@@ -92,7 +92,7 @@
             this.btnAdd_NghiPhep.TabIndex = 2;
             this.btnAdd_NghiPhep.Text = "Nghĩ Phép";
             this.btnAdd_NghiPhep.UseVisualStyleBackColor = false;
-            this.btnAdd_NghiPhep.Click += new System.EventHandler(this.btnAdd_NghiPhep_Click);
+            this.btnAdd_NghiPhep.Click += new System.EventHandler(this.btnAdd_NghiPhep_Click_1);
             // 
             // btnAdd_KhenThuong_KL
             // 

@@ -31,12 +31,6 @@ namespace QuanLyNhanSU
         {
             AddHopDongClicked.Invoke(this, EventArgs.Empty);
         }
-
-        private void btnAdd_NghiPhep_Click(object sender, EventArgs e)
-        {
-            AddNghiPhepClicked.Invoke(this, EventArgs.Empty);
-        }
-
         private void btnAdd_BaoHiem_Click(object sender, EventArgs e)
         {
             AddBaoHiemClicked.Invoke(this, EventArgs.Empty);
@@ -50,6 +44,11 @@ namespace QuanLyNhanSU
         private void btnAdd_PhuCap_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAdd_NghiPhep_Click_1(object sender, EventArgs e)
+        {
+            AddNghiPhepClicked.Invoke(this, EventArgs.Empty);
         }
     }
 }

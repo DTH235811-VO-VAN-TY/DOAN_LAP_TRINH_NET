@@ -19,8 +19,14 @@ namespace QuanLyNhanSU
             uC_ChucNangNS2.AddBaoHiemClicked += Uc_BaoHiemNV1_AddBaoHiemClicked;
             uC_ChucNangNS2.AddHopDongClicked += Uc_HopDong_AddHopDongClicked;
             uC_ChucNangNS2.AddKhenThuongLyLuatClicked += Uc_KhenThuong_KyLuat_AddKhenThuongLyLuatClicked;
+            uC_ChucNangNS2.AddNghiPhepClicked += Uc_NghiPhep_AddNghiPhepClicked;
             this.btnNhanSu.Click += new System.EventHandler(this.btnNhanSu_Click);
 
+        }
+
+        private void UC_ChucNangNS2_AddNghiPhepClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void uC_NhanVien1_Load(object sender, EventArgs e)
@@ -57,6 +63,12 @@ namespace QuanLyNhanSU
         private void btnNhanSu_Click(object sender, EventArgs e)
         {
             uC_ChucNangNS2.BringToFront();
+        }
+
+        public void Uc_NghiPhep_AddNghiPhepClicked(object sender, EventArgs e)
+        {
+             //uC_NghiPhepNV.BringToFront();
+             uC_NghiPhepNV1.BringToFront();
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)

@@ -114,6 +114,12 @@
     <Compile Include="UC_KhenThuong_KyLuat.Designer.cs">
       <DependentUpon>UC_KhenThuong_KyLuat.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC_NghiPhepNV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_NghiPhepNV.Designer.cs">
+      <DependentUpon>UC_NghiPhepNV.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC_NhanVien.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -161,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC_KhenThuong_KyLuat.resx">
       <DependentUpon>UC_KhenThuong_KyLuat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_NghiPhepNV.resx">
+      <DependentUpon>UC_NghiPhepNV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_NhanVien.resx">
       <DependentUpon>UC_NhanVien.cs</DependentUpon>

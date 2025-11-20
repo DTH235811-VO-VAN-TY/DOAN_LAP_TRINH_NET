@@ -46,6 +46,7 @@
             this.uc_HopDong1 = new QuanLyNhanSU.Uc_HopDong();
             this.uC_BaoHiemNV1 = new QuanLyNhanSU.UC_BaoHiemNV();
             this.uC_NhanVien2 = new QuanLyNhanSU.UC_NhanVien();
+            this.uC_NghiPhepNV1 = new QuanLyNhanSU.UC_NghiPhepNV();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -186,6 +187,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.uC_NghiPhepNV1);
             this.panel2.Controls.Add(this.uC_ChucNangNS2);
             this.panel2.Controls.Add(this.uC_KhenThuong_KyLuat1);
             this.panel2.Controls.Add(this.uc_HopDong1);
@@ -279,6 +281,13 @@
             this.uC_NhanVien2.Size = new System.Drawing.Size(1618, 981);
             this.uC_NhanVien2.TabIndex = 1;
             // 
+            // uC_NghiPhepNV1
+            // 
+            this.uC_NghiPhepNV1.Location = new System.Drawing.Point(82, 17);
+            this.uC_NghiPhepNV1.Name = "uC_NghiPhepNV1";
+            this.uC_NghiPhepNV1.Size = new System.Drawing.Size(1466, 712);
+            this.uC_NghiPhepNV1.TabIndex = 6;
+            // 
             // TrangChu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -326,5 +335,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private UC_ChucNangNS uC_ChucNangNS2;
+        private UC_NghiPhepNV uC_NghiPhepNV;
+        private UC_NghiPhepNV uC_NghiPhepNV1;
     }
 }

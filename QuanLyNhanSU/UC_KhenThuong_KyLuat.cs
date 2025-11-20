@@ -14,7 +14,7 @@ namespace QuanLyNhanSU
     public partial class UC_KhenThuong_KyLuat : UserControl
     {
         // --- Biến toàn cục ---
-        string connString = @"Data Source=REDMI-11\SQLEXPRESS01;Initial Catalog=QuanLyNhanSu_DB;Integrated Security=True";
+        string connString = @"Data Source=TUNG-IT\MSSQL_EXP_2008R2;Initial Catalog=QuanLyNhanSu_DB;Integrated Security=True";
         SqlConnection conn;
         DataSet ds = new DataSet();
         SqlDataAdapter daNhanVien;
