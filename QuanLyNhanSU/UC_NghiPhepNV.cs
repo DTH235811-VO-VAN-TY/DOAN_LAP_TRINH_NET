@@ -156,6 +156,7 @@ namespace QuanLyNhanSU
         private void LamMoi()
         {
             cboChonNhanVien.SelectedIndex = -1;
+            cboChonNhanVien.Enabled = true; // Mở khóa khi làm mới
             txtLyDo.Text = "";
             txtSoNgayNghi.Text = "";
             dtpNgayBatDau.Value = DateTime.Now;
@@ -169,6 +170,17 @@ namespace QuanLyNhanSU
         {
             if (cboChonNhanVien.SelectedIndex == -1) { MessageBox.Show("Chưa chọn nhân viên"); return; }
             if (txtSoNgayNghi.Text == "") { MessageBox.Show("Chưa nhập số ngày"); return; }
+            if (txtLyDo.Text == "") { MessageBox.Show("Chưa nhập lý do"); return; }
+
+            int Songaynghi = 0;
+            bool isNumber = int.TryParse(txtSoNgayNghi.Text, out Songaynghi);
+
+            if (isNumber == false || Songaynghi <= 0)
+            {
+                MessageBox.Show("Số ngày nghỉ phải là số lớn hơn 0!", "Lỗi nhập liệu");
+                txtSoNgayNghi.Focus();
+                return;
+            }
 
             // Thêm dòng mới vào RAM
             DataRow row = ds.Tables["tblNghiPhep"].NewRow();
@@ -193,6 +205,18 @@ namespace QuanLyNhanSU
         private void btnSua_Click(object sender, EventArgs e)
         {
             if (this.Tag == null) { MessageBox.Show("Vui lòng chọn dòng cần sửa!"); return; }
+
+            if(this.txtLyDo.Text == "") { MessageBox.Show("Chưa nhập lý do"); return; }
+
+            int Songaynghi = 0;
+            bool isNumber = int.TryParse(txtSoNgayNghi.Text, out Songaynghi);
+
+            if (isNumber == false || Songaynghi <= 0)
+            {
+                MessageBox.Show("Số ngày nghỉ phải là số lớn hơn 0!", "Lỗi nhập liệu");
+                txtSoNgayNghi.Focus();
+                return;
+            }
 
             int id = Convert.ToInt32(this.Tag);
             DataRow row = ds.Tables["tblNghiPhep"].Rows.Find(id);
@@ -302,6 +326,7 @@ namespace QuanLyNhanSU
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             LamMoi();
+            cboChonNhanVien.Focus();
         }
 
         private void dgvNghiPhep_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -314,6 +339,7 @@ namespace QuanLyNhanSU
 
                     if (row.Cells["MANV"].Value != DBNull.Value)
                         cboChonNhanVien.SelectedValue = row.Cells["MANV"].Value;
+                        cboChonNhanVien.Enabled = false; // Khóa không cho đổi nhân viên khi sửa
 
                     txtLyDo.Text = row.Cells["LyDo"].Value?.ToString() ?? "";
                     txtSoNgayNghi.Text = row.Cells["SoNgayNghi"].Value?.ToString() ?? "";
