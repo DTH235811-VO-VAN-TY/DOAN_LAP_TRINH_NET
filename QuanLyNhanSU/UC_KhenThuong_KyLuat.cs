@@ -84,8 +84,66 @@ namespace QuanLyNhanSU
             cboMaNVkl.DataSource = ds.Tables["tblNV_KL"];
             cboMaNVkl.DisplayMember = "MANV";
             cboMaNVkl.ValueMember = "MANV";
+        }
+        public void ReloadNhanVien()
+        {
+            try
+            {
+                // 1. Xóa dữ liệu cũ trong bảng gốc và tải lại từ CSDL
+                if (ds.Tables.Contains("tblNHANVIEN"))
+                    ds.Tables["tblNHANVIEN"].Clear();
 
-            // KHÔNG cần nối dây sự kiện ở đây nữa, vì Designer đã làm (bạn đã sửa lỗi CS1061)
+                if (daNhanVien == null)
+                {
+                    string sql = "SELECT MANV, HOTEN FROM TB_NHANVIEN";
+                    daNhanVien = new SqlDataAdapter(sql, conn);
+                }
+                daNhanVien.Fill(ds, "tblNHANVIEN");
+
+                // 2. Cập nhật bảng copy cho Khen Thưởng (tblNV_KT)
+                if (ds.Tables.Contains("tblNV_KT"))
+                {
+                    ds.Tables["tblNV_KT"].Clear(); // Xóa dòng cũ
+                    ds.Tables["tblNV_KT"].Merge(ds.Tables["tblNHANVIEN"]); // Nạp dòng mới từ bảng gốc
+                }
+                else
+                {
+                    // Nếu chưa có thì tạo mới (trường hợp hiếm)
+                    DataTable dtNVKhenThuong = ds.Tables["tblNHANVIEN"].Copy();
+                    dtNVKhenThuong.TableName = "tblNV_KT";
+                    ds.Tables.Add(dtNVKhenThuong);
+                }
+
+                // 3. Cập nhật bảng copy cho Kỷ Luật (tblNV_KL)
+                if (ds.Tables.Contains("tblNV_KL"))
+                {
+                    ds.Tables["tblNV_KL"].Clear();
+                    ds.Tables["tblNV_KL"].Merge(ds.Tables["tblNHANVIEN"]);
+                }
+                else
+                {
+                    DataTable dtNVKyLuat = ds.Tables["tblNHANVIEN"].Copy();
+                    dtNVKyLuat.TableName = "tblNV_KL";
+                    ds.Tables.Add(dtNVKyLuat);
+                }
+
+                // 4. Gán lại DataSource để ComboBox nhận diện thay đổi
+                cboMaNVkt.DataSource = ds.Tables["tblNV_KT"];
+                cboMaNVkt.DisplayMember = "MANV";
+                cboMaNVkt.ValueMember = "MANV";
+
+                cboMaNVkl.DataSource = ds.Tables["tblNV_KL"];
+                cboMaNVkl.DisplayMember = "MANV";
+                cboMaNVkl.ValueMember = "MANV";
+
+                // Reset chọn
+                cboMaNVkt.SelectedIndex = -1;
+                cboMaNVkl.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi cập nhật danh sách nhân viên: " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -154,6 +212,7 @@ namespace QuanLyNhanSU
             btnLamMoi.Click += btnLamMoi_Click;
             dgvKhenThuong.Click += dgvKhenThuong_Click;*/
         }
+        
 
         private void LamMoiControlsKT()
         {

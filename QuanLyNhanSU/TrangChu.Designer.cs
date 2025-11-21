@@ -33,19 +33,21 @@
             this.button6 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnThemUC_Luong = new System.Windows.Forms.Button();
             this.btnNhanSu = new System.Windows.Forms.Button();
             this.btnHomePage = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.uc_PhuCap1 = new QuanLyNhanSU.Uc_PhuCap();
             this.uC_ChucNangNS2 = new QuanLyNhanSU.UC_ChucNangNS();
             this.uC_KhenThuong_KyLuat1 = new QuanLyNhanSU.UC_KhenThuong_KyLuat();
             this.uc_HopDong1 = new QuanLyNhanSU.Uc_HopDong();
             this.uC_BaoHiemNV1 = new QuanLyNhanSU.UC_BaoHiemNV();
             this.uC_NhanVien2 = new QuanLyNhanSU.UC_NhanVien();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.uC_BangLuong1 = new QuanLyNhanSU.UC_BangLuong();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -58,7 +60,7 @@
             this.panel1.Controls.Add(this.button6);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.button5);
-            this.panel1.Controls.Add(this.button4);
+            this.panel1.Controls.Add(this.btnThemUC_Luong);
             this.panel1.Controls.Add(this.btnNhanSu);
             this.panel1.Controls.Add(this.btnHomePage);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -114,24 +116,25 @@
             this.button5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnThemUC_Luong
             // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aqua;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.Black;
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button4.Location = new System.Drawing.Point(31, 595);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(261, 125);
-            this.button4.TabIndex = 19;
-            this.button4.Text = "Lương";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnThemUC_Luong.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnThemUC_Luong.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnThemUC_Luong.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnThemUC_Luong.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aqua;
+            this.btnThemUC_Luong.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnThemUC_Luong.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThemUC_Luong.ForeColor = System.Drawing.Color.Black;
+            this.btnThemUC_Luong.Image = ((System.Drawing.Image)(resources.GetObject("btnThemUC_Luong.Image")));
+            this.btnThemUC_Luong.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnThemUC_Luong.Location = new System.Drawing.Point(31, 595);
+            this.btnThemUC_Luong.Name = "btnThemUC_Luong";
+            this.btnThemUC_Luong.Size = new System.Drawing.Size(261, 125);
+            this.btnThemUC_Luong.TabIndex = 19;
+            this.btnThemUC_Luong.Text = "Lương";
+            this.btnThemUC_Luong.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnThemUC_Luong.UseVisualStyleBackColor = true;
+            this.btnThemUC_Luong.Click += new System.EventHandler(this.btnThemUC_Luong_Click);
             // 
             // btnNhanSu
             // 
@@ -186,6 +189,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.uC_BangLuong1);
+            this.panel2.Controls.Add(this.uc_PhuCap1);
             this.panel2.Controls.Add(this.uC_ChucNangNS2);
             this.panel2.Controls.Add(this.uC_KhenThuong_KyLuat1);
             this.panel2.Controls.Add(this.uc_HopDong1);
@@ -197,42 +202,13 @@
             this.panel2.TabIndex = 12;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
-            // label1
+            // uc_PhuCap1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.MediumTurquoise;
-            this.label1.Location = new System.Drawing.Point(326, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(622, 45);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "HỆ THỐNG QUẢN LÝ NHÂN SỰ";
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.panel3.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Location = new System.Drawing.Point(189, 92);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1755, 77);
-            this.panel3.TabIndex = 14;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.MediumSeaGreen;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aqua;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(1634, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(79, 71);
-            this.button1.TabIndex = 21;
-            this.button1.UseVisualStyleBackColor = true;
+            this.uc_PhuCap1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uc_PhuCap1.Location = new System.Drawing.Point(0, 0);
+            this.uc_PhuCap1.Name = "uc_PhuCap1";
+            this.uc_PhuCap1.Size = new System.Drawing.Size(1618, 981);
+            this.uc_PhuCap1.TabIndex = 6;
             // 
             // uC_ChucNangNS2
             // 
@@ -279,6 +255,51 @@
             this.uC_NhanVien2.Size = new System.Drawing.Size(1618, 981);
             this.uC_NhanVien2.TabIndex = 1;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.MediumTurquoise;
+            this.label1.Location = new System.Drawing.Point(326, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(622, 45);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "HỆ THỐNG QUẢN LÝ NHÂN SỰ";
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.panel3.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.panel3.Controls.Add(this.button1);
+            this.panel3.Location = new System.Drawing.Point(189, 92);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1755, 77);
+            this.panel3.TabIndex = 14;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.MediumSeaGreen;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aqua;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(1634, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(79, 71);
+            this.button1.TabIndex = 21;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // uC_BangLuong1
+            // 
+            this.uC_BangLuong1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uC_BangLuong1.Location = new System.Drawing.Point(0, 0);
+            this.uC_BangLuong1.Name = "uC_BangLuong1";
+            this.uC_BangLuong1.Size = new System.Drawing.Size(1618, 981);
+            this.uC_BangLuong1.TabIndex = 7;
+            // 
             // TrangChu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -296,6 +317,7 @@
             this.Name = "TrangChu";
             this.Text = "TrangChu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.TrangChu_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -310,7 +332,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnThemUC_Luong;
         private System.Windows.Forms.Button btnNhanSu;
         private System.Windows.Forms.Button btnHomePage;
         private System.Windows.Forms.Button button2;
@@ -326,5 +348,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private UC_ChucNangNS uC_ChucNangNS2;
+        private Uc_PhuCap uc_PhuCap1;
+        private UC_BangLuong uC_BangLuong1;
     }
 }

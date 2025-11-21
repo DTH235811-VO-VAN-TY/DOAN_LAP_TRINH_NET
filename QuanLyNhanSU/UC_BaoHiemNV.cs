@@ -30,6 +30,7 @@ namespace QuanLyNhanSU
         private void UC_BaoHiemNV_Load(object sender, EventArgs e)
         {
             LoadSearchComboBox();
+            txtTenNV.Enabled = false; // Chỉ đọc
             if (this.DesignMode) return;
             try
             {
@@ -48,7 +49,7 @@ namespace QuanLyNhanSU
                 daNhanVien = new SqlDataAdapter(sQueryNhanVien, conn);
                 daNhanVien.Fill(ds, "tblNHANVIEN");
                 cboChonNhanVien.DataSource = ds.Tables["tblNHANVIEN"];
-                cboChonNhanVien.DisplayMember = "HOTEN";
+                cboChonNhanVien.DisplayMember = "MANV";
                 cboChonNhanVien.ValueMember = "MANV";
                 cboChonNhanVien.SelectedIndex = -1; // Xóa chọn mặc định
 
@@ -117,6 +118,30 @@ namespace QuanLyNhanSU
             catch (Exception ex)
             {
                 MessageBox.Show("LỖI GỐC KHI TẢI FORM: " + ex.Message, "Lỗi nghiêm trọng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public void ReloadNhanVien()
+        {
+            try
+            {
+                if(ds.Tables.Contains("tblNHANVIEN"))
+                {
+                    ds.Tables["tblNHANVIEN"].Clear();
+                }
+                if(daNhanVien != null)
+                {
+                    daNhanVien.Fill(ds, "tblNHANVIEN");
+
+                }
+                cboChonNhanVien.DataSource = ds.Tables["tblNHANVIEN"];
+                cboChonNhanVien.DisplayMember = "MANV";
+                cboChonNhanVien.ValueMember = "MANV";
+                cboChonNhanVien.SelectedIndex = -1;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi cập nhật danh sách nhân viên: " + ex.Message);
             }
         }
 
@@ -326,6 +351,19 @@ namespace QuanLyNhanSU
         {
             txtTimKiemBH.Text = "";
             ds.Tables["tblBAOHIEM"].DefaultView.RowFilter = string.Empty;
+        }
+
+        private void cboChonNhanVien_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cboChonNhanVien.SelectedItem != null)
+            {
+                DataRowView drv = cboChonNhanVien.SelectedItem as DataRowView;
+                txtTenNV.Text = drv["HOTEN"].ToString();
+            }
+            else
+            {
+                txtTenNV.Text = "";
+            }
         }
     }
 }

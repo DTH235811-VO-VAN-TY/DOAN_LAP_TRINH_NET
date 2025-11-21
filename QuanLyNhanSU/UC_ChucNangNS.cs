@@ -17,6 +17,7 @@ namespace QuanLyNhanSU
         public event EventHandler AddNghiPhepClicked;
         public event EventHandler AddBaoHiemClicked;
         public event EventHandler AddKhenThuongLyLuatClicked;
+        public event EventHandler AddPhuCapClicked;
         public UC_ChucNangNS()
         {
             InitializeComponent();
@@ -49,7 +50,7 @@ namespace QuanLyNhanSU
 
         private void btnAdd_PhuCap_Click(object sender, EventArgs e)
         {
-
+            AddPhuCapClicked.Invoke(this, EventArgs.Empty);
         }
     }
 }

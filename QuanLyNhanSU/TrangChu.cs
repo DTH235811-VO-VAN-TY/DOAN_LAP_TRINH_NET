@@ -19,6 +19,8 @@ namespace QuanLyNhanSU
             uC_ChucNangNS2.AddBaoHiemClicked += Uc_BaoHiemNV1_AddBaoHiemClicked;
             uC_ChucNangNS2.AddHopDongClicked += Uc_HopDong_AddHopDongClicked;
             uC_ChucNangNS2.AddKhenThuongLyLuatClicked += Uc_KhenThuong_KyLuat_AddKhenThuongLyLuatClicked;
+            uC_ChucNangNS2.AddPhuCapClicked += Uc_PhuCap_AddPhuCapClicked;
+            uC_NhanVien2.DataUpdated += UC_NhanVien_DataUpdated;
             this.btnNhanSu.Click += new System.EventHandler(this.btnNhanSu_Click);
 
         }
@@ -58,10 +60,45 @@ namespace QuanLyNhanSU
         {
             uC_ChucNangNS2.BringToFront();
         }
+        private void Uc_PhuCap_AddPhuCapClicked(object sender, EventArgs e)
+        {
+            uc_PhuCap1.BringToFront();
+        }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void TrangChu_Load(object sender, EventArgs e)
+        {
+            uC_ChucNangNS2.Visible = true;
+            uC_ChucNangNS2.BringToFront();
+        }
+        private void UC_NhanVien_DataUpdated(object sender, EventArgs e)
+        {
+            if(uc_HopDong1 != null)
+            {
+                uc_HopDong1.ReloadNhanVien();
+            }
+            if(uC_KhenThuong_KyLuat1 != null)
+            {
+                uC_KhenThuong_KyLuat1.ReloadNhanVien();
+            }
+            if (uC_BaoHiemNV1 != null)
+            {
+                uC_BaoHiemNV1.ReloadNhanVien();
+            }
+            if(uc_PhuCap1 != null)
+            {
+                uc_PhuCap1.ReloadNhanVienPhuCap();
+            }
+            MessageBox.Show("Dữ liệu nhân viên đã được cập nhật. Các phần liên quan đã được làm mới.");
+        }
+
+        private void btnThemUC_Luong_Click(object sender, EventArgs e)
+        {
+            uC_BangLuong1.BringToFront();
         }
     }
 }

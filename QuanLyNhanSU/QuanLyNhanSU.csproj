@@ -64,6 +64,12 @@
     <Compile Include="add_PhongBan_from.Designer.cs">
       <DependentUpon>add_PhongBan_from.cs</DependentUpon>
     </Compile>
+    <Compile Include="add_ThemPhuCap_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="add_ThemPhuCap_form.Designer.cs">
+      <DependentUpon>add_ThemPhuCap_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="add_TrinhDo_form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,12 @@
     </Compile>
     <Compile Include="TrangChu.Designer.cs">
       <DependentUpon>TrangChu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_BangLuong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_BangLuong.Designer.cs">
+      <DependentUpon>UC_BangLuong.cs</DependentUpon>
     </Compile>
     <Compile Include="UC_BaoHiemNV.cs">
       <SubType>UserControl</SubType>
@@ -120,6 +132,12 @@
     <Compile Include="UC_NhanVien.Designer.cs">
       <DependentUpon>UC_NhanVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="Uc_PhuCap.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Uc_PhuCap.Designer.cs">
+      <DependentUpon>Uc_PhuCap.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="add_BoPhan_form.resx">
       <DependentUpon>add_BoPhan_form.cs</DependentUpon>
     </EmbeddedResource>
@@ -128,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="add_PhongBan_from.resx">
       <DependentUpon>add_PhongBan_from.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="add_ThemPhuCap_form.resx">
+      <DependentUpon>add_ThemPhuCap_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="add_TrinhDo_form.resx">
       <DependentUpon>add_TrinhDo_form.cs</DependentUpon>
@@ -150,6 +171,9 @@
     <EmbeddedResource Include="TrangChu.resx">
       <DependentUpon>TrangChu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_BangLuong.resx">
+      <DependentUpon>UC_BangLuong.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_BaoHiemNV.resx">
       <DependentUpon>UC_BaoHiemNV.cs</DependentUpon>
     </EmbeddedResource>
@@ -164,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC_NhanVien.resx">
       <DependentUpon>UC_NhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uc_PhuCap.resx">
+      <DependentUpon>Uc_PhuCap.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

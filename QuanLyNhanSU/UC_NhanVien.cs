@@ -26,7 +26,7 @@ namespace QuanLyNhanSU
         SqlDataAdapter daTrinhDo;
         SqlDataAdapter daBoPhan;
         SqlDataAdapter daChucVu;
-
+        public event EventHandler DataUpdated;
         private void label3_Click(object sender, EventArgs e)
         {
 
@@ -363,7 +363,7 @@ namespace QuanLyNhanSU
                 // Đây là lúc "đẩy" tất cả thay đổi (Thêm, Sửa, Xóa) xuống CSDL
                 int rowsAffected = daNhanVien.Update(ds, "NhanVien");
                 MessageBox.Show($"Đã Lưu {rowsAffected} thay đổi vào cơ sở dữ liệu thành công.");
-
+                DataUpdated?.Invoke(this, EventArgs.Empty);
                 // (Tùy chọn) Tải lại dữ liệu "sạch" từ CSDL sau khi lưu
                 // LoadDataGridViewNhanVien(); 
             }
@@ -383,15 +383,12 @@ namespace QuanLyNhanSU
         }
         private void Add_PhongBan_From_DataSaved(object sender, EventArgs e)
         {
-            // Đây là nơi chúng ta tải lại ComboBox Phòng Ban
             try
             {
                 // Xóa dữ liệu cũ trong bảng "PhongBan" của DataSet
                 ds.Tables["PhongBan"].Clear();
-
                 // Tải lại dữ liệu mới từ CSDL vào bảng đó
                 daPhongBan.Fill(ds, "PhongBan");
-
                 // ComboBox cboPhongBan sẽ tự động cập nhật
                 // vì nó đã được gán DataSource = ds.Tables["PhongBan"]
                 // trong hàm UC_NhanVien_Load
@@ -421,7 +418,6 @@ namespace QuanLyNhanSU
                 MessageBox.Show("Lỗi khi tải lại danh sách trình độ: " + ex.Message);
             }
         }
-
         private void cboPhongBan_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Kiểm tra xem cboPhongBan đã chọn giá trị hợp lệ chưa
@@ -566,6 +562,35 @@ namespace QuanLyNhanSU
             cboChucVu.SelectedIndex = -1;
             cboTrinhDo.SelectedIndex = -1;
             dgvNhanVien.ClearSelection();
+        }
+
+        private void txtCCCD_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtCCCD.Text.Length != 12 || !txtCCCD.Text.All(char.IsDigit))
+            {
+                e.Cancel = true;
+                errorProvider.SetError(txtCCCD, "CCCD phải đủ 12 chữ số và chỉ chứa số");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider.SetError(txtCCCD, null);
+            }
+        }
+
+        private void dtpNgaySinh_Validating(object sender, CancelEventArgs e)
+        {
+            if (dtpNgaySinh.Value.Date >= DateTime.Now.Date)
+            {
+                e.Cancel = true;
+                errorProvider.SetError(dtpNgaySinh, "Ngày sinh không hợp lệ");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider.SetError(dtpNgaySinh, null);
+            }
+
         }
     }
 }
