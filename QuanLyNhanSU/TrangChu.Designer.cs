@@ -2,15 +2,8 @@
 {
     partial class TrangChu
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +15,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrangChu));
@@ -41,6 +30,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.uC_ChamCong1 = new QuanLyNhanSU.UC_ChamCong();
+            this.uC_NghiPhepNV1 = new QuanLyNhanSU.UC_NghiPhepNV();
             this.uC_ChucNangNS2 = new QuanLyNhanSU.UC_ChucNangNS();
             this.uC_KhenThuong_KyLuat1 = new QuanLyNhanSU.UC_KhenThuong_KyLuat();
             this.uc_HopDong1 = new QuanLyNhanSU.Uc_HopDong();
@@ -85,6 +76,7 @@
             this.button6.Text = "Tài Khoản";
             this.button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // pictureBox1
             // 
@@ -186,6 +178,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.uC_ChamCong1);
+            this.panel2.Controls.Add(this.uC_NghiPhepNV1);
             this.panel2.Controls.Add(this.uC_ChucNangNS2);
             this.panel2.Controls.Add(this.uC_KhenThuong_KyLuat1);
             this.panel2.Controls.Add(this.uc_HopDong1);
@@ -233,6 +227,22 @@
             this.button1.Size = new System.Drawing.Size(79, 71);
             this.button1.TabIndex = 21;
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // uC_ChamCong1
+            // 
+            this.uC_ChamCong1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uC_ChamCong1.Location = new System.Drawing.Point(0, 0);
+            this.uC_ChamCong1.Name = "uC_ChamCong1";
+            this.uC_ChamCong1.Size = new System.Drawing.Size(1618, 981);
+            this.uC_ChamCong1.TabIndex = 7;
+            // 
+            // uC_NghiPhepNV1
+            // 
+            this.uC_NghiPhepNV1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uC_NghiPhepNV1.Location = new System.Drawing.Point(0, 0);
+            this.uC_NghiPhepNV1.Name = "uC_NghiPhepNV1";
+            this.uC_NghiPhepNV1.Size = new System.Drawing.Size(1618, 981);
+            this.uC_NghiPhepNV1.TabIndex = 6;
             // 
             // uC_ChucNangNS2
             // 
@@ -326,5 +336,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private UC_ChucNangNS uC_ChucNangNS2;
+        private UC_ChamCong uC_ChamCong1;
+        private UC_NghiPhepNV uC_NghiPhepNV1;
     }
 }
