@@ -298,6 +298,7 @@
             this.dtpNgaySinh.Name = "dtpNgaySinh";
             this.dtpNgaySinh.Size = new System.Drawing.Size(297, 28);
             this.dtpNgaySinh.TabIndex = 3;
+            this.dtpNgaySinh.Validating += new System.ComponentModel.CancelEventHandler(this.dtpNgaySinh_Validating);
             // 
             // rdNam
             // 
@@ -327,6 +328,7 @@
             this.txtCCCD.Name = "txtCCCD";
             this.txtCCCD.Size = new System.Drawing.Size(213, 28);
             this.txtCCCD.TabIndex = 1;
+            this.txtCCCD.Validating += new System.ComponentModel.CancelEventHandler(this.txtCCCD_Validating);
             // 
             // txtDcNV
             // 

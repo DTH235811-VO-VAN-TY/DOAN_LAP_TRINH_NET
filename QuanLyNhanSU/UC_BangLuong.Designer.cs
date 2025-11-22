@@ -1,0 +1,271 @@
+﻿namespace QuanLyNhanSU
+{
+    partial class UC_BangLuong
+    {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dtpKyLuong = new System.Windows.Forms.DateTimePicker();
+            this.btnTinhLuong = new System.Windows.Forms.Button();
+            this.btnInPhieuLuong = new System.Windows.Forms.Button();
+            this.btnXoa = new System.Windows.Forms.Button();
+            this.btnQuayLai = new System.Windows.Forms.Button();
+            this.dgvBangLuong = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MANV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HOTEN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LUONGCB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NGAYCONG = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PHUCAP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.THUONG = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.KYLUAT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.THUCLINH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBangLuong)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnQuayLai);
+            this.groupBox1.Controls.Add(this.btnXoa);
+            this.groupBox1.Controls.Add(this.btnInPhieuLuong);
+            this.groupBox1.Controls.Add(this.btnTinhLuong);
+            this.groupBox1.Controls.Add(this.dtpKyLuong);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Location = new System.Drawing.Point(67, 112);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1460, 181);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Thông tin kỳ lương";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.MediumTurquoise;
+            this.label1.Location = new System.Drawing.Point(531, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(493, 42);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "BẢNG LƯƠNG NHÂN VIÊN";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(53, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 16);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Kỳ lương";
+            // 
+            // dtpKyLuong
+            // 
+            this.dtpKyLuong.CustomFormat = "MM/yyyy";
+            this.dtpKyLuong.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpKyLuong.Location = new System.Drawing.Point(131, 41);
+            this.dtpKyLuong.Name = "dtpKyLuong";
+            this.dtpKyLuong.ShowUpDown = true;
+            this.dtpKyLuong.Size = new System.Drawing.Size(246, 22);
+            this.dtpKyLuong.TabIndex = 1;
+            this.dtpKyLuong.ValueChanged += new System.EventHandler(this.dtpKyLuong_ValueChanged);
+            // 
+            // btnTinhLuong
+            // 
+            this.btnTinhLuong.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnTinhLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTinhLuong.ForeColor = System.Drawing.Color.White;
+            this.btnTinhLuong.Location = new System.Drawing.Point(56, 87);
+            this.btnTinhLuong.Name = "btnTinhLuong";
+            this.btnTinhLuong.Size = new System.Drawing.Size(204, 59);
+            this.btnTinhLuong.TabIndex = 2;
+            this.btnTinhLuong.Text = "TÍNH LƯƠNG";
+            this.btnTinhLuong.UseVisualStyleBackColor = false;
+            this.btnTinhLuong.Click += new System.EventHandler(this.btnTinhLuong_Click);
+            // 
+            // btnInPhieuLuong
+            // 
+            this.btnInPhieuLuong.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnInPhieuLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInPhieuLuong.ForeColor = System.Drawing.Color.White;
+            this.btnInPhieuLuong.Location = new System.Drawing.Point(329, 87);
+            this.btnInPhieuLuong.Name = "btnInPhieuLuong";
+            this.btnInPhieuLuong.Size = new System.Drawing.Size(204, 59);
+            this.btnInPhieuLuong.TabIndex = 2;
+            this.btnInPhieuLuong.Text = "IN PHIẾU LƯƠNG";
+            this.btnInPhieuLuong.UseVisualStyleBackColor = false;
+            // 
+            // btnXoa
+            // 
+            this.btnXoa.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoa.ForeColor = System.Drawing.Color.White;
+            this.btnXoa.Location = new System.Drawing.Point(638, 87);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(204, 59);
+            this.btnXoa.TabIndex = 2;
+            this.btnXoa.Text = "XÓA KỲ LƯƠNG";
+            this.btnXoa.UseVisualStyleBackColor = false;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            // 
+            // btnQuayLai
+            // 
+            this.btnQuayLai.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnQuayLai.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuayLai.ForeColor = System.Drawing.Color.White;
+            this.btnQuayLai.Location = new System.Drawing.Point(915, 87);
+            this.btnQuayLai.Name = "btnQuayLai";
+            this.btnQuayLai.Size = new System.Drawing.Size(204, 59);
+            this.btnQuayLai.TabIndex = 2;
+            this.btnQuayLai.Text = "QUAY LẠI";
+            this.btnQuayLai.UseVisualStyleBackColor = false;
+            // 
+            // dgvBangLuong
+            // 
+            this.dgvBangLuong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBangLuong.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.MANV,
+            this.HOTEN,
+            this.LUONGCB,
+            this.NGAYCONG,
+            this.PHUCAP,
+            this.THUONG,
+            this.KYLUAT,
+            this.THUCLINH});
+            this.dgvBangLuong.Location = new System.Drawing.Point(67, 352);
+            this.dgvBangLuong.Name = "dgvBangLuong";
+            this.dgvBangLuong.RowHeadersWidth = 51;
+            this.dgvBangLuong.RowTemplate.Height = 24;
+            this.dgvBangLuong.Size = new System.Drawing.Size(1460, 402);
+            this.dgvBangLuong.TabIndex = 2;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 6;
+            this.ID.Name = "ID";
+            this.ID.Width = 60;
+            // 
+            // MANV
+            // 
+            this.MANV.HeaderText = "Mã NV";
+            this.MANV.MinimumWidth = 6;
+            this.MANV.Name = "MANV";
+            this.MANV.Width = 125;
+            // 
+            // HOTEN
+            // 
+            this.HOTEN.HeaderText = "Họ Tên";
+            this.HOTEN.MinimumWidth = 6;
+            this.HOTEN.Name = "HOTEN";
+            this.HOTEN.Width = 175;
+            // 
+            // LUONGCB
+            // 
+            this.LUONGCB.HeaderText = "Lương Cơ Bản";
+            this.LUONGCB.MinimumWidth = 6;
+            this.LUONGCB.Name = "LUONGCB";
+            this.LUONGCB.Width = 125;
+            // 
+            // NGAYCONG
+            // 
+            this.NGAYCONG.HeaderText = "Ngày Công";
+            this.NGAYCONG.MinimumWidth = 6;
+            this.NGAYCONG.Name = "NGAYCONG";
+            this.NGAYCONG.Width = 125;
+            // 
+            // PHUCAP
+            // 
+            this.PHUCAP.HeaderText = "Phụ Cấp";
+            this.PHUCAP.MinimumWidth = 6;
+            this.PHUCAP.Name = "PHUCAP";
+            this.PHUCAP.Width = 125;
+            // 
+            // THUONG
+            // 
+            this.THUONG.HeaderText = "Thưởng";
+            this.THUONG.MinimumWidth = 6;
+            this.THUONG.Name = "THUONG";
+            this.THUONG.Width = 125;
+            // 
+            // KYLUAT
+            // 
+            this.KYLUAT.HeaderText = "Kỷ luật";
+            this.KYLUAT.MinimumWidth = 6;
+            this.KYLUAT.Name = "KYLUAT";
+            this.KYLUAT.Width = 125;
+            // 
+            // THUCLINH
+            // 
+            this.THUCLINH.HeaderText = "Thực Lĩnh";
+            this.THUCLINH.MinimumWidth = 6;
+            this.THUCLINH.Name = "THUCLINH";
+            this.THUCLINH.Width = 150;
+            // 
+            // UC_BangLuong
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dgvBangLuong);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.groupBox1);
+            this.Name = "UC_BangLuong";
+            this.Size = new System.Drawing.Size(1560, 970);
+            this.Load += new System.EventHandler(this.UC_BangLuong_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBangLuong)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnQuayLai;
+        private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.Button btnInPhieuLuong;
+        private System.Windows.Forms.Button btnTinhLuong;
+        private System.Windows.Forms.DateTimePicker dtpKyLuong;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgvBangLuong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MANV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HOTEN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LUONGCB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NGAYCONG;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PHUCAP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn THUONG;
+        private System.Windows.Forms.DataGridViewTextBoxColumn KYLUAT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn THUCLINH;
+    }
+}

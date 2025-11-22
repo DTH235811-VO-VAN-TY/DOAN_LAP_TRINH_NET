@@ -63,6 +63,7 @@
             this.btnQuayLai.TabIndex = 68;
             this.btnQuayLai.Text = "Quay Lại";
             this.btnQuayLai.UseVisualStyleBackColor = true;
+            this.btnQuayLai.Click += new System.EventHandler(this.btnQuayLai_Click);
             // 
             // txtSoTien
             // 
@@ -96,6 +97,7 @@
             this.dgvPhuCapMoi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPhuCapMoi.Size = new System.Drawing.Size(780, 150);
             this.dgvPhuCapMoi.TabIndex = 65;
+            this.dgvPhuCapMoi.Click += new System.EventHandler(this.dgvPhuCapMoi_Click);
             // 
             // Idphucap
             // 
@@ -129,6 +131,7 @@
             this.btnHuyPC.TabIndex = 64;
             this.btnHuyPC.Text = "HỦY";
             this.btnHuyPC.UseVisualStyleBackColor = false;
+            this.btnHuyPC.Click += new System.EventHandler(this.btnHuyPC_Click);
             // 
             // btnXoaPC
             // 
@@ -141,6 +144,7 @@
             this.btnXoaPC.TabIndex = 63;
             this.btnXoaPC.Text = "XÓA ";
             this.btnXoaPC.UseVisualStyleBackColor = false;
+            this.btnXoaPC.Click += new System.EventHandler(this.btnXoaPC_Click);
             // 
             // btnSuuPC
             // 
@@ -153,6 +157,7 @@
             this.btnSuuPC.TabIndex = 62;
             this.btnSuuPC.Text = "SỬA ";
             this.btnSuuPC.UseVisualStyleBackColor = false;
+            this.btnSuuPC.Click += new System.EventHandler(this.btnSuuPC_Click);
             // 
             // btnThemPC
             // 
@@ -165,6 +170,7 @@
             this.btnThemPC.TabIndex = 61;
             this.btnThemPC.Text = "THÊM";
             this.btnThemPC.UseVisualStyleBackColor = false;
+            this.btnThemPC.Click += new System.EventHandler(this.btnThemPC_Click);
             // 
             // btnLuuPC
             // 
@@ -177,6 +183,7 @@
             this.btnLuuPC.TabIndex = 60;
             this.btnLuuPC.Text = "Lưu";
             this.btnLuuPC.UseVisualStyleBackColor = false;
+            this.btnLuuPC.Click += new System.EventHandler(this.btnLuuPC_Click);
             // 
             // txtTenPCMoi
             // 
@@ -272,6 +279,7 @@
             this.button2.Size = new System.Drawing.Size(75, 37);
             this.button2.TabIndex = 69;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // add_ThemPhuCap_form
             // 

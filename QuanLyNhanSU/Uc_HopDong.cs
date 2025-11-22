@@ -27,6 +27,7 @@ namespace QuanLyNhanSU
         private void Uc_HopDong_Load(object sender, EventArgs e)
         {
             // Thoát nếu đang ở chế độ Design
+            txtTenNV.Enabled = false;
             if (this.DesignMode) return;
 
             try
@@ -42,10 +43,10 @@ namespace QuanLyNhanSU
                 string sQueryNhanVien = @"SELECT * FROM TB_NHANVIEN";
                 daNhanVien = new SqlDataAdapter(sQueryNhanVien, conn);
                 daNhanVien.Fill(ds, "tblNHANVIEN");
-                cboTenNV.DataSource = ds.Tables["tblNHANVIEN"];
-                cboTenNV.DisplayMember = "HOTEN";
-                cboTenNV.ValueMember = "MANV";
-                cboTenNV.SelectedIndex = -1; // Mặc định không chọn ai
+                cboMaNV.DataSource = ds.Tables["tblNHANVIEN"];
+                cboMaNV.DisplayMember = "MANV";
+                cboMaNV.ValueMember = "MANV";
+                cboMaNV.SelectedIndex = -1; // Mặc định không chọn ai
 
                 // 2. Tải ComboBox Thời Hạn (dữ liệu tĩnh)
                 cboThoiHan.Items.Add("3 tháng");
@@ -124,15 +125,42 @@ namespace QuanLyNhanSU
         /// <summary>
         /// Hàm tiện ích để làm mới các ô nhập liệu
         /// </summary>
+        /// 
+        public void ReloadNhanVien()
+        {
+            try
+            {
+                // Xóa dữ liệu cũ trong DataSet (bảng nhân viên)
+                if (ds.Tables.Contains("tblNHANVIEN"))
+                    ds.Tables["tblNHANVIEN"].Clear();
+
+                // Tải lại từ CSDL
+                // (Đảm bảo daNhanVien đã được khởi tạo trong Load, nếu chưa thì phải khởi tạo lại)
+                if (daNhanVien == null)
+                {
+                    string sql = "SELECT MANV, HOTEN FROM TB_NHANVIEN";
+                    daNhanVien = new SqlDataAdapter(sql, conn);
+                }
+
+                daNhanVien.Fill(ds, "tblNHANVIEN");
+
+                // Gán lại DataSource (để làm mới ComboBox)
+                cboMaNV.DataSource = ds.Tables["tblNHANVIEN"];
+                cboMaNV.DisplayMember = "MANV";
+                cboMaNV.ValueMember = "MANV";
+            }
+            catch (Exception ex) { /* Xử lý lỗi nếu cần */ }
+        }
         private void LamMoiControls()
         {
             txtSoHD.Text = "";
             txtSoHD.Enabled = true; // Bật lại để cho phép Thêm mới
-            cboTenNV.SelectedIndex = -1;
+            cboMaNV.SelectedIndex = -1;
             numericUpDown1.Value = 1; // (numericUpDown1 là tên của Lần Ký)
             dtpNgayKy.Value = DateTime.Now;
             dtpNgayBatDau.Value = DateTime.Now;
             dtpNgayKetThuc.Value = DateTime.Now;
+            txtHSL.Text = "0.0";
             nudHSL.Value = 0;
             cboThoiHan.SelectedIndex = -1;
             txtNoiDung.Text = "";
@@ -164,7 +192,7 @@ namespace QuanLyNhanSU
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtSoHD.Text) || cboTenNV.SelectedValue == null)
+            if (string.IsNullOrEmpty(txtSoHD.Text) || cboMaNV.SelectedValue == null)
             {
                 MessageBox.Show("Số Hợp Đồng và Tên Nhân Viên là bắt buộc!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -179,13 +207,13 @@ namespace QuanLyNhanSU
 
             DataRow newRow = ds.Tables["tblHOPDONG"].NewRow();
             newRow["SOHD"] = txtSoHD.Text;
-            newRow["MANV"] = cboTenNV.SelectedValue;
-            newRow["HOTEN"] = cboTenNV.Text; // Để hiển thị DGV ngay
+            newRow["MANV"] = cboMaNV.SelectedValue;
+            newRow["HOTEN"] = cboMaNV.Text; // Để hiển thị DGV ngay
             newRow["LANKY"] = numericUpDown1.Value; // (numericUpDown1 là Lần Ký)
             newRow["NGAYKY"] = dtpNgayKy.Value;
             newRow["NGAYBATDAU"] = dtpNgayBatDau.Value;
             newRow["NGAYKETTHUC"] = dtpNgayKetThuc.Value;
-            newRow["HESOLUONG"] = nudHSL.Value;
+            newRow["HESOLUONG"] = txtHSL.Text;
             newRow["THOIHAN"] = cboThoiHan.SelectedItem;
             newRow["NOIDUNG"] = txtNoiDung.Text;
 
@@ -201,7 +229,7 @@ namespace QuanLyNhanSU
                 MessageBox.Show("Vui lòng chọn một hợp đồng từ lưới để sửa.");
                 return;
             }
-            if (cboTenNV.SelectedValue == null)
+            if (cboMaNV.SelectedValue == null)
             {
                 MessageBox.Show("Vui lòng chọn Tên Nhân Viên.");
                 return;
@@ -213,13 +241,13 @@ namespace QuanLyNhanSU
             if (rowToUpdate != null)
             {
                 rowToUpdate.BeginEdit();
-                rowToUpdate["MANV"] = cboTenNV.SelectedValue;
-                rowToUpdate["HOTEN"] = cboTenNV.Text;
+                rowToUpdate["MANV"] = cboMaNV.SelectedValue;
+                rowToUpdate["HOTEN"] = cboMaNV.Text;
                 rowToUpdate["LANKY"] = numericUpDown1.Value;
                 rowToUpdate["NGAYKY"] = dtpNgayKy.Value;
                 rowToUpdate["NGAYBATDAU"] = dtpNgayBatDau.Value;
                 rowToUpdate["NGAYKETTHUC"] = dtpNgayKetThuc.Value;
-                rowToUpdate["HESOLUONG"] = nudHSL.Value;
+                rowToUpdate["HESOLUONG"] = txtHSL.Text;
                 rowToUpdate["THOIHAN"] = cboThoiHan.SelectedItem;
                 rowToUpdate["NOIDUNG"] = txtNoiDung.Text;
                 rowToUpdate.EndEdit();
@@ -268,11 +296,12 @@ namespace QuanLyNhanSU
 
                     // Gán dữ liệu lên controls
                     txtSoHD.Text = drv["SOHD"].ToString();
-                    cboTenNV.SelectedValue = drv["MANV"];
+                    cboMaNV.SelectedValue = drv["MANV"];
                     numericUpDown1.Value = Convert.ToDecimal(drv["LANKY"]);
                     dtpNgayKy.Value = Convert.ToDateTime(drv["NGAYKY"]);
                     dtpNgayBatDau.Value = Convert.ToDateTime(drv["NGAYBATDAU"]);
                     dtpNgayKetThuc.Value = Convert.ToDateTime(drv["NGAYKETTHUC"]);
+                    txtHSL.Text = drv["HESOLUONG"].ToString();
                     nudHSL.Value = Convert.ToDecimal(drv["HESOLUONG"]);
                     cboThoiHan.SelectedItem = drv["THOIHAN"].ToString();
                     txtNoiDung.Text = drv["NOIDUNG"].ToString();
@@ -284,6 +313,19 @@ namespace QuanLyNhanSU
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi chọn hàng: " + ex.Message);
+            }
+        }
+
+        private void cboMaNV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cboMaNV.SelectedItem != null)
+            {
+                DataRowView drv = cboMaNV.SelectedItem as DataRowView;
+                txtTenNV.Text = drv["HOTEN"].ToString();
+            }
+            else
+            {
+                txtTenNV.Text = "";
             }
         }
     }
