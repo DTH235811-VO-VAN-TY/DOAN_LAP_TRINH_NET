@@ -1,215 +1,338 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace QuanLyNhanSU
 {
     public partial class add_UngLuong_form : Form
     {
-        // 1. Cấu hình chuỗi kết nối (Thay đổi tên Server/Database của bạn vào đây)
-        string strKetNoi = @"Data Source=LAPTOP-S5P1Q2HR\SQLEXPRESS;Initial Catalog=QuanLyNhanSu_DB;Integrated Security=True";
-        SqlConnection conn = null;
+        // 1. Cấu hình chuỗi kết nối
+        string strKetNoi = @"Data Source=REDMI-11\SQLEXPRESS01;Initial Catalog=QuanLyNhanSu_DB;Integrated Security=True";
 
-        // 2. Biến cờ hiệu
-        bool isThem = false;
-        int idHienTai = -1;
+        SqlConnection conn = null;
+        DataSet ds = new DataSet();
+
+        SqlDataAdapter daNhanVien; // Để load combobox
+        SqlDataAdapter daUngLuong; // Để xử lý chính
+
         public add_UngLuong_form()
         {
             InitializeComponent();
-            conn = new SqlConnection(strKetNoi);
         }
+
+        // Sự kiện Load Form
+        private void add_UngLuong_form_Load(object sender, EventArgs e)
+        {
+            LoadData();
+            LockControl(true); // Khóa các ô nhập khi mới mở
+        }
+
         private void LoadData()
         {
             try
             {
-                if (conn.State == ConnectionState.Closed) conn.Open();
-                // Lấy dữ liệu, giả sử tên bảng là tb_UNGLUONG
-                string sql = "SELECT * FROM tb_UNGLUONG ORDER BY NGAY DESC";
-                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dgvUngluong.DataSource = dt;
+                conn = new SqlConnection(strKetNoi);
+                conn.Open();
+
+                // --- A. LOAD COMBOBOX NHÂN VIÊN ---
+                string sqlNV = "SELECT * FROM TB_NHANVIEN";
+                daNhanVien = new SqlDataAdapter(sqlNV, conn);
+                daNhanVien.Fill(ds, "tblNHANVIEN");
+
+                cboMaNV.DataSource = ds.Tables["tblNHANVIEN"];
+                cboMaNV.DisplayMember = "MANV";
+                cboMaNV.ValueMember = "MANV";
+                cboMaNV.SelectedIndex = -1;
+
+                // --- B. CẤU HÌNH ADAPTER ỨNG LƯƠNG (Quan trọng nhất) ---
+
+                // 1. Select Command (Lấy cả Tên NV để hiện lên lưới)
+                // Giả sử bảng TB_UNGLUONG có các cột: ID, MANV, NAM, THANG, NGAY, SOTIEN, GHICHU (nếu có), TRANGTHAI
+                string sqlSelect = @"SELECT ul.ID, ul.MANV, nv.HOTEN, ul.NGAY, ul.SOTIEN, ul.GHICHU 
+                                     FROM TB_UNGLUONG ul 
+                                     LEFT JOIN TB_NHANVIEN nv ON ul.MANV = nv.MANV 
+                                     ORDER BY ul.NGAY DESC";
+
+                daUngLuong = new SqlDataAdapter(sqlSelect, conn);
+
+                // 2. Insert Command
+                // Lưu ý: Tự động tách YEAR và MONTH từ tham số @NGAY
+                string sqlInsert = @"INSERT INTO TB_UNGLUONG (MANV, NGAY, NAM, THANG, SOTIEN, GHICHU, TRANGTHAI) 
+                                     VALUES (@MANV, @NGAY, YEAR(@NGAY), MONTH(@NGAY), @SOTIEN, @GHICHU, 1)";
+
+                SqlCommand cmdInsert = new SqlCommand(sqlInsert, conn);
+                cmdInsert.Parameters.Add("@MANV", SqlDbType.NVarChar, 50, "MANV");
+                cmdInsert.Parameters.Add("@NGAY", SqlDbType.DateTime, 8, "NGAY");
+                cmdInsert.Parameters.Add("@SOTIEN", SqlDbType.Float, 8, "SOTIEN"); // Hoặc Decimal tùy DB
+                cmdInsert.Parameters.Add("@GHICHU", SqlDbType.NVarChar, 200, "GHICHU");
+                daUngLuong.InsertCommand = cmdInsert;
+
+                // 3. Update Command
+                string sqlUpdate = @"UPDATE TB_UNGLUONG 
+                                     SET MANV=@MANV, NGAY=@NGAY, NAM=YEAR(@NGAY), THANG=MONTH(@NGAY), 
+                                         SOTIEN=@SOTIEN, GHICHU=@GHICHU 
+                                     WHERE ID=@ID";
+
+                SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, conn);
+                cmdUpdate.Parameters.Add("@MANV", SqlDbType.NVarChar, 50, "MANV");
+                cmdUpdate.Parameters.Add("@NGAY", SqlDbType.DateTime, 8, "NGAY");
+                cmdUpdate.Parameters.Add("@SOTIEN", SqlDbType.Float, 8, "SOTIEN");
+                cmdUpdate.Parameters.Add("@GHICHU", SqlDbType.NVarChar, 200, "GHICHU");
+                cmdUpdate.Parameters.Add("@ID", SqlDbType.Int, 4, "ID"); // Khóa chính để tìm dòng update
+                daUngLuong.UpdateCommand = cmdUpdate;
+
+                // 4. Delete Command
+                string sqlDelete = @"DELETE FROM TB_UNGLUONG WHERE ID=@ID";
+                SqlCommand cmdDelete = new SqlCommand(sqlDelete, conn);
+                cmdDelete.Parameters.Add("@ID", SqlDbType.Int, 4, "ID");
+                daUngLuong.DeleteCommand = cmdDelete;
+
+                // --- C. TẢI DỮ LIỆU VÀO DATASET ---
+                daUngLuong.Fill(ds, "tblUNGLUONG");
+
+                // Thiết lập Khóa chính cho bảng trong bộ nhớ (để tìm kiếm Sửa/Xóa nhanh hơn)
+                DataColumn pk = ds.Tables["tblUNGLUONG"].Columns["ID"];
+                pk.AutoIncrement = true;
+                pk.AutoIncrementSeed = -1;
+                pk.AutoIncrementStep = -1;
+                ds.Tables["tblUNGLUONG"].PrimaryKey = new DataColumn[] { pk };
+
+                // --- D. GÁN DỮ LIỆU LÊN LƯỚI ---
+                dgvUngluong.AutoGenerateColumns = false; // Tắt tự động tạo cột để dùng cột bạn đã thiết kế
+                dgvUngluong.DataSource = ds.Tables["tblUNGLUONG"];
+
+                // Mapping: Tên cột trong Grid (Name) -> Tên cột trong SQL
+                // Bạn cần kiểm tra kỹ (Name) trong file Designer của bạn có khớp không nhé
+                dgvUngluong.Columns["Manhanvien"].DataPropertyName = "MANV";
+                dgvUngluong.Columns["Tennhanvien"].DataPropertyName = "HOTEN";
+                dgvUngluong.Columns["Ngayungluong"].DataPropertyName = "NGAY";
+                dgvUngluong.Columns["Sotienung"].DataPropertyName = "SOTIEN";
+                dgvUngluong.Columns["Ghichu"].DataPropertyName = "GHICHU";
+
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message); }
-            finally { conn.Close(); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+            }
         }
 
+        // Hàm điều khiển trạng thái nút (giống UC_BaoHiem)
         private void LockControl(bool lockState)
         {
-            // Khóa/Mở khóa các ô nhập
-            txtMaNV.Enabled = !lockState;
-            txtTenNV.Enabled = !lockState;
+            // True: Đang xem (Khóa nhập), False: Đang sửa (Mở nhập)
+            cboMaNV.Enabled = !lockState;
             txtSoTienung.Enabled = !lockState;
             txtGhichu.Enabled = !lockState;
             dtpNgayungluong.Enabled = !lockState;
 
-            // Khóa/Mở khóa nút
+            // Khóa text Tên NV luôn (vì tự động load)
+            txtTenNV.Enabled = false;
+
             btnThem.Enabled = lockState;
             btnSua.Enabled = lockState;
             btnXoa.Enabled = lockState;
-            btnLuu.Enabled = !lockState; // Nút Lưu chỉ sáng khi đang nhập
+
+            btnLuu.Enabled = !lockState; // Chỉ sáng khi đang nhập liệu
             btnLamMoi.Enabled = true;
         }
 
         private void ResetInput()
         {
-            txtMaNV.Clear();
+            cboMaNV.SelectedIndex = -1;
             txtTenNV.Clear();
             txtSoTienung.Clear();
             txtGhichu.Clear();
             dtpNgayungluong.Value = DateTime.Now;
+            dgvUngluong.ClearSelection();
         }
 
+        // Xử lý khi chọn 1 dòng trên lưới
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            try
             {
-                DataGridViewRow row = dgvUngluong.Rows[e.RowIndex];
-                try
+                if (e.RowIndex >= 0)
                 {
-                    idHienTai = Convert.ToInt32(row.Cells["ID"].Value);
+                    DataGridViewRow row = dgvUngluong.Rows[e.RowIndex];
 
-                    // Đổ dữ liệu lên ô nhập
-                    txtMaNV.Text = row.Cells["MANV"].Value?.ToString();
+                    // Lấy DataRowView từ dòng được chọn (Dữ liệu gốc)
+                    DataRowView drv = row.DataBoundItem as DataRowView;
+                    if (drv == null) return;
 
-                    // Lưu ý: Database hiện tại không có cột HOTEN, nên ô Tên NV sẽ trống hoặc bạn phải tự join bảng
-                    // txtTenNV.Text = ...; 
+                    // Đổ dữ liệu lên form
+                    cboMaNV.SelectedValue = drv["MANV"].ToString();
+                    // TxtTenNV sẽ tự nhảy nhờ sự kiện cbo_SelectedIndexChanged
 
-                    // Xử lý ngày tháng
-                    if (row.Cells["NGAY"].Value != DBNull.Value)
-                        dtpNgayungluong.Value = Convert.ToDateTime(row.Cells["NGAY"].Value);
+                    if (drv["NGAY"] != DBNull.Value)
+                        dtpNgayungluong.Value = Convert.ToDateTime(drv["NGAY"]);
 
-                    // Xử lý số tiền (Format có dấu phẩy cho dễ nhìn)
-                    if (row.Cells["SOTIEN"].Value != DBNull.Value)
+                    if (drv["SOTIEN"] != DBNull.Value)
                     {
-                        decimal soTien = Convert.ToDecimal(row.Cells["SOTIEN"].Value);
-                        txtSoTienung.Text = soTien.ToString("0.##");
+                        // Format số tiền cho đẹp nếu cần, nhưng khi gán vào textbox để sửa thì nên để số thô
+                        txtSoTienung.Text = drv["SOTIEN"].ToString();
                     }
+
+                    if (ds.Tables["tblUNGLUONG"].Columns.Contains("GHICHU") && drv["GHICHU"] != DBNull.Value)
+                        txtGhichu.Text = drv["GHICHU"].ToString();
+                    else
+                        txtGhichu.Text = "";
+
+                    // Mở nút Sửa/Xóa
+                    LockControl(true);
                 }
-                catch (Exception) { }
             }
+            catch (Exception ex) { MessageBox.Show("Lỗi chọn dòng: " + ex.Message); }
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            isThem = true;
             ResetInput();
-            LockControl(false);
-            txtMaNV.Focus();
+            LockControl(false); // Mở khóa để nhập
+            cboMaNV.Focus();
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if (idHienTai == -1)
+            if (dgvUngluong.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Vui lòng chọn dòng cần sửa!");
                 return;
             }
-            isThem = false;
-            LockControl(false);
-            // txtMaNV.Enabled = false; // Nếu muốn cấm sửa mã nhân viên thì bỏ comment dòng này
+            LockControl(false); // Mở khóa để sửa
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (idHienTai == -1) { MessageBox.Show("Chưa chọn dòng để xóa!"); return; }
+            if (dgvUngluong.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Chưa chọn dòng để xóa!");
+                return;
+            }
 
-            if (MessageBox.Show("Bạn có chắc muốn xóa phiếu ứng lương này?", "Cảnh báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Bạn có chắc muốn xóa phiếu ứng lương này?", "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 try
                 {
-                    if (conn.State == ConnectionState.Closed) conn.Open();
-                    SqlCommand cmd = new SqlCommand("DELETE FROM tb_UNGLUONG WHERE ID=@ID", conn);
-                    cmd.Parameters.AddWithValue("@ID", idHienTai);
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Đã xóa!");
-                    LoadData();
-                    ResetInput();
-                    idHienTai = -1;
+                    // Xóa trong DataTable (Bộ nhớ đệm)
+                    int id = Convert.ToInt32(dgvUngluong.SelectedRows[0].Cells["ID"].Value); // Đảm bảo Grid có cột ID (ẩn cũng được) hoặc lấy từ DataRowView
+
+                    // Cách lấy ID an toàn hơn từ DataRowView
+                    DataRowView drv = dgvUngluong.SelectedRows[0].DataBoundItem as DataRowView;
+                    if (drv != null)
+                    {
+                        drv.Row.Delete(); // Đánh dấu là đã xóa
+                        MessageBox.Show("Đã xóa trong bộ nhớ tạm. Bấm LƯU để cập nhật CSDL.");
+                        ResetInput();
+                    }
                 }
                 catch (Exception ex) { MessageBox.Show("Lỗi xóa: " + ex.Message); }
-                finally { conn.Close(); }
             }
-        }
-
-        private void btnLamMoi_Click(object sender, EventArgs e)
-        {
-            ResetInput();
-            LockControl(true);
-            idHienTai = -1;
-            LoadData();
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            // 1. Kiểm tra nhập liệu
-            if (string.IsNullOrWhiteSpace(txtMaNV.Text) || string.IsNullOrWhiteSpace(txtSoTienung.Text))
+            // 1. Validate
+            if (cboMaNV.SelectedIndex == -1 || string.IsNullOrWhiteSpace(txtSoTienung.Text))
             {
                 MessageBox.Show("Vui lòng nhập Mã NV và Số tiền ứng!");
                 return;
             }
 
-            decimal soTienUng;
-            if (!decimal.TryParse(txtSoTienung.Text, out soTienUng))
-            {
-                MessageBox.Show("Số tiền phải là số!");
-                return;
-            }
-
+            // 2. Xử lý dữ liệu vào DataTable
             try
             {
-                if (conn.State == ConnectionState.Closed) conn.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = conn;
+                // A. Trường hợp THÊM MỚI
+                // Kiểm tra xem người dùng đang bấm Thêm (không có row nào chọn) hay Sửa
+                // Tuy nhiên logic đơn giản nhất: Nếu txtSoTienung đang mở, ta kiểm tra xem có đang chọn row nào để sửa không.
 
-                // Tách Ngày, Tháng, Năm từ DateTimePicker
-                int nam = dtpNgayungluong.Value.Year;
-                int thang = dtpNgayungluong.Value.Month;
-                DateTime ngayDayDu = dtpNgayungluong.Value;
+                // Logic chuẩn: Dùng DataRow
+                DataRow row;
 
-                if (isThem)
+                // Nếu đang Sửa (có dòng được chọn và không phải là thêm mới)
+                // Ở đây tôi dùng logic đơn giản: Nếu grid đang focus dòng nào thì coi như sửa dòng đó, 
+                // nhưng nếu vừa bấm nút Thêm (ResetInput) thì grid mất focus.
+
+                // Cách tốt nhất: Kiểm tra ID. Nhưng ở đây dùng DataSet, ta có thể làm như sau:
+
+                if (dgvUngluong.SelectedRows.Count > 0 && dgvUngluong.CurrentRow.DataBoundItem != null)
                 {
-                    // INSERT: Tự động tách ngày tháng năm để lưu vào 3 cột
-                    // Mặc định TRANGTHAI = 1
-                    cmd.CommandText = @"INSERT INTO tb_UNGLUONG (NAM, THANG, NGAY, SOTIEN, MANV, TRANGTHAI) 
-                                        VALUES (@Nam, @Thang, @Ngay, @SoTien, @MaNV, 1)";
+                    // -- UPDATE --
+                    DataRowView drv = dgvUngluong.CurrentRow.DataBoundItem as DataRowView;
+
+                    // Kiểm tra xem dòng này có phải là dòng mới thêm chưa lưu không, hay dòng cũ
+                    // Nếu đang ở chế độ thêm mới thì ta đã ClearSelection ở nút Thêm rồi.
+                    // Nên nếu có SelectedRows thì là SỬA.
+
+                    // Tuy nhiên để chắc chắn, bạn nên dùng 1 biến cờ isThem như code cũ, hoặc kiểm tra trạng thái
+                    // Nhưng theo phong cách UC_BaoHiem, ta thao tác trực tiếp Row.
+
+                    row = drv.Row;
+                    row.BeginEdit();
+                    row["MANV"] = cboMaNV.SelectedValue;
+                    row["HOTEN"] = txtTenNV.Text; // Cập nhật hiển thị ngay
+                    row["NGAY"] = dtpNgayungluong.Value;
+                    row["SOTIEN"] = Convert.ToDouble(txtSoTienung.Text);
+                    row["GHICHU"] = txtGhichu.Text;
+                    row.EndEdit();
                 }
                 else
                 {
-                    // UPDATE
-                    cmd.CommandText = @"UPDATE tb_UNGLUONG 
-                                        SET NAM=@Nam, THANG=@Thang, NGAY=@Ngay, 
-                                            SOTIEN=@SoTien, MANV=@MaNV 
-                                        WHERE ID=@ID";
-                    cmd.Parameters.AddWithValue("@ID", idHienTai);
+                    // -- INSERT --
+                    row = ds.Tables["tblUNGLUONG"].NewRow();
+                    row["MANV"] = cboMaNV.SelectedValue;
+                    row["HOTEN"] = txtTenNV.Text; // Cập nhật hiển thị ngay
+                    row["NGAY"] = dtpNgayungluong.Value;
+                    row["SOTIEN"] = Convert.ToDouble(txtSoTienung.Text);
+                    row["GHICHU"] = txtGhichu.Text;
+                    ds.Tables["tblUNGLUONG"].Rows.Add(row);
                 }
 
-                // Truyền tham số
-                cmd.Parameters.AddWithValue("@Nam", nam);
-                cmd.Parameters.AddWithValue("@Thang", thang);
-                cmd.Parameters.AddWithValue("@Ngay", ngayDayDu);
-                cmd.Parameters.AddWithValue("@SoTien", soTienUng);
-                cmd.Parameters.AddWithValue("@MaNV", txtMaNV.Text);
+                // 3. ĐẨY DỮ LIỆU XUỐNG SQL (Batch Update)
+                int result = daUngLuong.Update(ds, "tblUNGLUONG");
 
-                cmd.ExecuteNonQuery();
+                MessageBox.Show("Đã lưu thành công vào CSDL!");
 
-                MessageBox.Show(isThem ? "Thêm mới thành công!" : "Cập nhật thành công!");
-                LoadData();
+                // Tải lại dữ liệu để lấy ID mới và đảm bảo đồng bộ
+                ds.Tables["tblUNGLUONG"].Clear();
+                daUngLuong.Fill(ds, "tblUNGLUONG");
+
                 LockControl(true);
-                idHienTai = -1;
+                ResetInput();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi lưu: " + ex.Message);
+                MessageBox.Show("Lỗi khi lưu: " + ex.Message);
             }
-            finally { conn.Close(); }
         }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            // Hủy các thay đổi chưa lưu và tải lại
+            ds.Tables["tblUNGLUONG"].RejectChanges();
+            ResetInput();
+            LockControl(true);
+        }
+
+        private void cboMaNV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboMaNV.SelectedItem != null)
+            {
+                DataRowView drv = cboMaNV.SelectedItem as DataRowView;
+                txtTenNV.Text = drv["HOTEN"].ToString();
+            }
+            else
+            {
+                txtTenNV.Text = "";
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        // Bạn cần sự kiện Load cho Form, hãy vào file Designer hoặc Properties để gán sự kiện này
+        // this.Load += new System.EventHandler(this.add_UngLuong_form_Load);
     }
 }

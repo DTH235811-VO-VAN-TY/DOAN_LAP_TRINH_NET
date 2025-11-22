@@ -100,5 +100,10 @@ namespace QuanLyNhanSU
         {
             uC_BangLuong1.BringToFront();
         }
+
+        private void btnHomePage_Click(object sender, EventArgs e)
+        {
+            uC_HomePage1.BringToFront();
+        }
     }
 }

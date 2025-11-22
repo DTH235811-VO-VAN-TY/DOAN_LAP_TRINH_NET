@@ -37,12 +37,8 @@
             this.btnThem = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvUngluong = new System.Windows.Forms.DataGridView();
-            this.Manhanvien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tennhanvien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ngayungluong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sotienung = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ghichu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboMaNV = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtSoTienung = new System.Windows.Forms.TextBox();
             this.txtTenNV = new System.Windows.Forms.TextBox();
@@ -51,12 +47,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.dtpNgayungluong = new System.Windows.Forms.DateTimePicker();
-            this.txtMaNV = new System.Windows.Forms.TextBox();
             this.txtGhichu = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.Ghichu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sotienung = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ngayungluong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tennhanvien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Manhanvien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUngluong)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -143,7 +144,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label1.ForeColor = System.Drawing.Color.MediumTurquoise;
-            this.label1.Location = new System.Drawing.Point(267, 19);
+            this.label1.Location = new System.Drawing.Point(348, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(518, 41);
             this.label1.TabIndex = 42;
@@ -167,43 +168,9 @@
             this.dgvUngluong.TabIndex = 41;
             this.dgvUngluong.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             // 
-            // Manhanvien
-            // 
-            this.Manhanvien.HeaderText = "Mã Nhân Viên";
-            this.Manhanvien.MinimumWidth = 6;
-            this.Manhanvien.Name = "Manhanvien";
-            this.Manhanvien.Width = 125;
-            // 
-            // Tennhanvien
-            // 
-            this.Tennhanvien.HeaderText = "Tên Nhân Viên";
-            this.Tennhanvien.MinimumWidth = 6;
-            this.Tennhanvien.Name = "Tennhanvien";
-            this.Tennhanvien.Width = 150;
-            // 
-            // Ngayungluong
-            // 
-            this.Ngayungluong.HeaderText = "Ngày ứng lương";
-            this.Ngayungluong.MinimumWidth = 6;
-            this.Ngayungluong.Name = "Ngayungluong";
-            this.Ngayungluong.Width = 150;
-            // 
-            // Sotienung
-            // 
-            this.Sotienung.HeaderText = "Số tiền ứng";
-            this.Sotienung.MinimumWidth = 6;
-            this.Sotienung.Name = "Sotienung";
-            this.Sotienung.Width = 200;
-            // 
-            // Ghichu
-            // 
-            this.Ghichu.HeaderText = "Ghi chú";
-            this.Ghichu.MinimumWidth = 6;
-            this.Ghichu.Name = "Ghichu";
-            this.Ghichu.Width = 300;
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cboMaNV);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtSoTienung);
             this.groupBox1.Controls.Add(this.txtTenNV);
@@ -212,7 +179,6 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.dtpNgayungluong);
-            this.groupBox1.Controls.Add(this.txtMaNV);
             this.groupBox1.Controls.Add(this.txtGhichu);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
@@ -222,6 +188,15 @@
             this.groupBox1.TabIndex = 40;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin hợp đồng";
+            // 
+            // cboMaNV
+            // 
+            this.cboMaNV.FormattingEnabled = true;
+            this.cboMaNV.Location = new System.Drawing.Point(199, 51);
+            this.cboMaNV.Name = "cboMaNV";
+            this.cboMaNV.Size = new System.Drawing.Size(136, 28);
+            this.cboMaNV.TabIndex = 15;
+            this.cboMaNV.SelectedIndexChanged += new System.EventHandler(this.cboMaNV_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -290,13 +265,6 @@
             this.dtpNgayungluong.Size = new System.Drawing.Size(136, 27);
             this.dtpNgayungluong.TabIndex = 5;
             // 
-            // txtMaNV
-            // 
-            this.txtMaNV.Location = new System.Drawing.Point(199, 59);
-            this.txtMaNV.Name = "txtMaNV";
-            this.txtMaNV.Size = new System.Drawing.Size(171, 27);
-            this.txtMaNV.TabIndex = 1;
-            // 
             // txtGhichu
             // 
             this.txtGhichu.Location = new System.Drawing.Point(199, 173);
@@ -340,11 +308,60 @@
             this.panel4.Size = new System.Drawing.Size(16, 677);
             this.panel4.TabIndex = 52;
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(1099, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 37);
+            this.button1.TabIndex = 40;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // Ghichu
+            // 
+            this.Ghichu.HeaderText = "Ghi chú";
+            this.Ghichu.MinimumWidth = 6;
+            this.Ghichu.Name = "Ghichu";
+            this.Ghichu.Width = 300;
+            // 
+            // Sotienung
+            // 
+            this.Sotienung.HeaderText = "Số tiền ứng";
+            this.Sotienung.MinimumWidth = 6;
+            this.Sotienung.Name = "Sotienung";
+            this.Sotienung.Width = 200;
+            // 
+            // Ngayungluong
+            // 
+            this.Ngayungluong.HeaderText = "Ngày ứng lương";
+            this.Ngayungluong.MinimumWidth = 6;
+            this.Ngayungluong.Name = "Ngayungluong";
+            this.Ngayungluong.Width = 150;
+            // 
+            // Tennhanvien
+            // 
+            this.Tennhanvien.HeaderText = "Tên Nhân Viên";
+            this.Tennhanvien.MinimumWidth = 6;
+            this.Tennhanvien.Name = "Tennhanvien";
+            this.Tennhanvien.Width = 150;
+            // 
+            // Manhanvien
+            // 
+            this.Manhanvien.HeaderText = "Mã Nhân Viên";
+            this.Manhanvien.MinimumWidth = 6;
+            this.Manhanvien.Name = "Manhanvien";
+            this.Manhanvien.Width = 125;
+            // 
             // add_UngLuong_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1194, 709);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -361,6 +378,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "add_UngLuong_form";
             this.Text = "add_UngLuong_form";
+            this.Load += new System.EventHandler(this.add_UngLuong_form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUngluong)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -386,18 +404,19 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DateTimePicker dtpNgayungluong;
-        private System.Windows.Forms.TextBox txtMaNV;
         private System.Windows.Forms.TextBox txtGhichu;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtSoTienung;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cboMaNV;
         private System.Windows.Forms.DataGridViewTextBoxColumn Manhanvien;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tennhanvien;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ngayungluong;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sotienung;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ghichu;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel4;
     }
 }
