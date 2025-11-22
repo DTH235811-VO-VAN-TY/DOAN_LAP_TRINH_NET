@@ -41,6 +41,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnTanCa = new System.Windows.Forms.Button();
             this.dgvLichSu = new System.Windows.Forms.DataGridView();
+            this.dtpNgayCong = new System.Windows.Forms.DateTimePicker();
+            this.btnMoGhiCong = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichSu)).BeginInit();
@@ -59,6 +61,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnMoGhiCong);
+            this.groupBox1.Controls.Add(this.dtpNgayCong);
             this.groupBox1.Controls.Add(this.lblGioHienTai);
             this.groupBox1.Controls.Add(this.txtTrangThai);
             this.groupBox1.Controls.Add(this.label3);
@@ -66,7 +70,7 @@
             this.groupBox1.Controls.Add(this.cboChonNhanVien);
             this.groupBox1.Location = new System.Drawing.Point(97, 123);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(573, 273);
+            this.groupBox1.Size = new System.Drawing.Size(707, 273);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Bảng Chấm Công";
@@ -76,9 +80,9 @@
             this.lblGioHienTai.AutoSize = true;
             this.lblGioHienTai.Location = new System.Drawing.Point(21, 182);
             this.lblGioHienTai.Name = "lblGioHienTai";
-            this.lblGioHienTai.Size = new System.Drawing.Size(73, 16);
+            this.lblGioHienTai.Size = new System.Drawing.Size(79, 16);
             this.lblGioHienTai.TabIndex = 4;
-            this.lblGioHienTai.Text = "Giờ hiện tại";
+            this.lblGioHienTai.Text = "Giờ vào làm";
             // 
             // txtTrangThai
             // 
@@ -137,7 +141,7 @@
             // 
             this.groupBox2.Controls.Add(this.btnTanCa);
             this.groupBox2.Controls.Add(this.btnVaoCa);
-            this.groupBox2.Location = new System.Drawing.Point(740, 123);
+            this.groupBox2.Location = new System.Drawing.Point(924, 123);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(423, 273);
             this.groupBox2.TabIndex = 8;
@@ -164,8 +168,28 @@
             this.dgvLichSu.Name = "dgvLichSu";
             this.dgvLichSu.RowHeadersWidth = 51;
             this.dgvLichSu.RowTemplate.Height = 24;
-            this.dgvLichSu.Size = new System.Drawing.Size(1066, 267);
+            this.dgvLichSu.Size = new System.Drawing.Size(1250, 267);
             this.dgvLichSu.TabIndex = 9;
+            // 
+            // dtpNgayCong
+            // 
+            this.dtpNgayCong.Location = new System.Drawing.Point(452, 40);
+            this.dtpNgayCong.Name = "dtpNgayCong";
+            this.dtpNgayCong.Size = new System.Drawing.Size(243, 22);
+            this.dtpNgayCong.TabIndex = 5;
+            // 
+            // btnMoGhiCong
+            // 
+            this.btnMoGhiCong.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnMoGhiCong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMoGhiCong.ForeColor = System.Drawing.Color.White;
+            this.btnMoGhiCong.Location = new System.Drawing.Point(452, 176);
+            this.btnMoGhiCong.Name = "btnMoGhiCong";
+            this.btnMoGhiCong.Size = new System.Drawing.Size(243, 75);
+            this.btnMoGhiCong.TabIndex = 8;
+            this.btnMoGhiCong.Text = "Ghi Công";
+            this.btnMoGhiCong.UseVisualStyleBackColor = false;
+            this.btnMoGhiCong.Click += new System.EventHandler(this.btnMoGhiCong_Click);
             // 
             // UC_ChamCong
             // 
@@ -176,7 +200,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Name = "UC_ChamCong";
-            this.Size = new System.Drawing.Size(1514, 764);
+            this.Size = new System.Drawing.Size(1514, 777);
             this.Load += new System.EventHandler(this.UC_ChamCong_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -201,5 +225,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnTanCa;
         private System.Windows.Forms.DataGridView dgvLichSu;
+        private System.Windows.Forms.DateTimePicker dtpNgayCong;
+        private System.Windows.Forms.Button btnMoGhiCong;
     }
 }
