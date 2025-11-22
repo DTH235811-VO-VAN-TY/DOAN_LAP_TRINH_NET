@@ -90,6 +90,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuanLyTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyTaiKhoan.Designer.cs">
+      <DependentUpon>QuanLyTaiKhoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="TrangChu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +114,12 @@
     <Compile Include="UC_BaoHiemNV.Designer.cs">
       <DependentUpon>UC_BaoHiemNV.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC_ChamCong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_ChamCong.Designer.cs">
+      <DependentUpon>UC_ChamCong.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC_ChucNangNS.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -125,6 +137,12 @@
     </Compile>
     <Compile Include="UC_KhenThuong_KyLuat.Designer.cs">
       <DependentUpon>UC_KhenThuong_KyLuat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_NghiPhepNV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_NghiPhepNV.Designer.cs">
+      <DependentUpon>UC_NghiPhepNV.cs</DependentUpon>
     </Compile>
     <Compile Include="UC_NhanVien.cs">
       <SubType>UserControl</SubType>
@@ -168,6 +186,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="QuanLyTaiKhoan.resx">
+      <DependentUpon>QuanLyTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TrangChu.resx">
       <DependentUpon>TrangChu.cs</DependentUpon>
     </EmbeddedResource>
@@ -177,6 +198,9 @@
     <EmbeddedResource Include="UC_BaoHiemNV.resx">
       <DependentUpon>UC_BaoHiemNV.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_ChamCong.resx">
+      <DependentUpon>UC_ChamCong.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_ChucNangNS.resx">
       <DependentUpon>UC_ChucNangNS.cs</DependentUpon>
     </EmbeddedResource>
@@ -185,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC_KhenThuong_KyLuat.resx">
       <DependentUpon>UC_KhenThuong_KyLuat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_NghiPhepNV.resx">
+      <DependentUpon>UC_NghiPhepNV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_NhanVien.resx">
       <DependentUpon>UC_NhanVien.cs</DependentUpon>
