@@ -21,6 +21,7 @@ namespace QuanLyNhanSU
         SqlDataAdapter daNhanVien;
         SqlDataAdapter daLoaiPhuCap; // Dùng để lấy danh sách các loại phụ cấp
         SqlDataAdapter daNV_PhuCap;  // Dùng để thao tác bảng TB_NHANVIEN_PHUCAP
+        public event EventHandler DataUpdated;
 
         public Uc_PhuCap()
         {
@@ -37,7 +38,7 @@ namespace QuanLyNhanSU
                 conn.Open();
 
                 // 1. Tải ComboBox Nhân Viên
-                string sqlNV = "SELECT MANV, HOTEN FROM TB_NHANVIEN";
+                string sqlNV = "SELECT * FROM tb_NHANVIEN WHERE DATHOIVIEC = 0 OR DATHOIVIEC IS NULL"; 
                 daNhanVien = new SqlDataAdapter(sqlNV, conn);
                 daNhanVien.Fill(ds, "tblNHANVIEN");
 
@@ -108,21 +109,28 @@ namespace QuanLyNhanSU
         }
         public void ReloadNhanVienPhuCap()
         {
-            if (ds.Tables.Contains("tblNHANVIEN"))
+            try
             {
-                ds.Tables["tblNHANVIEN"].Clear();
-            }
-            if(daNV_PhuCap != null)
-            {
-                string sqlNV = "SELECT MANV, HOTEN FROM TB_NHANVIEN";
-                daNhanVien = new SqlDataAdapter(sqlNV, conn);
+                if (ds.Tables.Contains("tblNHANVIEN"))
+                            {
+                                ds.Tables["tblNHANVIEN"].Clear();
+                            }
+                if(daNV_PhuCap != null)
+                {
+                  string sqlNV = "SELECT MANV, HOTEN FROM TB_NHANVIEN WHERE DATHOIVIEC = 0 OR DATHOIVIEC IS NULL"; ;
+                   daNhanVien = new SqlDataAdapter(sqlNV, conn);
                 
+                            }
+             daNhanVien.Fill(ds, "tblNHANVIEN");
+             cboMaNVPC.DataSource = ds.Tables["tblNHANVIEN"];
+             cboMaNVPC.DisplayMember = "MANV"; // Hiển thị Mã
+             cboMaNVPC.ValueMember = "MANV";   // Giá trị là Mã
+             cboMaNVPC.SelectedIndex = -1;
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Lỗi tải lại nhân viên: " + ex.Message);
             }
-            daNhanVien.Fill(ds, "tblNHANVIEN");
-            cboMaNVPC.DataSource = ds.Tables["tblNHANVIEN"];
-            cboMaNVPC.DisplayMember = "MANV"; // Hiển thị Mã
-            cboMaNVPC.ValueMember = "MANV";   // Giá trị là Mã
-            cboMaNVPC.SelectedIndex = -1;
+
         }
 
         private void BuildCommands()
@@ -256,6 +264,7 @@ namespace QuanLyNhanSU
                 ds.Tables["tblNV_PHUCAP"].Clear();
                 daNV_PhuCap.Fill(ds, "tblNV_PHUCAP");
                 LamMoiControls();
+                DataUpdated?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception ex)
             {

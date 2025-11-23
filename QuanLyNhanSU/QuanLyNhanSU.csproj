@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -100,6 +101,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormThongTin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormThongTin.Designer.cs">
+      <DependentUpon>FormThongTin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmChamCongThuCong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChamCongThuCong.Designer.cs">
+      <DependentUpon>frmChamCongThuCong.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrangChu.cs">
@@ -119,6 +132,12 @@
     </Compile>
     <Compile Include="UC_BaoHiemNV.Designer.cs">
       <DependentUpon>UC_BaoHiemNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_ChamCong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_ChamCong.Designer.cs">
+      <DependentUpon>UC_ChamCong.cs</DependentUpon>
     </Compile>
     <Compile Include="UC_ChucNangNS.cs">
       <SubType>UserControl</SubType>
@@ -144,6 +163,17 @@
     <Compile Include="UC_KhenThuong_KyLuat.Designer.cs">
       <DependentUpon>UC_KhenThuong_KyLuat.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC_NghiPhepNV.Designer_New.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_NghiPhepNV_New.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_NghiPhepNV_New.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UC_NghiPhepNV_New.resx</DependentUpon>
+    </Compile>
     <Compile Include="UC_NhanVien.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,6 +185,18 @@
     </Compile>
     <Compile Include="Uc_PhuCap.Designer.cs">
       <DependentUpon>Uc_PhuCap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_QuanLyTaiKhoan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_QuanLyTaiKhoan.Designer.cs">
+      <DependentUpon>UC_QuanLyTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_ThoiViec.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_ThoiViec.Designer.cs">
+      <DependentUpon>UC_ThoiViec.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="add_BoPhan_form.resx">
       <DependentUpon>add_BoPhan_form.cs</DependentUpon>
@@ -183,6 +225,12 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormThongTin.resx">
+      <DependentUpon>FormThongTin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChamCongThuCong.resx">
+      <DependentUpon>frmChamCongThuCong.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -201,6 +249,9 @@
     <EmbeddedResource Include="UC_BaoHiemNV.resx">
       <DependentUpon>UC_BaoHiemNV.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_ChamCong.resx">
+      <DependentUpon>UC_ChamCong.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_ChucNangNS.resx">
       <DependentUpon>UC_ChucNangNS.cs</DependentUpon>
     </EmbeddedResource>
@@ -213,11 +264,24 @@
     <EmbeddedResource Include="UC_KhenThuong_KyLuat.resx">
       <DependentUpon>UC_KhenThuong_KyLuat.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_NghiPhepNV.Designer_New.resx">
+      <DependentUpon>UC_NghiPhepNV.Designer_New.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_NghiPhepNV_New.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UC_NghiPhepNV_New.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_NhanVien.resx">
       <DependentUpon>UC_NhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uc_PhuCap.resx">
       <DependentUpon>Uc_PhuCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_QuanLyTaiKhoan.resx">
+      <DependentUpon>UC_QuanLyTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_ThoiViec.resx">
+      <DependentUpon>UC_ThoiViec.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

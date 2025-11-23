@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSU
@@ -40,7 +41,7 @@ namespace QuanLyNhanSU
                 conn.Open();
 
                 // 1. Tải ComboBox Nhân Viên (dùng để Thêm/Sửa)
-                string sQueryNhanVien = @"SELECT * FROM TB_NHANVIEN";
+                string sQueryNhanVien = @"SELECT * FROM tb_NHANVIEN WHERE DATHOIVIEC = 0 OR DATHOIVIEC IS NULL";
                 daNhanVien = new SqlDataAdapter(sQueryNhanVien, conn);
                 daNhanVien.Fill(ds, "tblNHANVIEN");
                 cboMaNV.DataSource = ds.Tables["tblNHANVIEN"];
@@ -73,6 +74,8 @@ namespace QuanLyNhanSU
                 dgvHopDong.Columns["Hesoluong"].DataPropertyName = "HESOLUONG";
                 dgvHopDong.Columns["Thoihan"].DataPropertyName = "THOIHAN";
                 dgvHopDong.Columns["Noidung"].DataPropertyName = "NOIDUNG";
+                dgvHopDong.Columns["Manv"].DataPropertyName = "MANV"; // Ẩn, dùng để lưu
+                dgvHopDong.Columns["Manv"].Visible = false;
 
                 // 5. Định nghĩa InsertCommand
                 string sThem = @"INSERT INTO TB_HOPDONG (SOHD, MANV, LANKY, NGAYKY, NGAYBATDAU, NGAYKETTHUC, HESOLUONG, THOIHAN, NOIDUNG) 
@@ -327,6 +330,220 @@ namespace QuanLyNhanSU
             {
                 txtTenNV.Text = "";
             }
+        }
+        private string _in_SoHD = "";
+        private string _in_HoTen = "";
+        private string _in_SinhNgay = "";
+        private string _in_CCCD = "";
+        private string _in_DiaChi = "";
+        private string _in_ChucVu = "";
+        private string _in_PhongBan = "";
+        private string _in_BoPhan = "";
+        private string _in_TrinhDo = "";
+        private string _in_LoaiHD = ""; // Thời hạn
+        private string _in_TuNgay = "";
+        private string _in_DenNgay = "";
+        private string _in_HeSoLuong = "";
+        private string _in_NgayKy = "";
+        private void btnInHD_Click(object sender, EventArgs e)
+        {
+            if (dgvHopDong.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn một hợp đồng để in!");
+                return;
+            }
+
+            // 1. Lấy Mã NV và Số HĐ từ dòng đang chọn
+            string maNV = dgvHopDong.SelectedRows[0].Cells["MANV"].Value.ToString(); // Đảm bảo cột MANV có tồn tại (có thể ẩn)
+            string soHD = dgvHopDong.SelectedRows[0].Cells["SoHD"].Value.ToString();
+
+            // 2. Truy vấn CSDL để lấy đầy đủ thông tin chi tiết (Join nhiều bảng)
+            if (LayThongTinChiTietHopDong(maNV, soHD))
+            {
+                // 3. Tiến hành in
+                PrintDocument pd = new PrintDocument();
+                pd.DefaultPageSettings.PaperSize = new PaperSize("A4", 827, 1169); // Khổ A4 đứng
+                pd.PrintPage += new PrintPageEventHandler(this.pd_InHopDong_PrintPage);
+
+                PrintPreviewDialog ppd = new PrintPreviewDialog();
+                ppd.Document = pd;
+                ppd.Width = 900;
+                ppd.Height = 700;
+                ppd.ShowDialog();
+            }
+        }
+
+        // Hàm lấy dữ liệu chi tiết
+        private bool LayThongTinChiTietHopDong(string maNV, string soHD)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed) conn.Open();
+
+                // Câu truy vấn lấy TẤT CẢ thông tin cần thiết
+                string sql = @"SELECT 
+                                nv.HOTEN, nv.NGAYSINH, nv.CCCD, nv.DIACHI,
+                                pb.TENPB, cv.TENCV, bp.TENBP, td.TENTD,
+                                hd.SOHD, hd.THOIHAN, hd.NGAYBATDAU, hd.NGAYKETTHUC, hd.HESOLUONG, hd.NGAYKY
+                               FROM TB_HOPDONG hd
+                               JOIN TB_NHANVIEN nv ON hd.MANV = nv.MANV
+                               LEFT JOIN TB_PHONGBAN pb ON nv.IDPB = pb.IDPB
+                               LEFT JOIN TB_CHUCVU cv ON nv.IDCV = cv.IDCV
+                               LEFT JOIN TB_BOPHAN bp ON nv.IDBP = bp.IDBP
+                               LEFT JOIN TB_TRINHDO td ON nv.IDTD = td.IDTD
+                               WHERE hd.SOHD = @SOHD";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@SOHD", soHD);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    _in_SoHD = dr["SOHD"].ToString();
+                    _in_HoTen = dr["HOTEN"].ToString();
+                    _in_SinhNgay = Convert.ToDateTime(dr["NGAYSINH"]).ToString("dd/MM/yyyy");
+                    _in_CCCD = dr["CCCD"].ToString();
+                    _in_DiaChi = dr["DIACHI"].ToString();
+                    _in_PhongBan = dr["TENPB"].ToString();
+                    _in_ChucVu = dr["TENCV"].ToString();
+                    _in_BoPhan = dr["TENBP"].ToString();
+                    _in_TrinhDo = dr["TENTD"].ToString();
+
+                    _in_LoaiHD = dr["THOIHAN"].ToString();
+                    _in_TuNgay = Convert.ToDateTime(dr["NGAYBATDAU"]).ToString("dd/MM/yyyy");
+
+                    // Xử lý ngày kết thúc (nếu vô thời hạn thì có thể null)
+                    if (dr["NGAYKETTHUC"] != DBNull.Value)
+                        _in_DenNgay = Convert.ToDateTime(dr["NGAYKETTHUC"]).ToString("dd/MM/yyyy");
+                    else
+                        _in_DenNgay = "...";
+
+                    _in_HeSoLuong = dr["HESOLUONG"].ToString();
+                    _in_NgayKy = Convert.ToDateTime(dr["NGAYKY"]).ToString("dd/MM/yyyy");
+
+                    dr.Close();
+                    return true;
+                }
+                dr.Close();
+                MessageBox.Show("Không tìm thấy dữ liệu chi tiết!");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi lấy dữ liệu in: " + ex.Message);
+                return false;
+            }
+        }
+
+        private void pd_InHopDong_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            // --- CẤU HÌNH FONT ---
+            Font fontQuocHieu = new Font("Times New Roman", 12, FontStyle.Bold);
+            Font fontTieuDe = new Font("Times New Roman", 18, FontStyle.Bold);
+            Font fontDam = new Font("Times New Roman", 11, FontStyle.Bold); // Font nội dung đậm
+            Font fontThuong = new Font("Times New Roman", 11, FontStyle.Regular); // Font nội dung thường
+            Font fontNghieng = new Font("Times New Roman", 11, FontStyle.Italic);
+
+            float y = e.MarginBounds.Top;
+            float leftMargin = e.MarginBounds.Left;
+            float rightMargin = e.MarginBounds.Right;
+            float pageCenter = e.PageBounds.Width / 2;
+            float w = e.MarginBounds.Width;
+
+            StringFormat centerFormat = new StringFormat { Alignment = StringAlignment.Center };
+
+            // --- 1. VẼ QUỐC HIỆU TIÊU NGỮ ---
+            e.Graphics.DrawString("CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM", fontQuocHieu, Brushes.Black, pageCenter, y, centerFormat);
+            y += 20;
+            e.Graphics.DrawString("Độc lập - Tự do - Hạnh phúc", fontDam, Brushes.Black, pageCenter, y, centerFormat);
+            y += 20;
+            e.Graphics.DrawString("----------------", fontDam, Brushes.Black, pageCenter, y, centerFormat);
+            y += 40;
+
+            // --- 2. TIÊU ĐỀ HỢP ĐỒNG ---
+            e.Graphics.DrawString("HỢP ĐỒNG LAO ĐỘNG", fontTieuDe, Brushes.Black, pageCenter, y, centerFormat);
+            y += 30;
+            e.Graphics.DrawString($"Số: {_in_SoHD}", fontNghieng, Brushes.Black, pageCenter, y, centerFormat);
+            y += 40;
+
+            // --- 3. NỘI DUNG ---
+            // Hàm vẽ dòng text kết hợp dữ liệu (Helper nhỏ)
+            void DrawLine(string label, string value, Font fLabel, Font fValue, float yPos)
+            {
+                e.Graphics.DrawString(label, fLabel, Brushes.Black, leftMargin, yPos);
+                SizeF sizeLabel = e.Graphics.MeasureString(label, fLabel);
+                e.Graphics.DrawString(value, fValue, Brushes.Black, leftMargin + sizeLabel.Width, yPos);
+            }
+
+            e.Graphics.DrawString("Hôm nay, ngày " + DateTime.Now.Day + " tháng " + DateTime.Now.Month + " năm " + DateTime.Now.Year + ", tại Công ty ABC, chúng tôi gồm:", fontNghieng, Brushes.Black, leftMargin, y);
+            y += 30;
+
+            // === BÊN A ===
+            e.Graphics.DrawString("BÊN A (Người sử dụng lao động): CÔNG TY CÔNG NGHỆ PHẦN MỀM VĂN TỶ", fontDam, Brushes.Black, leftMargin, y);
+            y += 25;
+            e.Graphics.DrawString("Đại diện: Ông Võ Văn Tỷ", fontThuong, Brushes.Black, leftMargin, y);
+            y += 25;
+            e.Graphics.DrawString("Chức vụ: Tổng Giám Đốc", fontThuong, Brushes.Black, leftMargin, y);
+            y += 25;
+            e.Graphics.DrawString("Địa chỉ: Số 123, Đường  Nguyễn Văn Linh, Phường Long Xuyên, An Giang", fontThuong, Brushes.Black, leftMargin, y);
+            y += 40;
+
+            // === BÊN B ===
+            e.Graphics.DrawString("BÊN B (Người lao động):", fontDam, Brushes.Black, leftMargin, y);
+            y += 25;
+            DrawLine("Ông/Bà: ", _in_HoTen.ToUpper(), fontThuong, fontDam, y);
+            y += 25;
+            DrawLine("Sinh ngày: ", _in_SinhNgay, fontThuong, fontThuong, y);
+            y += 25;
+            DrawLine("Số CCCD/CMND: ", _in_CCCD, fontThuong, fontDam, y);
+            y += 25;
+            DrawLine("Địa chỉ thường trú: ", _in_DiaChi, fontThuong, fontThuong, y);
+            y += 40;
+
+            e.Graphics.DrawString("Thỏa thuận ký kết hợp đồng lao động và cam kết làm đúng những điều khoản sau đây:", fontNghieng, Brushes.Black, leftMargin, y);
+            y += 30;
+
+            // === ĐIỀU KHOẢN ===
+            // Điều 1
+            e.Graphics.DrawString("Điều 1: Thời hạn và công việc hợp đồng", fontDam, Brushes.Black, leftMargin, y);
+            y += 25;
+            DrawLine("- Loại hợp đồng: ", _in_LoaiHD, fontThuong, fontDam, y);
+            y += 25;
+            DrawLine("- Từ ngày: ", _in_TuNgay + "   đến ngày: " + _in_DenNgay, fontThuong, fontThuong, y);
+            y += 25;
+            DrawLine("- Địa điểm làm việc: ", _in_PhongBan + " - " + _in_BoPhan, fontThuong, fontDam, y);
+            y += 25;
+            DrawLine("- Chức danh chuyên môn: ", _in_ChucVu, fontThuong, fontDam, y);
+            y += 25;
+            DrawLine("- Trình độ chuyên môn: ", _in_TrinhDo, fontThuong, fontThuong, y);
+            y += 40;
+
+            // Điều 2
+            e.Graphics.DrawString("Điều 2: Chế độ làm việc và lương thưởng", fontDam, Brushes.Black, leftMargin, y);
+            y += 25;
+            e.Graphics.DrawString("- Thời gian làm việc: 8 giờ/ngày, từ thứ 2 đến thứ 6.", fontThuong, Brushes.Black, leftMargin, y);
+            y += 25;
+            DrawLine("- Hệ số lương cơ bản: ", _in_HeSoLuong, fontThuong, fontDam, y);
+            y += 25;
+            e.Graphics.DrawString("- Được hưởng các chế độ BHYT, BHXH theo quy định của nhà nước.", fontThuong, Brushes.Black, leftMargin, y);
+            y += 25;
+            e.Graphics.DrawString("- Được thưởng lễ, tết theo tình hình kinh doanh của công ty.", fontThuong, Brushes.Black, leftMargin, y);
+            y += 50;
+
+            // === CHỮ KÝ ===
+            float xBenA = leftMargin + 50;
+            float xBenB = e.MarginBounds.Right - 250;
+
+            e.Graphics.DrawString("NGƯỜI LAO ĐỘNG", fontDam, Brushes.Black, xBenA, y);
+            e.Graphics.DrawString("NGƯỜI SỬ DỤNG LAO ĐỘNG", fontDam, Brushes.Black, xBenB, y);
+            y += 20;
+            e.Graphics.DrawString("(Ký, ghi rõ họ tên)", fontNghieng, Brushes.Black, xBenA + 10, y);
+            e.Graphics.DrawString("(Ký, đóng dấu)", fontNghieng, Brushes.Black, xBenB + 30, y);
+
+            // Chừa chỗ ký tên
+            y += 100;
+            e.Graphics.DrawString(_in_HoTen, fontDam, Brushes.Black, xBenA, y);
+            e.Graphics.DrawString("Võ Văn Tỷ", fontDam, Brushes.Black, xBenB + 20, y);
         }
     }
 }

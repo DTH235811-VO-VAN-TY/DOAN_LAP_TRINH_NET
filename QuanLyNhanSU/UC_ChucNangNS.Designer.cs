@@ -90,7 +90,7 @@
             this.btnAdd_NghiPhep.Name = "btnAdd_NghiPhep";
             this.btnAdd_NghiPhep.Size = new System.Drawing.Size(448, 243);
             this.btnAdd_NghiPhep.TabIndex = 2;
-            this.btnAdd_NghiPhep.Text = "Nghĩ Phép";
+            this.btnAdd_NghiPhep.Text = "Thôi Việc";
             this.btnAdd_NghiPhep.UseVisualStyleBackColor = false;
             this.btnAdd_NghiPhep.Click += new System.EventHandler(this.btnAdd_NghiPhep_Click);
             // 

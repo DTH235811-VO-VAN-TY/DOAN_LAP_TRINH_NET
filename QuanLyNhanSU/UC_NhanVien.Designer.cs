@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_NhanVien));
             this.btnLuuNv = new System.Windows.Forms.Button();
             this.btnThemNv = new System.Windows.Forms.Button();
             this.btnSuaNV = new System.Windows.Forms.Button();
@@ -66,6 +67,7 @@
             this.txtTimKiemNV = new System.Windows.Forms.TextBox();
             this.cboTimKiemNV = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.btnInNV = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNhanVien)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -181,9 +183,11 @@
             // btnThemTrinhDo
             // 
             this.btnThemTrinhDo.BackColor = System.Drawing.Color.Cyan;
-            this.btnThemTrinhDo.Location = new System.Drawing.Point(1058, 193);
+            this.btnThemTrinhDo.Image = ((System.Drawing.Image)(resources.GetObject("btnThemTrinhDo.Image")));
+            this.btnThemTrinhDo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnThemTrinhDo.Location = new System.Drawing.Point(1058, 192);
             this.btnThemTrinhDo.Name = "btnThemTrinhDo";
-            this.btnThemTrinhDo.Size = new System.Drawing.Size(190, 39);
+            this.btnThemTrinhDo.Size = new System.Drawing.Size(249, 50);
             this.btnThemTrinhDo.TabIndex = 6;
             this.btnThemTrinhDo.Text = "Thêm trình độ";
             this.btnThemTrinhDo.UseVisualStyleBackColor = false;
@@ -192,9 +196,11 @@
             // btnThemChucVu
             // 
             this.btnThemChucVu.BackColor = System.Drawing.Color.Cyan;
+            this.btnThemChucVu.Image = ((System.Drawing.Image)(resources.GetObject("btnThemChucVu.Image")));
+            this.btnThemChucVu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThemChucVu.Location = new System.Drawing.Point(1058, 142);
             this.btnThemChucVu.Name = "btnThemChucVu";
-            this.btnThemChucVu.Size = new System.Drawing.Size(190, 39);
+            this.btnThemChucVu.Size = new System.Drawing.Size(249, 50);
             this.btnThemChucVu.TabIndex = 6;
             this.btnThemChucVu.Text = "Thêm chức vụ";
             this.btnThemChucVu.UseVisualStyleBackColor = false;
@@ -203,9 +209,11 @@
             // btnThemBP
             // 
             this.btnThemBP.BackColor = System.Drawing.Color.Cyan;
-            this.btnThemBP.Location = new System.Drawing.Point(1058, 86);
+            this.btnThemBP.Image = ((System.Drawing.Image)(resources.GetObject("btnThemBP.Image")));
+            this.btnThemBP.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnThemBP.Location = new System.Drawing.Point(1058, 87);
             this.btnThemBP.Name = "btnThemBP";
-            this.btnThemBP.Size = new System.Drawing.Size(190, 39);
+            this.btnThemBP.Size = new System.Drawing.Size(249, 50);
             this.btnThemBP.TabIndex = 6;
             this.btnThemBP.Text = "Thêm bộ phận";
             this.btnThemBP.UseVisualStyleBackColor = false;
@@ -214,11 +222,14 @@
             // btnThemPB
             // 
             this.btnThemPB.BackColor = System.Drawing.Color.Cyan;
-            this.btnThemPB.Location = new System.Drawing.Point(1058, 38);
+            this.btnThemPB.Image = ((System.Drawing.Image)(resources.GetObject("btnThemPB.Image")));
+            this.btnThemPB.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnThemPB.Location = new System.Drawing.Point(1058, 35);
             this.btnThemPB.Name = "btnThemPB";
-            this.btnThemPB.Size = new System.Drawing.Size(190, 39);
+            this.btnThemPB.Size = new System.Drawing.Size(249, 53);
             this.btnThemPB.TabIndex = 7;
             this.btnThemPB.Text = "Thêm Phòng Ban";
+            this.btnThemPB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnThemPB.UseVisualStyleBackColor = false;
             this.btnThemPB.Click += new System.EventHandler(this.btnThemPB_Click);
             // 
@@ -233,6 +244,8 @@
             // cboChucVu
             // 
             this.cboChucVu.FormattingEnabled = true;
+            this.cboChucVu.Items.AddRange(new object[] {
+            "---Chọn Chức Vụ---"});
             this.cboChucVu.Location = new System.Drawing.Point(784, 147);
             this.cboChucVu.Name = "cboChucVu";
             this.cboChucVu.Size = new System.Drawing.Size(169, 30);
@@ -241,6 +254,8 @@
             // cboBoPhan
             // 
             this.cboBoPhan.FormattingEnabled = true;
+            this.cboBoPhan.Items.AddRange(new object[] {
+            "---Chọn Bộ Phận---"});
             this.cboBoPhan.Location = new System.Drawing.Point(784, 91);
             this.cboBoPhan.Name = "cboBoPhan";
             this.cboBoPhan.Size = new System.Drawing.Size(240, 30);
@@ -249,6 +264,8 @@
             // cboPhongBan
             // 
             this.cboPhongBan.FormattingEnabled = true;
+            this.cboPhongBan.Items.AddRange(new object[] {
+            "---Chọn Phòng Ban---"});
             this.cboPhongBan.Location = new System.Drawing.Point(784, 46);
             this.cboPhongBan.Name = "cboPhongBan";
             this.cboPhongBan.Size = new System.Drawing.Size(240, 30);
@@ -435,11 +452,14 @@
             // btnTiemKiemNV
             // 
             this.btnTiemKiemNV.BackColor = System.Drawing.Color.Cyan;
-            this.btnTiemKiemNV.Location = new System.Drawing.Point(1039, 28);
+            this.btnTiemKiemNV.Image = ((System.Drawing.Image)(resources.GetObject("btnTiemKiemNV.Image")));
+            this.btnTiemKiemNV.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTiemKiemNV.Location = new System.Drawing.Point(1039, 23);
             this.btnTiemKiemNV.Name = "btnTiemKiemNV";
-            this.btnTiemKiemNV.Size = new System.Drawing.Size(147, 39);
+            this.btnTiemKiemNV.Size = new System.Drawing.Size(148, 51);
             this.btnTiemKiemNV.TabIndex = 3;
             this.btnTiemKiemNV.Text = "Tim kiếm";
+            this.btnTiemKiemNV.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnTiemKiemNV.UseVisualStyleBackColor = false;
             this.btnTiemKiemNV.Click += new System.EventHandler(this.btnTiemKiemNV_Click);
             // 
@@ -469,6 +489,18 @@
             this.label11.TabIndex = 4;
             this.label11.Text = "QUẢN LÝ NHÂN VIÊN";
             // 
+            // btnInNV
+            // 
+            this.btnInNV.BackColor = System.Drawing.Color.Cyan;
+            this.btnInNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInNV.Location = new System.Drawing.Point(1210, 709);
+            this.btnInNV.Name = "btnInNV";
+            this.btnInNV.Size = new System.Drawing.Size(237, 46);
+            this.btnInNV.TabIndex = 0;
+            this.btnInNV.Text = "IN DANH SÁCH";
+            this.btnInNV.UseVisualStyleBackColor = false;
+            this.btnInNV.Click += new System.EventHandler(this.btnInNV_Click);
+            // 
             // UC_NhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -477,6 +509,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvNhanVien);
+            this.Controls.Add(this.btnInNV);
             this.Controls.Add(this.btnHuyNV);
             this.Controls.Add(this.btnXoaNV);
             this.Controls.Add(this.btnSuaNV);
@@ -535,5 +568,6 @@
         private System.Windows.Forms.Button btnThemPB;
         private System.Windows.Forms.Button btnThemTrinhDo;
         private System.Windows.Forms.Button btnThemChucVu;
+        private System.Windows.Forms.Button btnInNV;
     }
 }

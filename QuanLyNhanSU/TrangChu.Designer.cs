@@ -2,15 +2,8 @@
 {
     partial class TrangChu
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,15 +15,11 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrangChu));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btnTaiKhoan = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnAddUc_ChamCong = new System.Windows.Forms.Button();
             this.btnThemUC_Luong = new System.Windows.Forms.Button();
@@ -40,7 +29,17 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lblTuyenDung = new System.Windows.Forms.Label();
+            this.lblQuyDinh = new System.Windows.Forms.Label();
+            this.lblGioiThieu = new System.Windows.Forms.Label();
+            this.btnDangXuat = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.uC_ThoiViec1 = new QuanLyNhanSU.UC_ThoiViec();
+            this.uC_NghiPhepNV1 = new QuanLyNhanSU.UC_NghiPhepNV();
+            this.uC_QuanLyTaiKhoan1 = new QuanLyNhanSU.UC_QuanLyTaiKhoan();
+            this.uC_ChamCong2 = new QuanLyNhanSU.UC_ChamCong();
+            this.uC_HomePage1 = new QuanLyNhanSU.UC_HomePage();
+            this.uC_ChamCong1 = new QuanLyNhanSU.UC_ChamCong();
             this.uC_BangLuong1 = new QuanLyNhanSU.UC_BangLuong();
             this.uc_PhuCap1 = new QuanLyNhanSU.Uc_PhuCap();
             this.uC_ChucNangNS2 = new QuanLyNhanSU.UC_ChucNangNS();
@@ -48,46 +47,50 @@
             this.uc_HopDong1 = new QuanLyNhanSU.Uc_HopDong();
             this.uC_BaoHiemNV1 = new QuanLyNhanSU.UC_BaoHiemNV();
             this.uC_NhanVien2 = new QuanLyNhanSU.UC_NhanVien();
-            this.uC_HomePage1 = new QuanLyNhanSU.UC_HomePage();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lblTaiKhoan = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.panel1.Controls.Add(this.button6);
+            this.panel1.Controls.Add(this.btnTaiKhoan);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btnAddUc_ChamCong);
             this.panel1.Controls.Add(this.btnThemUC_Luong);
             this.panel1.Controls.Add(this.btnNhanSu);
             this.panel1.Controls.Add(this.btnHomePage);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.ForeColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(320, 1102);
             this.panel1.TabIndex = 0;
             // 
-            // button6
+            // btnTaiKhoan
             // 
-            this.button6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aqua;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-            this.button6.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button6.Location = new System.Drawing.Point(31, 890);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(261, 125);
-            this.button6.TabIndex = 17;
-            this.button6.Text = "Tài Khoản";
-            this.button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnTaiKhoan.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnTaiKhoan.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnTaiKhoan.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnTaiKhoan.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aqua;
+            this.btnTaiKhoan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTaiKhoan.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTaiKhoan.ForeColor = System.Drawing.Color.Black;
+            this.btnTaiKhoan.Image = ((System.Drawing.Image)(resources.GetObject("btnTaiKhoan.Image")));
+            this.btnTaiKhoan.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnTaiKhoan.Location = new System.Drawing.Point(31, 890);
+            this.btnTaiKhoan.Name = "btnTaiKhoan";
+            this.btnTaiKhoan.Size = new System.Drawing.Size(261, 125);
+            this.btnTaiKhoan.TabIndex = 17;
+            this.btnTaiKhoan.Text = "Tài Khoản";
+            this.btnTaiKhoan.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnTaiKhoan.UseVisualStyleBackColor = true;
+            this.btnTaiKhoan.Click += new System.EventHandler(this.btnTaiKhoan_Click);
             // 
             // pictureBox1
             // 
@@ -116,6 +119,7 @@
             this.btnAddUc_ChamCong.Text = "Chấm Công";
             this.btnAddUc_ChamCong.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnAddUc_ChamCong.UseVisualStyleBackColor = true;
+            this.btnAddUc_ChamCong.Click += new System.EventHandler(this.btnAddUc_ChamCong_Click);
             // 
             // btnThemUC_Luong
             // 
@@ -191,7 +195,12 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.uC_ThoiViec1);
+            this.panel2.Controls.Add(this.uC_NghiPhepNV1);
+            this.panel2.Controls.Add(this.uC_QuanLyTaiKhoan1);
+            this.panel2.Controls.Add(this.uC_ChamCong2);
             this.panel2.Controls.Add(this.uC_HomePage1);
+            this.panel2.Controls.Add(this.uC_ChamCong1);
             this.panel2.Controls.Add(this.uC_BangLuong1);
             this.panel2.Controls.Add(this.uc_PhuCap1);
             this.panel2.Controls.Add(this.uC_ChucNangNS2);
@@ -220,11 +229,68 @@
             // 
             this.panel3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.panel3.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.panel3.Controls.Add(this.panel4);
+            this.panel3.Controls.Add(this.lblTuyenDung);
+            this.panel3.Controls.Add(this.lblQuyDinh);
+            this.panel3.Controls.Add(this.lblGioiThieu);
+            this.panel3.Controls.Add(this.btnDangXuat);
             this.panel3.Controls.Add(this.button1);
             this.panel3.Location = new System.Drawing.Point(189, 92);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1755, 77);
             this.panel3.TabIndex = 14;
+            // 
+            // lblTuyenDung
+            // 
+            this.lblTuyenDung.AutoSize = true;
+            this.lblTuyenDung.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblTuyenDung.Font = new System.Drawing.Font("Times New Roman", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTuyenDung.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.lblTuyenDung.Location = new System.Drawing.Point(837, 21);
+            this.lblTuyenDung.Name = "lblTuyenDung";
+            this.lblTuyenDung.Size = new System.Drawing.Size(198, 32);
+            this.lblTuyenDung.TabIndex = 22;
+            this.lblTuyenDung.Text = "Tin tuyển dụng";
+            this.lblTuyenDung.Click += new System.EventHandler(this.lblTuyenDung_Click);
+            // 
+            // lblQuyDinh
+            // 
+            this.lblQuyDinh.AutoSize = true;
+            this.lblQuyDinh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblQuyDinh.Font = new System.Drawing.Font("Times New Roman", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuyDinh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.lblQuyDinh.Location = new System.Drawing.Point(492, 21);
+            this.lblQuyDinh.Name = "lblQuyDinh";
+            this.lblQuyDinh.Size = new System.Drawing.Size(267, 32);
+            this.lblQuyDinh.TabIndex = 22;
+            this.lblQuyDinh.Text = "Quy định - Biểu mẩu";
+            this.lblQuyDinh.Click += new System.EventHandler(this.lblQuyDinh_Click);
+            // 
+            // lblGioiThieu
+            // 
+            this.lblGioiThieu.AutoSize = true;
+            this.lblGioiThieu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblGioiThieu.Font = new System.Drawing.Font("Times New Roman", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGioiThieu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.lblGioiThieu.Location = new System.Drawing.Point(243, 21);
+            this.lblGioiThieu.Name = "lblGioiThieu";
+            this.lblGioiThieu.Size = new System.Drawing.Size(144, 32);
+            this.lblGioiThieu.TabIndex = 22;
+            this.lblGioiThieu.Text = "Giới Thiệu";
+            this.lblGioiThieu.Click += new System.EventHandler(this.lblGioiThieu_Click);
+            // 
+            // btnDangXuat
+            // 
+            this.btnDangXuat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDangXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDangXuat.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDangXuat.Location = new System.Drawing.Point(1532, 3);
+            this.btnDangXuat.Name = "btnDangXuat";
+            this.btnDangXuat.Size = new System.Drawing.Size(209, 71);
+            this.btnDangXuat.TabIndex = 11;
+            this.btnDangXuat.Text = "Đăng Xuất";
+            this.btnDangXuat.UseVisualStyleBackColor = false;
+            this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
             // 
             // button1
             // 
@@ -236,11 +302,59 @@
             this.button1.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(1634, 3);
+            this.button1.Location = new System.Drawing.Point(49, 6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(79, 71);
             this.button1.TabIndex = 21;
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // uC_ThoiViec1
+            // 
+            this.uC_ThoiViec1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uC_ThoiViec1.Location = new System.Drawing.Point(0, 0);
+            this.uC_ThoiViec1.Name = "uC_ThoiViec1";
+            this.uC_ThoiViec1.Size = new System.Drawing.Size(1618, 981);
+            this.uC_ThoiViec1.TabIndex = 12;
+            // 
+            // uC_NghiPhepNV1
+            // 
+            this.uC_NghiPhepNV1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uC_NghiPhepNV1.Location = new System.Drawing.Point(0, 0);
+            this.uC_NghiPhepNV1.Name = "uC_NghiPhepNV1";
+            this.uC_NghiPhepNV1.Size = new System.Drawing.Size(1618, 981);
+            this.uC_NghiPhepNV1.TabIndex = 11;
+            // 
+            // uC_QuanLyTaiKhoan1
+            // 
+            this.uC_QuanLyTaiKhoan1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uC_QuanLyTaiKhoan1.Location = new System.Drawing.Point(0, 0);
+            this.uC_QuanLyTaiKhoan1.Name = "uC_QuanLyTaiKhoan1";
+            this.uC_QuanLyTaiKhoan1.Size = new System.Drawing.Size(1618, 981);
+            this.uC_QuanLyTaiKhoan1.TabIndex = 10;
+            // 
+            // uC_ChamCong2
+            // 
+            this.uC_ChamCong2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uC_ChamCong2.Location = new System.Drawing.Point(0, 0);
+            this.uC_ChamCong2.Name = "uC_ChamCong2";
+            this.uC_ChamCong2.Size = new System.Drawing.Size(1618, 981);
+            this.uC_ChamCong2.TabIndex = 9;
+            // 
+            // uC_HomePage1
+            // 
+            this.uC_HomePage1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uC_HomePage1.Location = new System.Drawing.Point(0, 0);
+            this.uC_HomePage1.Name = "uC_HomePage1";
+            this.uC_HomePage1.Size = new System.Drawing.Size(1618, 981);
+            this.uC_HomePage1.TabIndex = 8;
+            // 
+            // uC_ChamCong1
+            // 
+            this.uC_ChamCong1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uC_ChamCong1.Location = new System.Drawing.Point(0, 0);
+            this.uC_ChamCong1.Name = "uC_ChamCong1";
+            this.uC_ChamCong1.Size = new System.Drawing.Size(1618, 981);
+            this.uC_ChamCong1.TabIndex = 7;
             // 
             // uC_BangLuong1
             // 
@@ -303,13 +417,23 @@
             this.uC_NhanVien2.Size = new System.Drawing.Size(1618, 981);
             this.uC_NhanVien2.TabIndex = 1;
             // 
-            // uC_HomePage1
+            // panel4
             // 
-            this.uC_HomePage1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uC_HomePage1.Location = new System.Drawing.Point(0, 0);
-            this.uC_HomePage1.Name = "uC_HomePage1";
-            this.uC_HomePage1.Size = new System.Drawing.Size(1618, 981);
-            this.uC_HomePage1.TabIndex = 8;
+            this.panel4.Controls.Add(this.lblTaiKhoan);
+            this.panel4.Location = new System.Drawing.Point(1118, 6);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(200, 68);
+            this.panel4.TabIndex = 23;
+            // 
+            // lblTaiKhoan
+            // 
+            this.lblTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTaiKhoan.Location = new System.Drawing.Point(24, 8);
+            this.lblTaiKhoan.Name = "lblTaiKhoan";
+            this.lblTaiKhoan.Size = new System.Drawing.Size(158, 53);
+            this.lblTaiKhoan.TabIndex = 0;
+            this.lblTaiKhoan.Text = "Tài khoản";
+            this.lblTaiKhoan.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TrangChu
             // 
@@ -333,6 +457,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -341,16 +467,13 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btnTaiKhoan;
         private System.Windows.Forms.Button btnAddUc_ChamCong;
         private System.Windows.Forms.Button btnThemUC_Luong;
         private System.Windows.Forms.Button btnNhanSu;
         private System.Windows.Forms.Button btnHomePage;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel2;
-        private UC_ChucNangNS uC_ChucNangNS1;
-        private UC_NhanVien uC_NhanVien1;
-        private UC_NhanVien uC_NhanVien2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel3;
         private UC_BaoHiemNV uC_BaoHiemNV1;
@@ -359,8 +482,21 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private UC_ChucNangNS uC_ChucNangNS2;
+        private UC_ChamCong uC_ChamCong1;
         private Uc_PhuCap uc_PhuCap1;
         private UC_BangLuong uC_BangLuong1;
         private UC_HomePage uC_HomePage1;
+        private UC_ChamCong uC_ChamCong2;
+        private UC_NhanVien uC_NhanVien2;
+        private UC_QuanLyTaiKhoan uC_QuanLyTaiKhoan1;
+        private System.Windows.Forms.Button btnDangXuat;
+        private System.Windows.Forms.Label lblGioiThieu;
+        private System.Windows.Forms.Label lblTuyenDung;
+        private System.Windows.Forms.Label lblQuyDinh;
+        private UC_NghiPhepNV uC_NghiPhepNV1;
+        private UC_ThoiViec uC_ThoiViec1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblTaiKhoan;
+        //   private UC_NghiPhepNV uC_NghiPhepNV1;
     }
 }

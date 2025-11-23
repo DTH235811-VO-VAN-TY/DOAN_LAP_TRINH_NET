@@ -65,7 +65,7 @@ namespace QuanLyNhanSU
         /// </summary>
         private void LoadNhanVienComboBox()
         {
-            string sQueryNhanVien = @"SELECT MANV, HOTEN FROM TB_NHANVIEN";
+            string sQueryNhanVien = @"SELECT * FROM tb_NHANVIEN WHERE DATHOIVIEC = 0 OR DATHOIVIEC IS NULL"; ;
             daNhanVien = new SqlDataAdapter(sQueryNhanVien, conn);
             daNhanVien.Fill(ds, "tblNHANVIEN");
 

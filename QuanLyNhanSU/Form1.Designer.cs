@@ -36,8 +36,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtTaiKhoan = new System.Windows.Forms.TextBox();
+            this.txtMatKhau = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnDangNhap = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -108,19 +108,20 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Mật khẩu";
             // 
-            // textBox1
+            // txtTaiKhoan
             // 
-            this.textBox1.Location = new System.Drawing.Point(276, 171);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(296, 30);
-            this.textBox1.TabIndex = 7;
+            this.txtTaiKhoan.Location = new System.Drawing.Point(276, 171);
+            this.txtTaiKhoan.Name = "txtTaiKhoan";
+            this.txtTaiKhoan.Size = new System.Drawing.Size(296, 30);
+            this.txtTaiKhoan.TabIndex = 7;
             // 
-            // textBox2
+            // txtMatKhau
             // 
-            this.textBox2.Location = new System.Drawing.Point(276, 224);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(296, 30);
-            this.textBox2.TabIndex = 7;
+            this.txtMatKhau.Location = new System.Drawing.Point(276, 224);
+            this.txtMatKhau.Name = "txtMatKhau";
+            this.txtMatKhau.Size = new System.Drawing.Size(296, 30);
+            this.txtMatKhau.TabIndex = 7;
+            this.txtMatKhau.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMatKhau_KeyDown);
             // 
             // label4
             // 
@@ -170,8 +171,8 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnDangNhap);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtMatKhau);
+            this.Controls.Add(this.txtTaiKhoan);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -200,8 +201,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtTaiKhoan;
+        private System.Windows.Forms.TextBox txtMatKhau;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnDangNhap;
         private System.Windows.Forms.Button button2;

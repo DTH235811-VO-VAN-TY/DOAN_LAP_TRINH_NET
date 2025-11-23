@@ -14,7 +14,7 @@ namespace QuanLyNhanSU
     {
         public event EventHandler AddNhanVienClicked;
         public event EventHandler AddHopDongClicked;
-        public event EventHandler AddNghiPhepClicked;
+        public event EventHandler AddThoiViecClicked;
         public event EventHandler AddBaoHiemClicked;
         public event EventHandler AddKhenThuongLyLuatClicked;
         public event EventHandler AddPhuCapClicked;
@@ -35,7 +35,7 @@ namespace QuanLyNhanSU
 
         private void btnAdd_NghiPhep_Click(object sender, EventArgs e)
         {
-            AddNghiPhepClicked.Invoke(this, EventArgs.Empty);
+            AddThoiViecClicked.Invoke(this, EventArgs.Empty);
         }
 
         private void btnAdd_BaoHiem_Click(object sender, EventArgs e)

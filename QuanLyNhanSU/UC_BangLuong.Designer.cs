@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnHienNVungluong = new System.Windows.Forms.Button();
+            this.btnHienNangLuong = new System.Windows.Forms.Button();
             this.btnQuayLai = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnInPhieuLuong = new System.Windows.Forms.Button();
@@ -37,6 +39,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvBangLuong = new System.Windows.Forms.DataGridView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnHienAll = new System.Windows.Forms.Button();
+            this.btnTiemKiemLuong = new System.Windows.Forms.Button();
+            this.txtTimKiemLuong = new System.Windows.Forms.TextBox();
+            this.cboTimKiemLuong = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MANV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HOTEN = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,14 +54,8 @@
             this.PHUCAP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.THUONG = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KYLUAT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UNGLUONG = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.THUCLINH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnHienAll = new System.Windows.Forms.Button();
-            this.btnTiemKiemLuong = new System.Windows.Forms.Button();
-            this.txtTimKiemLuong = new System.Windows.Forms.TextBox();
-            this.cboTimKiemLuong = new System.Windows.Forms.ComboBox();
-            this.btnHienNangLuong = new System.Windows.Forms.Button();
-            this.btnHienNVungluong = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBangLuong)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -68,12 +71,38 @@
             this.groupBox1.Controls.Add(this.btnTinhLuong);
             this.groupBox1.Controls.Add(this.dtpKyLuong);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(67, 112);
+            this.groupBox1.Location = new System.Drawing.Point(67, 55);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1460, 181);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin kỳ lương";
+            // 
+            // btnHienNVungluong
+            // 
+            this.btnHienNVungluong.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnHienNVungluong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHienNVungluong.ForeColor = System.Drawing.Color.White;
+            this.btnHienNVungluong.Location = new System.Drawing.Point(911, 104);
+            this.btnHienNVungluong.Name = "btnHienNVungluong";
+            this.btnHienNVungluong.Size = new System.Drawing.Size(413, 50);
+            this.btnHienNVungluong.TabIndex = 3;
+            this.btnHienNVungluong.Text = "Xem Quá Trình Ứng Lương";
+            this.btnHienNVungluong.UseVisualStyleBackColor = false;
+            this.btnHienNVungluong.Click += new System.EventHandler(this.btnHienNVungluong_Click);
+            // 
+            // btnHienNangLuong
+            // 
+            this.btnHienNangLuong.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnHienNangLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHienNangLuong.ForeColor = System.Drawing.Color.White;
+            this.btnHienNangLuong.Location = new System.Drawing.Point(388, 104);
+            this.btnHienNangLuong.Name = "btnHienNangLuong";
+            this.btnHienNangLuong.Size = new System.Drawing.Size(383, 50);
+            this.btnHienNangLuong.TabIndex = 3;
+            this.btnHienNangLuong.Text = "Xem Quá Trình Nâng Lương";
+            this.btnHienNangLuong.UseVisualStyleBackColor = false;
+            this.btnHienNangLuong.Click += new System.EventHandler(this.btnHienNangLuong_Click);
             // 
             // btnQuayLai
             // 
@@ -150,7 +179,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.MediumTurquoise;
-            this.label1.Location = new System.Drawing.Point(531, 44);
+            this.label1.Location = new System.Drawing.Point(547, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(493, 42);
             this.label1.TabIndex = 1;
@@ -168,76 +197,14 @@
             this.PHUCAP,
             this.THUONG,
             this.KYLUAT,
+            this.UNGLUONG,
             this.THUCLINH});
-            this.dgvBangLuong.Location = new System.Drawing.Point(67, 430);
+            this.dgvBangLuong.Location = new System.Drawing.Point(67, 360);
             this.dgvBangLuong.Name = "dgvBangLuong";
             this.dgvBangLuong.RowHeadersWidth = 51;
             this.dgvBangLuong.RowTemplate.Height = 24;
             this.dgvBangLuong.Size = new System.Drawing.Size(1479, 324);
             this.dgvBangLuong.TabIndex = 2;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.MinimumWidth = 6;
-            this.ID.Name = "ID";
-            this.ID.Width = 60;
-            // 
-            // MANV
-            // 
-            this.MANV.HeaderText = "Mã NV";
-            this.MANV.MinimumWidth = 6;
-            this.MANV.Name = "MANV";
-            this.MANV.Width = 125;
-            // 
-            // HOTEN
-            // 
-            this.HOTEN.HeaderText = "Họ Tên";
-            this.HOTEN.MinimumWidth = 6;
-            this.HOTEN.Name = "HOTEN";
-            this.HOTEN.Width = 175;
-            // 
-            // LUONGCB
-            // 
-            this.LUONGCB.HeaderText = "Lương Cơ Bản";
-            this.LUONGCB.MinimumWidth = 6;
-            this.LUONGCB.Name = "LUONGCB";
-            this.LUONGCB.Width = 125;
-            // 
-            // NGAYCONG
-            // 
-            this.NGAYCONG.HeaderText = "Ngày Công";
-            this.NGAYCONG.MinimumWidth = 6;
-            this.NGAYCONG.Name = "NGAYCONG";
-            this.NGAYCONG.Width = 125;
-            // 
-            // PHUCAP
-            // 
-            this.PHUCAP.HeaderText = "Phụ Cấp";
-            this.PHUCAP.MinimumWidth = 6;
-            this.PHUCAP.Name = "PHUCAP";
-            this.PHUCAP.Width = 125;
-            // 
-            // THUONG
-            // 
-            this.THUONG.HeaderText = "Thưởng";
-            this.THUONG.MinimumWidth = 6;
-            this.THUONG.Name = "THUONG";
-            this.THUONG.Width = 125;
-            // 
-            // KYLUAT
-            // 
-            this.KYLUAT.HeaderText = "Kỷ luật";
-            this.KYLUAT.MinimumWidth = 6;
-            this.KYLUAT.Name = "KYLUAT";
-            this.KYLUAT.Width = 125;
-            // 
-            // THUCLINH
-            // 
-            this.THUCLINH.HeaderText = "Thực Lĩnh";
-            this.THUCLINH.MinimumWidth = 6;
-            this.THUCLINH.Name = "THUCLINH";
-            this.THUCLINH.Width = 150;
             // 
             // groupBox2
             // 
@@ -246,7 +213,7 @@
             this.groupBox2.Controls.Add(this.txtTimKiemLuong);
             this.groupBox2.Controls.Add(this.cboTimKiemLuong);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(67, 312);
+            this.groupBox2.Location = new System.Drawing.Point(67, 242);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(1479, 80);
             this.groupBox2.TabIndex = 4;
@@ -288,36 +255,102 @@
             this.cboTimKiemLuong.Size = new System.Drawing.Size(199, 30);
             this.cboTimKiemLuong.TabIndex = 0;
             // 
-            // btnHienNangLuong
+            // label3
             // 
-            this.btnHienNangLuong.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.btnHienNangLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHienNangLuong.ForeColor = System.Drawing.Color.White;
-            this.btnHienNangLuong.Location = new System.Drawing.Point(388, 104);
-            this.btnHienNangLuong.Name = "btnHienNangLuong";
-            this.btnHienNangLuong.Size = new System.Drawing.Size(383, 50);
-            this.btnHienNangLuong.TabIndex = 3;
-            this.btnHienNangLuong.Text = "Xem Quá Trình Nâng Lương";
-            this.btnHienNangLuong.UseVisualStyleBackColor = false;
-            this.btnHienNangLuong.Click += new System.EventHandler(this.btnHienNangLuong_Click);
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.label3.Location = new System.Drawing.Point(82, 709);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(700, 32);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "*Ghi chú: Lương hợp đồng = (Lương Cơ Bản * HSL)";
             // 
-            // btnHienNVungluong
+            // label4
             // 
-            this.btnHienNVungluong.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.btnHienNVungluong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHienNVungluong.ForeColor = System.Drawing.Color.White;
-            this.btnHienNVungluong.Location = new System.Drawing.Point(911, 104);
-            this.btnHienNVungluong.Name = "btnHienNVungluong";
-            this.btnHienNVungluong.Size = new System.Drawing.Size(413, 50);
-            this.btnHienNVungluong.TabIndex = 3;
-            this.btnHienNVungluong.Text = "Xem Quá Trình Ứng Lương";
-            this.btnHienNVungluong.UseVisualStyleBackColor = false;
-            this.btnHienNVungluong.Click += new System.EventHandler(this.btnHienNVungluong_Click);
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.label4.Location = new System.Drawing.Point(82, 750);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(1215, 32);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "*Ghi chú: Thực lĩnh = ((Lương Hợp Đồng */26) * Ngày Công) + Phụ cấp + Thưởng - Kỹ" +
+    " luật";
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 6;
+            this.ID.Name = "ID";
+            this.ID.Width = 60;
+            // 
+            // MANV
+            // 
+            this.MANV.HeaderText = "Mã NV";
+            this.MANV.MinimumWidth = 6;
+            this.MANV.Name = "MANV";
+            this.MANV.Width = 125;
+            // 
+            // HOTEN
+            // 
+            this.HOTEN.HeaderText = "Họ Tên";
+            this.HOTEN.MinimumWidth = 6;
+            this.HOTEN.Name = "HOTEN";
+            this.HOTEN.Width = 175;
+            // 
+            // LUONGCB
+            // 
+            this.LUONGCB.HeaderText = "Lương Hợp Đồng";
+            this.LUONGCB.MinimumWidth = 6;
+            this.LUONGCB.Name = "LUONGCB";
+            this.LUONGCB.Width = 125;
+            // 
+            // NGAYCONG
+            // 
+            this.NGAYCONG.HeaderText = "Ngày Công";
+            this.NGAYCONG.MinimumWidth = 6;
+            this.NGAYCONG.Name = "NGAYCONG";
+            this.NGAYCONG.Width = 70;
+            // 
+            // PHUCAP
+            // 
+            this.PHUCAP.HeaderText = "Phụ Cấp";
+            this.PHUCAP.MinimumWidth = 6;
+            this.PHUCAP.Name = "PHUCAP";
+            // 
+            // THUONG
+            // 
+            this.THUONG.HeaderText = "Thưởng";
+            this.THUONG.MinimumWidth = 6;
+            this.THUONG.Name = "THUONG";
+            // 
+            // KYLUAT
+            // 
+            this.KYLUAT.HeaderText = "Kỷ luật";
+            this.KYLUAT.MinimumWidth = 6;
+            this.KYLUAT.Name = "KYLUAT";
+            // 
+            // UNGLUONG
+            // 
+            this.UNGLUONG.HeaderText = "Tiền Đã Ứng";
+            this.UNGLUONG.MinimumWidth = 6;
+            this.UNGLUONG.Name = "UNGLUONG";
+            this.UNGLUONG.Width = 125;
+            // 
+            // THUCLINH
+            // 
+            this.THUCLINH.HeaderText = "Thực Lĩnh";
+            this.THUCLINH.MinimumWidth = 6;
+            this.THUCLINH.Name = "THUCLINH";
+            this.THUCLINH.Width = 150;
             // 
             // UC_BangLuong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.dgvBangLuong);
             this.Controls.Add(this.label1);
@@ -346,6 +379,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvBangLuong;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnHienAll;
+        private System.Windows.Forms.Button btnTiemKiemLuong;
+        private System.Windows.Forms.TextBox txtTimKiemLuong;
+        private System.Windows.Forms.ComboBox cboTimKiemLuong;
+        private System.Windows.Forms.Button btnHienNVungluong;
+        private System.Windows.Forms.Button btnHienNangLuong;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn MANV;
         private System.Windows.Forms.DataGridViewTextBoxColumn HOTEN;
@@ -354,13 +396,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PHUCAP;
         private System.Windows.Forms.DataGridViewTextBoxColumn THUONG;
         private System.Windows.Forms.DataGridViewTextBoxColumn KYLUAT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UNGLUONG;
         private System.Windows.Forms.DataGridViewTextBoxColumn THUCLINH;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnHienAll;
-        private System.Windows.Forms.Button btnTiemKiemLuong;
-        private System.Windows.Forms.TextBox txtTimKiemLuong;
-        private System.Windows.Forms.ComboBox cboTimKiemLuong;
-        private System.Windows.Forms.Button btnHienNVungluong;
-        private System.Windows.Forms.Button btnHienNangLuong;
     }
 }

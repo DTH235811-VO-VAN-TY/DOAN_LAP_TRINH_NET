@@ -45,7 +45,7 @@ namespace QuanLyNhanSU
                 conn.Open();
 
                 //Dữ liệu Combobox Nhân Viên (Giữ nguyên, dùng để Thêm/Sửa)
-                string sQueryNhanVien = @"SELECT * FROM TB_NHANVIEN";
+                string sQueryNhanVien = @"SELECT * FROM tb_NHANVIEN WHERE DATHOIVIEC = 0 OR DATHOIVIEC IS NULL";
                 daNhanVien = new SqlDataAdapter(sQueryNhanVien, conn);
                 daNhanVien.Fill(ds, "tblNHANVIEN");
                 cboChonNhanVien.DataSource = ds.Tables["tblNHANVIEN"];
