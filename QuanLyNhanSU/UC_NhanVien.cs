@@ -75,10 +75,7 @@ namespace QuanLyNhanSU
         // Tách logic cấu hình DataAdapter ra riêng để gọn gàng và tái sử dụng
         private void LoadDataConfiguration()
         {
-            //--------------------//
-            // === SỬA LỖI 2: Xóa 'DIENTHOAI' khỏi câu SELECT ===
-            // (Câu SELECT của bạn đã xóa rồi, rất tốt! Tôi giữ nguyên)
-            // Cập nhật câu lệnh SELECT để chỉ lấy nhân viên ĐANG LÀM VIỆC (DATHOIVIEC = 0 hoặc NULL)
+            
             string sqlNhanVien = @"SELECT 
                                             n.MANV, n.HOTEN, n.GIOITINH, n.NGAYSINH, n.CCCD, n.DIACHI, 
                                             n.IDPB, p.TENPB, 
@@ -139,6 +136,31 @@ namespace QuanLyNhanSU
             cmdXoaNV.Parameters.Add("@MANV", SqlDbType.NVarChar, 10, "MANV");
             daNhanVien.DeleteCommand = cmdXoaNV;
         }
+        // Hàm hỗ trợ load ComboBox có dòng "---Chọn...---" ở đầu
+        private void LoadComboWithPrompt(SqlDataAdapter da, string tableName, ComboBox cbo, string displayMember, string valueMember, string promptText)
+        {
+            // 1. Tải dữ liệu từ SQL vào DataTable trong DataSet
+            if (ds.Tables.Contains(tableName)) ds.Tables[tableName].Clear();
+            da.Fill(ds, tableName);
+
+            DataTable dt = ds.Tables[tableName];
+
+            // 2. Tạo một dòng mới (Dòng ảo để hiển thị chữ Chọn)
+            DataRow dr = dt.NewRow();
+            dr[valueMember] = -1; // Gán ID = -1 để phân biệt đây là dòng tiêu đề
+            dr[displayMember] = promptText; // Ví dụ: "---Chọn Phòng Ban---"
+
+            // 3. Chèn dòng này vào vị trí đầu tiên (index 0)
+            dt.Rows.InsertAt(dr, 0);
+
+            // 4. Gán dữ liệu vào ComboBox
+            cbo.DataSource = dt;
+            cbo.DisplayMember = displayMember;
+            cbo.ValueMember = valueMember;
+
+            // 5. Chọn mặc định dòng đầu tiên
+            cbo.SelectedIndex = 0;
+        }
 
 
         private void UC_NhanVien_Load(object sender, EventArgs e)
@@ -177,35 +199,36 @@ namespace QuanLyNhanSU
             {
                 conn.Open();
 
-                // Tải ComboBoxes (Code của bạn đã đúng)
                 string sqlPhongBan = @"SELECT * FROM TB_PHONGBAN";
                 daPhongBan = new SqlDataAdapter(sqlPhongBan, conn);
-                daPhongBan.Fill(ds, "PhongBan");
-                cboPhongBan.DataSource = ds.Tables["PhongBan"];
-                cboPhongBan.DisplayMember = "TENPB";
-                cboPhongBan.ValueMember = "IDPB";
+                LoadComboWithPrompt(daPhongBan, "PhongBan", cboPhongBan, "TENPB", "IDPB", "---Chọn Phòng Ban---");
 
+                // 2. Trình Độ
                 string sqlTrinhDo = @"SELECT * FROM TB_TRINHDO";
                 daTrinhDo = new SqlDataAdapter(sqlTrinhDo, conn);
-                daTrinhDo.Fill(ds, "TrinhDo");
-                cboTrinhDo.DataSource = ds.Tables["TrinhDo"];
-                cboTrinhDo.DisplayMember = "TENTD";
-                cboTrinhDo.ValueMember = "IDTD";
+                LoadComboWithPrompt(daTrinhDo, "TrinhDo", cboTrinhDo, "TENTD", "IDTD", "---Chọn Trình Độ---");
 
+                // 3. Chức Vụ
+                string sqlChucVu = @"SELECT * FROM TB_CHUCVU";
+                daChucVu = new SqlDataAdapter(sqlChucVu, conn);
+                LoadComboWithPrompt(daChucVu, "ChucVu", cboChucVu, "TENCV", "IDCV", "---Chọn Chức Vụ---");
+
+                // 4. Bộ Phận (Load Master List)
                 string sqlBoPhan = @"SELECT * FROM TB_BOPHAN";
                 daBoPhan = new SqlDataAdapter(sqlBoPhan, conn);
-                // Sửa: Tải vào bảng tên "AllBoPhan" để giữ làm master list
+                // Lưu ý: Bộ phận phụ thuộc Phòng ban nên ta chỉ load dữ liệu gốc vào DataSet trước
+                if (ds.Tables.Contains("AllBoPhan")) ds.Tables["AllBoPhan"].Clear();
                 daBoPhan.Fill(ds, "AllBoPhan");
 
                 // 3. THÊM: "Nối dây" sự kiện. Khi cboPhongBan thay đổi, gọi hàm lọc
                 this.cboPhongBan.SelectedIndexChanged += new System.EventHandler(this.cboPhongBan_SelectedIndexChanged);
 
-                string sqlChucVu = @"SELECT * FROM TB_CHUCVU";
+                /*string sqlChucVu = @"SELECT * FROM TB_CHUCVU";
                 daChucVu = new SqlDataAdapter(sqlChucVu, conn);
                 daChucVu.Fill(ds, "ChucVu");
                 cboChucVu.DataSource = ds.Tables["ChucVu"];
                 cboChucVu.DisplayMember = "TENCV";
-                cboChucVu.ValueMember = "IDCV";
+                cboChucVu.ValueMember = "IDCV";*/
 
                 // Cấu hình Adapter cho Nhân viên
                 LoadDataConfiguration();
@@ -309,6 +332,43 @@ namespace QuanLyNhanSU
             }
         }
 
+        private int TinhTuoi(DateTime ngaySinh)
+        {
+            DateTime today = DateTime.Now;
+            int age = today.Year - ngaySinh.Year;
+            // Nếu chưa đến sinh nhật trong năm nay thì trừ 1 tuổi
+            if (ngaySinh.Date > today.AddYears(-age)) age--;
+            return age;
+        }
+        // Hàm kiểm tra xem CCCD đã tồn tại chưa
+        // Trả về true nếu bị trùng, false nếu hợp lệ
+        private bool KiemTraTrungCCCD(string cccd, string maNVHienTai = "")
+        {
+            // 1. Duyệt qua tất cả các dòng trong DataSet (Bộ nhớ đệm)
+            foreach (DataRow row in ds.Tables["NhanVien"].Rows)
+            {
+                // Chỉ kiểm tra các dòng chưa bị xóa
+                if (row.RowState != DataRowState.Deleted)
+                {
+                    string cccdTrongList = row["CCCD"].ToString();
+                    string maNVTrongList = row["MANV"].ToString();
+
+                    // Nếu CCCD trùng khớp
+                    if (cccdTrongList == cccd)
+                    {
+                        // Trường hợp SỬA: Nếu trùng với chính mình thì bỏ qua (hợp lệ)
+                        // Trường hợp THÊM: maNVHienTai rỗng nên luôn bắt lỗi nếu trùng
+                        if (maNVHienTai != "" && maNVTrongList == maNVHienTai)
+                        {
+                            continue;
+                        }
+
+                        return true; // Đã tìm thấy người khác trùng số CCCD
+                    }
+                }
+            }
+            return false; // Không trùng ai cả
+        }
         private void btnThemNv_Click(object sender, EventArgs e)
         {
             if (txtMaNV.Text.Length > 6)
@@ -334,6 +394,26 @@ namespace QuanLyNhanSU
             else if(dtpNgaySinh.Value >= DateTime.Now)
             {
                 MessageBox.Show("Ngày sinh không hợp lệ!");
+            }
+            else if (TinhTuoi(dtpNgaySinh.Value) < 16)
+            {
+                MessageBox.Show("Nhân viên phải đủ 16 tuổi mới được đi làm!", "Lỗi độ tuổi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dtpNgaySinh.Focus();
+                return;
+            }
+            else if (Convert.ToInt32(cboPhongBan.SelectedValue) == -1 ||
+                     Convert.ToInt32(cboChucVu.SelectedValue) == -1 ||
+                        Convert.ToInt32(cboTrinhDo.SelectedValue) == -1)
+            {
+                MessageBox.Show("Vui lòng chọn đầy đủ Phòng ban, Chức vụ và Trình độ!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (KiemTraTrungCCCD(txtCCCD.Text.Trim()))
+            {
+                MessageBox.Show($"Số CCCD {txtCCCD.Text} đã tồn tại trong hệ thống!\nVui lòng kiểm tra lại.",
+                                "Trùng dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCCCD.Focus();
+                return;
             }
             else
             {
@@ -367,6 +447,23 @@ namespace QuanLyNhanSU
             if (txtMaNV.Enabled == true || string.IsNullOrEmpty(txtMaNV.Text))
             {
                 MessageBox.Show("Bạn chưa chọn nhân viên để sửa.", "Lỗi");
+                return;
+            }
+            if (TinhTuoi(dtpNgaySinh.Value) < 16)
+            {
+                MessageBox.Show("Nhân viên phải đủ 16 tuổi!", "Lỗi độ tuổi");
+                return;
+            }
+            if (Convert.ToInt32(cboPhongBan.SelectedValue) == -1) // Kiểm tra sơ bộ phòng ban
+            {
+                MessageBox.Show("Vui lòng chọn Phòng ban hợp lệ!");
+                return;
+            }
+            if (KiemTraTrungCCCD(txtCCCD.Text.Trim(), txtMaNV.Text))
+            {
+                MessageBox.Show($"Số CCCD {txtCCCD.Text} đã thuộc về một nhân viên khác!",
+                                "Trùng dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCCCD.Focus();
                 return;
             }
 
@@ -494,33 +591,36 @@ namespace QuanLyNhanSU
         }
         private void cboPhongBan_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Kiểm tra xem cboPhongBan đã chọn giá trị hợp lệ chưa
-            if (cboPhongBan.SelectedValue == null || cboPhongBan.SelectedValue is DBNull)
-            {
-                cboBoPhan.DataSource = null; // Nếu chưa, làm trắng cboBoPhan
-                return;
-            }
+            if (cboPhongBan.SelectedValue == null || cboPhongBan.SelectedValue is DBNull) return;
 
             try
             {
-                // Lấy ID Phòng ban đã chọn
                 int selectedIDPB = Convert.ToInt32(cboPhongBan.SelectedValue);
 
-                // Tạo một DataView từ bảng "AllBoPhan" (bảng master list)
-                DataView dvBoPhan = new DataView(ds.Tables["AllBoPhan"]);
+                // Nếu chọn "---Chọn Phòng Ban---" (ID = -1) thì reset Bộ phận
+                if (selectedIDPB == -1)
+                {
+                    cboBoPhan.DataSource = null;
+                    return;
+                }
 
-                // Áp dụng bộ lọc (RowFilter)
-                // "Chỉ hiển thị các dòng có IDPB bằng với ID ta đã chọn"
+                DataView dvBoPhan = new DataView(ds.Tables["AllBoPhan"]);
                 dvBoPhan.RowFilter = $"IDPB = {selectedIDPB}";
 
-                // Gán DataView đã lọc làm nguồn cho cboBoPhan
-                cboBoPhan.DataSource = dvBoPhan;
+                // Tạo bảng tạm để thêm dòng "---Chọn Bộ Phận---" cho cboBoPhan
+                DataTable dtFiltered = dvBoPhan.ToTable();
+                DataRow dr = dtFiltered.NewRow();
+                dr["IDBP"] = -1;
+                dr["TENBP"] = "---Chọn Bộ Phận---";
+                dtFiltered.Rows.InsertAt(dr, 0);
+
+                cboBoPhan.DataSource = dtFiltered;
                 cboBoPhan.DisplayMember = "TENBP";
                 cboBoPhan.ValueMember = "IDBP";
+                cboBoPhan.SelectedIndex = 0;
             }
-            catch (Exception)
+            catch
             {
-                // Xảy ra khi form đang tải, an toàn để bỏ qua
                 cboBoPhan.DataSource = null;
             }
         }
@@ -667,17 +767,16 @@ namespace QuanLyNhanSU
 
         private void dtpNgaySinh_Validating(object sender, CancelEventArgs e)
         {
-            if (dtpNgaySinh.Value.Date >= DateTime.Now.Date)
+            if (TinhTuoi(dtpNgaySinh.Value) < 16)
             {
                 e.Cancel = true;
-                errorProvider.SetError(dtpNgaySinh, "Ngày sinh không hợp lệ");
+                errorProvider.SetError(dtpNgaySinh, "Nhân viên chưa đủ 16 tuổi");
             }
             else
             {
                 e.Cancel = false;
                 errorProvider.SetError(dtpNgaySinh, null);
             }
-
         }
         private void pd_BeginPrint(object sender, PrintEventArgs e)
         {

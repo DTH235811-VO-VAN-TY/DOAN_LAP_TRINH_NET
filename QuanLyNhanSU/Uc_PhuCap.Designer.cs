@@ -343,6 +343,7 @@
             this.Sotienphucap});
             this.dgvPhuCap.Location = new System.Drawing.Point(162, 411);
             this.dgvPhuCap.Name = "dgvPhuCap";
+            this.dgvPhuCap.ReadOnly = true;
             this.dgvPhuCap.RowHeadersWidth = 51;
             this.dgvPhuCap.RowTemplate.Height = 24;
             this.dgvPhuCap.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -355,6 +356,7 @@
             this.Idphucap.HeaderText = "ID Phụ Cấp";
             this.Idphucap.MinimumWidth = 6;
             this.Idphucap.Name = "Idphucap";
+            this.Idphucap.ReadOnly = true;
             this.Idphucap.Width = 125;
             // 
             // MaNhanVien
@@ -362,6 +364,7 @@
             this.MaNhanVien.HeaderText = "Mã Nhân Viên";
             this.MaNhanVien.MinimumWidth = 6;
             this.MaNhanVien.Name = "MaNhanVien";
+            this.MaNhanVien.ReadOnly = true;
             this.MaNhanVien.Width = 125;
             // 
             // Tennhanvien
@@ -369,6 +372,7 @@
             this.Tennhanvien.HeaderText = "Tên Nhân Viên";
             this.Tennhanvien.MinimumWidth = 6;
             this.Tennhanvien.Name = "Tennhanvien";
+            this.Tennhanvien.ReadOnly = true;
             this.Tennhanvien.Width = 200;
             // 
             // Tenphucap
@@ -376,6 +380,7 @@
             this.Tenphucap.HeaderText = "Tên Phụ Cấp";
             this.Tenphucap.MinimumWidth = 6;
             this.Tenphucap.Name = "Tenphucap";
+            this.Tenphucap.ReadOnly = true;
             this.Tenphucap.Width = 200;
             // 
             // Ngayphucap
@@ -383,6 +388,7 @@
             this.Ngayphucap.HeaderText = "Ngày Phụ Cấp";
             this.Ngayphucap.MinimumWidth = 6;
             this.Ngayphucap.Name = "Ngayphucap";
+            this.Ngayphucap.ReadOnly = true;
             this.Ngayphucap.Width = 200;
             // 
             // Sotienphucap
@@ -390,6 +396,7 @@
             this.Sotienphucap.HeaderText = "Số Tiền Phụ Cấp";
             this.Sotienphucap.MinimumWidth = 6;
             this.Sotienphucap.Name = "Sotienphucap";
+            this.Sotienphucap.ReadOnly = true;
             this.Sotienphucap.Width = 200;
             // 
             // Uc_PhuCap

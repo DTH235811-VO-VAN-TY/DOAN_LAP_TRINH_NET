@@ -115,9 +115,11 @@ namespace QuanLyNhanSU
         }*/
         private void TrangChu_Load(object sender, EventArgs e)
         {
-            uC_ChucNangNS2.Visible = true;
-            uC_ChucNangNS2.BringToFront();
+          //  uC_ChucNangNS2.Visible = true;
+           // uC_ChucNangNS2.BringToFront();
           // lblTaiKhoan.Text = ; // Hiển thị tên đăng nhập lên label
+          uC_HomePage1.Visible = true;
+            uC_HomePage1.BringToFront();
         }
         private void UC_NhanVien_DataUpdated(object sender, EventArgs e)
         {
@@ -125,7 +127,7 @@ namespace QuanLyNhanSU
             {
                 uc_HopDong1.ReloadNhanVien();
             }
-            if(uC_KhenThuong_KyLuat1 != null)
+           if(uC_KhenThuong_KyLuat1 != null)
             {
                 uC_KhenThuong_KyLuat1.ReloadNhanVien();
             }
@@ -136,6 +138,14 @@ namespace QuanLyNhanSU
             if(uc_PhuCap1 != null)
             {
                 uc_PhuCap1.ReloadNhanVienPhuCap();
+            }
+            if(uC_NghiPhepNV1 != null)
+            {
+                uC_NghiPhepNV1.ReloadData();
+            }
+           if(uC_ThoiViec1 != null)
+            {
+                uC_ThoiViec1.LoadComboBoxNhanVien();
             }
             MessageBox.Show("Dữ liệu nhân viên đã được cập nhật. Các phần liên quan đã được làm mới.");
         }

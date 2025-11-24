@@ -39,13 +39,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvBangLuong = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnHienAll = new System.Windows.Forms.Button();
-            this.btnTiemKiemLuong = new System.Windows.Forms.Button();
-            this.txtTimKiemLuong = new System.Windows.Forms.TextBox();
-            this.cboTimKiemLuong = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MANV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HOTEN = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +49,13 @@
             this.KYLUAT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UNGLUONG = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.THUCLINH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnHienAll = new System.Windows.Forms.Button();
+            this.btnTiemKiemLuong = new System.Windows.Forms.Button();
+            this.txtTimKiemLuong = new System.Windows.Forms.TextBox();
+            this.cboTimKiemLuong = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBangLuong)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -140,6 +140,7 @@
             this.btnInPhieuLuong.TabIndex = 2;
             this.btnInPhieuLuong.Text = "IN PHIẾU LƯƠNG";
             this.btnInPhieuLuong.UseVisualStyleBackColor = false;
+            this.btnInPhieuLuong.Click += new System.EventHandler(this.btnInPhieuLuong_Click);
             // 
             // btnTinhLuong
             // 
@@ -201,10 +202,91 @@
             this.THUCLINH});
             this.dgvBangLuong.Location = new System.Drawing.Point(67, 360);
             this.dgvBangLuong.Name = "dgvBangLuong";
+            this.dgvBangLuong.ReadOnly = true;
             this.dgvBangLuong.RowHeadersWidth = 51;
             this.dgvBangLuong.RowTemplate.Height = 24;
             this.dgvBangLuong.Size = new System.Drawing.Size(1479, 324);
             this.dgvBangLuong.TabIndex = 2;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 6;
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 60;
+            // 
+            // MANV
+            // 
+            this.MANV.HeaderText = "Mã NV";
+            this.MANV.MinimumWidth = 6;
+            this.MANV.Name = "MANV";
+            this.MANV.ReadOnly = true;
+            this.MANV.Width = 125;
+            // 
+            // HOTEN
+            // 
+            this.HOTEN.HeaderText = "Họ Tên";
+            this.HOTEN.MinimumWidth = 6;
+            this.HOTEN.Name = "HOTEN";
+            this.HOTEN.ReadOnly = true;
+            this.HOTEN.Width = 175;
+            // 
+            // LUONGCB
+            // 
+            this.LUONGCB.HeaderText = "Lương Hợp Đồng";
+            this.LUONGCB.MinimumWidth = 6;
+            this.LUONGCB.Name = "LUONGCB";
+            this.LUONGCB.ReadOnly = true;
+            this.LUONGCB.Width = 125;
+            // 
+            // NGAYCONG
+            // 
+            this.NGAYCONG.HeaderText = "Ngày Công";
+            this.NGAYCONG.MinimumWidth = 6;
+            this.NGAYCONG.Name = "NGAYCONG";
+            this.NGAYCONG.ReadOnly = true;
+            this.NGAYCONG.Width = 70;
+            // 
+            // PHUCAP
+            // 
+            this.PHUCAP.HeaderText = "Phụ Cấp";
+            this.PHUCAP.MinimumWidth = 6;
+            this.PHUCAP.Name = "PHUCAP";
+            this.PHUCAP.ReadOnly = true;
+            this.PHUCAP.Width = 125;
+            // 
+            // THUONG
+            // 
+            this.THUONG.HeaderText = "Thưởng";
+            this.THUONG.MinimumWidth = 6;
+            this.THUONG.Name = "THUONG";
+            this.THUONG.ReadOnly = true;
+            this.THUONG.Width = 125;
+            // 
+            // KYLUAT
+            // 
+            this.KYLUAT.HeaderText = "Kỷ luật";
+            this.KYLUAT.MinimumWidth = 6;
+            this.KYLUAT.Name = "KYLUAT";
+            this.KYLUAT.ReadOnly = true;
+            this.KYLUAT.Width = 125;
+            // 
+            // UNGLUONG
+            // 
+            this.UNGLUONG.HeaderText = "Tiền Đã Ứng";
+            this.UNGLUONG.MinimumWidth = 6;
+            this.UNGLUONG.Name = "UNGLUONG";
+            this.UNGLUONG.ReadOnly = true;
+            this.UNGLUONG.Width = 125;
+            // 
+            // THUCLINH
+            // 
+            this.THUCLINH.HeaderText = "Thực Lĩnh";
+            this.THUCLINH.MinimumWidth = 6;
+            this.THUCLINH.Name = "THUCLINH";
+            this.THUCLINH.ReadOnly = true;
+            this.THUCLINH.Width = 150;
             // 
             // groupBox2
             // 
@@ -277,73 +359,6 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "*Ghi chú: Thực lĩnh = ((Lương Hợp Đồng */26) * Ngày Công) + Phụ cấp + Thưởng - Kỹ" +
     " luật";
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.MinimumWidth = 6;
-            this.ID.Name = "ID";
-            this.ID.Width = 60;
-            // 
-            // MANV
-            // 
-            this.MANV.HeaderText = "Mã NV";
-            this.MANV.MinimumWidth = 6;
-            this.MANV.Name = "MANV";
-            this.MANV.Width = 125;
-            // 
-            // HOTEN
-            // 
-            this.HOTEN.HeaderText = "Họ Tên";
-            this.HOTEN.MinimumWidth = 6;
-            this.HOTEN.Name = "HOTEN";
-            this.HOTEN.Width = 175;
-            // 
-            // LUONGCB
-            // 
-            this.LUONGCB.HeaderText = "Lương Hợp Đồng";
-            this.LUONGCB.MinimumWidth = 6;
-            this.LUONGCB.Name = "LUONGCB";
-            this.LUONGCB.Width = 125;
-            // 
-            // NGAYCONG
-            // 
-            this.NGAYCONG.HeaderText = "Ngày Công";
-            this.NGAYCONG.MinimumWidth = 6;
-            this.NGAYCONG.Name = "NGAYCONG";
-            this.NGAYCONG.Width = 70;
-            // 
-            // PHUCAP
-            // 
-            this.PHUCAP.HeaderText = "Phụ Cấp";
-            this.PHUCAP.MinimumWidth = 6;
-            this.PHUCAP.Name = "PHUCAP";
-            // 
-            // THUONG
-            // 
-            this.THUONG.HeaderText = "Thưởng";
-            this.THUONG.MinimumWidth = 6;
-            this.THUONG.Name = "THUONG";
-            // 
-            // KYLUAT
-            // 
-            this.KYLUAT.HeaderText = "Kỷ luật";
-            this.KYLUAT.MinimumWidth = 6;
-            this.KYLUAT.Name = "KYLUAT";
-            // 
-            // UNGLUONG
-            // 
-            this.UNGLUONG.HeaderText = "Tiền Đã Ứng";
-            this.UNGLUONG.MinimumWidth = 6;
-            this.UNGLUONG.Name = "UNGLUONG";
-            this.UNGLUONG.Width = 125;
-            // 
-            // THUCLINH
-            // 
-            this.THUCLINH.HeaderText = "Thực Lĩnh";
-            this.THUCLINH.MinimumWidth = 6;
-            this.THUCLINH.Name = "THUCLINH";
-            this.THUCLINH.Width = 150;
             // 
             // UC_BangLuong
             // 

@@ -2,6 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Drawing.Printing;
+using System.Drawing;
 
 namespace QuanLyNhanSU
 {
@@ -281,5 +283,122 @@ namespace QuanLyNhanSU
             DeleteBangLuongThang(maKyCong);
             LoadBangLuong();
         }
+
+        private void btnInPhieuLuong_Click(object sender, EventArgs e)
+        {
+            // 1. Kiểm tra xem đã chọn nhân viên nào chưa
+            if (dgvBangLuong.SelectedRows.Count == 0 && dgvBangLuong.CurrentRow == null)
+            {
+                MessageBox.Show("Vui lòng chọn một nhân viên để in phiếu lương!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Lấy dòng đang chọn
+            if (dgvBangLuong.SelectedRows.Count > 0)
+                rowToPrint = dgvBangLuong.SelectedRows[0];
+            else
+                rowToPrint = dgvBangLuong.CurrentRow;
+
+            // 2. Cấu hình in ấn
+            PrintDocument pd = new PrintDocument();
+            pd.PrintPage += new PrintPageEventHandler(InPhieuLuong_NoiDung);
+
+            // 3. Hiện khung xem trước (Preview)
+            PrintPreviewDialog ppd = new PrintPreviewDialog();
+            ppd.Document = pd;
+            ppd.Width = 600;
+            ppd.Height = 800;
+            ppd.ShowDialog();
+
+        }
+        // Hàm này dùng để "Vẽ" nội dung lên giấy
+        DataGridViewRow rowToPrint;
+        private void InPhieuLuong_NoiDung(object sender, PrintPageEventArgs e)
+        {
+            // Lấy thông tin từ dòng đã chọn (Đảm bảo tên cột đúng với DataPropertyName bạn đã đặt)
+            string maNV = rowToPrint.Cells["MANV"].FormattedValue.ToString();
+            string hoTen = rowToPrint.Cells["HOTEN"].FormattedValue.ToString();
+            string kyLuong = dtpKyLuong.Value.ToString("MM/yyyy");
+
+            string luongHD = rowToPrint.Cells["LUONGCB"].FormattedValue.ToString(); // Hoặc LUONGHOPDONG tùy tên cột
+            string ngayCong = rowToPrint.Cells["NGAYCONG"].FormattedValue.ToString();
+            string phuCap = rowToPrint.Cells["PHUCAP"].FormattedValue.ToString();
+            string thuong = rowToPrint.Cells["THUONG"].FormattedValue.ToString();
+            string kyLuat = rowToPrint.Cells["KYLUAT"].FormattedValue.ToString();
+
+            // Kiểm tra xem cột Ứng Lương có tồn tại không
+            string ungLuong = "0";
+            if (dgvBangLuong.Columns.Contains("UNGLUONG"))
+                ungLuong = rowToPrint.Cells["UNGLUONG"].FormattedValue.ToString();
+
+            string thucLinh = rowToPrint.Cells["THUCLINH"].FormattedValue.ToString();
+
+            // --- BẮT ĐẦU VẼ ---
+            Graphics g = e.Graphics;
+            Font fontTieuDe = new Font("Arial", 18, FontStyle.Bold);
+            Font fontDam = new Font("Arial", 12, FontStyle.Bold);
+            Font fontThuong = new Font("Arial", 12, FontStyle.Regular);
+
+            float y = 50; // Tọa độ Y (độ cao), cứ viết xong 1 dòng thì cộng thêm vào
+            float x_label = 100; // Tọa độ X của nhãn (bên trái)
+            float x_value = 400; // Tọa độ X của giá trị (bên phải)
+
+            // 1. Tiêu đề
+            g.DrawString("PHIẾU LƯƠNG NHÂN VIÊN", fontTieuDe, Brushes.Blue, new PointF(220, y));
+            y += 40;
+            g.DrawString("Kỳ lương: " + kyLuong, fontThuong, Brushes.Black, new PointF(300, y));
+            y += 50;
+
+            // Kẻ đường gạch ngang
+            g.DrawLine(Pens.Black, 50, y, 750, y);
+            y += 30;
+
+            // 2. Thông tin chung
+            g.DrawString("Mã Nhân Viên:", fontDam, Brushes.Black, new PointF(x_label, y));
+            g.DrawString(maNV, fontThuong, Brushes.Black, new PointF(x_value, y));
+            y += 30;
+
+            g.DrawString("Họ và Tên:", fontDam, Brushes.Black, new PointF(x_label, y));
+            g.DrawString(hoTen, fontThuong, Brushes.Black, new PointF(x_value, y));
+            y += 50; // Cách xa một chút
+
+            // 3. Chi tiết lương
+            g.DrawString("Lương Hợp Đồng:", fontThuong, Brushes.Black, new PointF(x_label, y));
+            g.DrawString(luongHD + " VNĐ", fontThuong, Brushes.Black, new PointF(x_value, y));
+            y += 30;
+
+            g.DrawString("Ngày công thực tế:", fontThuong, Brushes.Black, new PointF(x_label, y));
+            g.DrawString(ngayCong + " ngày", fontThuong, Brushes.Black, new PointF(x_value, y));
+            y += 30;
+
+            g.DrawString("Phụ cấp:", fontThuong, Brushes.Green, new PointF(x_label, y));
+            g.DrawString("+" + phuCap, fontThuong, Brushes.Green, new PointF(x_value, y));
+            y += 30;
+
+            g.DrawString("Thưởng:", fontThuong, Brushes.Green, new PointF(x_label, y));
+            g.DrawString("+" + thuong, fontThuong, Brushes.Green, new PointF(x_value, y));
+            y += 30;
+
+            g.DrawString("Kỷ luật/Phạt:", fontThuong, Brushes.Red, new PointF(x_label, y));
+            g.DrawString("-" + kyLuat, fontThuong, Brushes.Red, new PointF(x_value, y));
+            y += 30;
+
+            g.DrawString("Đã ứng:", fontThuong, Brushes.Red, new PointF(x_label, y));
+            g.DrawString("-" + ungLuong, fontThuong, Brushes.Red, new PointF(x_value, y));
+            y += 40;
+
+            // Kẻ đường gạch ngang kết thúc
+            g.DrawLine(Pens.Black, 100, y, 700, y);
+            y += 20;
+
+            // 4. Tổng kết
+            g.DrawString("THỰC LĨNH:", new Font("Arial", 16, FontStyle.Bold), Brushes.Blue, new PointF(x_label, y));
+            g.DrawString(thucLinh + " VNĐ", new Font("Arial", 16, FontStyle.Bold), Brushes.Red, new PointF(x_value, y));
+
+            y += 100;
+            g.DrawString("Người lập phiếu", fontThuong, Brushes.Black, new PointF(500, y));
+            y += 30;
+            g.DrawString("(Ký tên)", fontThuong, Brushes.Gray, new PointF(530, y));
+        }
+        }
     }
-}

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.btnHienAll = new System.Windows.Forms.Button();
-            this.btnTimPC = new System.Windows.Forms.Button();
-            this.txtTimKiemNVPC = new System.Windows.Forms.TextBox();
-            this.cboTimKiemPC = new System.Windows.Forms.ComboBox();
+            this.btnTimNV = new System.Windows.Forms.Button();
+            this.txtTimKiemNV = new System.Windows.Forms.TextBox();
+            this.cboTimKiemNV = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSua = new System.Windows.Forms.Button();
@@ -45,13 +45,13 @@
             this.btnLuu = new System.Windows.Forms.Button();
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtLyDo = new System.Windows.Forms.TextBox();
+            this.dtpNgayNghi = new System.Windows.Forms.DateTimePicker();
+            this.dtpNgayNop = new System.Windows.Forms.DateTimePicker();
             this.txtSoQD = new System.Windows.Forms.TextBox();
             this.btnThem = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
-            this.dtpNgayNop = new System.Windows.Forms.DateTimePicker();
-            this.dtpNgayNghi = new System.Windows.Forms.DateTimePicker();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtLyDo = new System.Windows.Forms.TextBox();
             this.dgvThoiViec = new System.Windows.Forms.DataGridView();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -68,39 +68,41 @@
             this.btnHienAll.TabIndex = 3;
             this.btnHienAll.Text = "Hiện tất cả";
             this.btnHienAll.UseVisualStyleBackColor = false;
+            this.btnHienAll.Click += new System.EventHandler(this.btnHienAll_Click);
             // 
-            // btnTimPC
+            // btnTimNV
             // 
-            this.btnTimPC.BackColor = System.Drawing.Color.Aqua;
-            this.btnTimPC.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnTimPC.Location = new System.Drawing.Point(836, 29);
-            this.btnTimPC.Name = "btnTimPC";
-            this.btnTimPC.Size = new System.Drawing.Size(118, 37);
-            this.btnTimPC.TabIndex = 3;
-            this.btnTimPC.Text = "Tìm";
-            this.btnTimPC.UseVisualStyleBackColor = false;
+            this.btnTimNV.BackColor = System.Drawing.Color.Aqua;
+            this.btnTimNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnTimNV.Location = new System.Drawing.Point(836, 29);
+            this.btnTimNV.Name = "btnTimNV";
+            this.btnTimNV.Size = new System.Drawing.Size(118, 37);
+            this.btnTimNV.TabIndex = 3;
+            this.btnTimNV.Text = "Tìm";
+            this.btnTimNV.UseVisualStyleBackColor = false;
+            this.btnTimNV.Click += new System.EventHandler(this.btnTimNV_Click);
             // 
-            // txtTimKiemNVPC
+            // txtTimKiemNV
             // 
-            this.txtTimKiemNVPC.Location = new System.Drawing.Point(244, 38);
-            this.txtTimKiemNVPC.Name = "txtTimKiemNVPC";
-            this.txtTimKiemNVPC.Size = new System.Drawing.Size(566, 28);
-            this.txtTimKiemNVPC.TabIndex = 1;
+            this.txtTimKiemNV.Location = new System.Drawing.Point(244, 38);
+            this.txtTimKiemNV.Name = "txtTimKiemNV";
+            this.txtTimKiemNV.Size = new System.Drawing.Size(566, 28);
+            this.txtTimKiemNV.TabIndex = 1;
             // 
-            // cboTimKiemPC
+            // cboTimKiemNV
             // 
-            this.cboTimKiemPC.FormattingEnabled = true;
-            this.cboTimKiemPC.Location = new System.Drawing.Point(17, 36);
-            this.cboTimKiemPC.Name = "cboTimKiemPC";
-            this.cboTimKiemPC.Size = new System.Drawing.Size(199, 30);
-            this.cboTimKiemPC.TabIndex = 0;
+            this.cboTimKiemNV.FormattingEnabled = true;
+            this.cboTimKiemNV.Location = new System.Drawing.Point(17, 36);
+            this.cboTimKiemNV.Name = "cboTimKiemNV";
+            this.cboTimKiemNV.Size = new System.Drawing.Size(199, 30);
+            this.cboTimKiemNV.TabIndex = 0;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnHienAll);
-            this.groupBox2.Controls.Add(this.btnTimPC);
-            this.groupBox2.Controls.Add(this.txtTimKiemNVPC);
-            this.groupBox2.Controls.Add(this.cboTimKiemPC);
+            this.groupBox2.Controls.Add(this.btnTimNV);
+            this.groupBox2.Controls.Add(this.txtTimKiemNV);
+            this.groupBox2.Controls.Add(this.cboTimKiemNV);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(214, 306);
             this.groupBox2.Name = "groupBox2";
@@ -242,6 +244,39 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin ";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(28, 153);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 20);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Lý Do";
+            // 
+            // txtLyDo
+            // 
+            this.txtLyDo.Location = new System.Drawing.Point(160, 148);
+            this.txtLyDo.Multiline = true;
+            this.txtLyDo.Name = "txtLyDo";
+            this.txtLyDo.Size = new System.Drawing.Size(728, 61);
+            this.txtLyDo.TabIndex = 18;
+            // 
+            // dtpNgayNghi
+            // 
+            this.dtpNgayNghi.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpNgayNghi.Location = new System.Drawing.Point(907, 34);
+            this.dtpNgayNghi.Name = "dtpNgayNghi";
+            this.dtpNgayNghi.Size = new System.Drawing.Size(146, 27);
+            this.dtpNgayNghi.TabIndex = 5;
+            // 
+            // dtpNgayNop
+            // 
+            this.dtpNgayNop.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpNgayNop.Location = new System.Drawing.Point(606, 34);
+            this.dtpNgayNop.Name = "dtpNgayNop";
+            this.dtpNgayNop.Size = new System.Drawing.Size(146, 27);
+            this.dtpNgayNop.TabIndex = 5;
+            // 
             // txtSoQD
             // 
             this.txtSoQD.Location = new System.Drawing.Point(160, 36);
@@ -275,44 +310,12 @@
             this.btnXoa.UseVisualStyleBackColor = false;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
-            // dtpNgayNop
-            // 
-            this.dtpNgayNop.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgayNop.Location = new System.Drawing.Point(606, 34);
-            this.dtpNgayNop.Name = "dtpNgayNop";
-            this.dtpNgayNop.Size = new System.Drawing.Size(146, 27);
-            this.dtpNgayNop.TabIndex = 5;
-            // 
-            // dtpNgayNghi
-            // 
-            this.dtpNgayNghi.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgayNghi.Location = new System.Drawing.Point(907, 34);
-            this.dtpNgayNghi.Name = "dtpNgayNghi";
-            this.dtpNgayNghi.Size = new System.Drawing.Size(146, 27);
-            this.dtpNgayNghi.TabIndex = 5;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(28, 153);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 20);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "Lý Do";
-            // 
-            // txtLyDo
-            // 
-            this.txtLyDo.Location = new System.Drawing.Point(160, 148);
-            this.txtLyDo.Multiline = true;
-            this.txtLyDo.Name = "txtLyDo";
-            this.txtLyDo.Size = new System.Drawing.Size(728, 61);
-            this.txtLyDo.TabIndex = 18;
-            // 
             // dgvThoiViec
             // 
             this.dgvThoiViec.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvThoiViec.Location = new System.Drawing.Point(214, 405);
             this.dgvThoiViec.Name = "dgvThoiViec";
+            this.dgvThoiViec.ReadOnly = true;
             this.dgvThoiViec.RowHeadersWidth = 51;
             this.dgvThoiViec.RowTemplate.Height = 24;
             this.dgvThoiViec.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -348,9 +351,9 @@
 
         #endregion
         private System.Windows.Forms.Button btnHienAll;
-        private System.Windows.Forms.Button btnTimPC;
-        private System.Windows.Forms.TextBox txtTimKiemNVPC;
-        private System.Windows.Forms.ComboBox cboTimKiemPC;
+        private System.Windows.Forms.Button btnTimNV;
+        private System.Windows.Forms.TextBox txtTimKiemNV;
+        private System.Windows.Forms.ComboBox cboTimKiemNV;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSua;

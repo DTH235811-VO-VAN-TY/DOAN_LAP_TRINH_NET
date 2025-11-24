@@ -143,6 +143,7 @@ namespace QuanLyNhanSU
             {
                 MessageBox.Show("LỖI GỐC KHI TẢI FORM: " + ex.Message, "Lỗi nghiêm trọng", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            LoadSearchComboBox();
         }
 
         /// <summary>
@@ -608,6 +609,54 @@ namespace QuanLyNhanSU
             y += 100;
             e.Graphics.DrawString(_in_HoTen, fontDam, Brushes.Black, xBenA, y);
             e.Graphics.DrawString("Võ Văn Tỷ", fontDam, Brushes.Black, xBenB + 20, y);
+        }
+        private void LoadSearchComboBox()
+        {
+            var searchOptions = new[] {
+                new { Text = "Tìm theo Số HĐ", Value = "SOHD" },
+                new { Text = "Tìm theo Họ Tên", Value = "HOTEN" }
+            };
+            // (Sửa lại tên 'cboTimKiemTheo' nếu tên của bạn khác)
+            cboTimKiemNV.DataSource = searchOptions;
+            cboTimKiemNV.DisplayMember = "Text";
+            cboTimKiemNV.ValueMember = "Value";
+            cboTimKiemNV.SelectedIndex = 0;
+        }
+        private void btnTiemKiemNV_Click(object sender, EventArgs e)
+        {
+            // 1. Lấy từ khóa từ ô TEXTBOX (nơi người dùng nhập), không phải ComboBox
+            string key = txtTimKiemNV.Text.Trim();
+
+            // Xử lý ký tự đặc biệt để tránh lỗi (ví dụ dấu nháy đơn)
+            key = key.Replace("'", "''");
+
+            // 2. Nếu ô nhập trống thì hiện tất cả
+            if (string.IsNullOrEmpty(key))
+            {
+                ds.Tables["tblHOPDONG"].DefaultView.RowFilter = string.Empty;
+                return;
+            }
+
+            // 3. Xác định cột cần tìm dựa trên ValueMember đã cài đặt ở hàm LoadSearchComboBox
+            // ValueMember bạn đã đặt là "SOHD" và "HOTEN" nên ta lấy trực tiếp luôn
+            string colName = cboTimKiemNV.SelectedValue.ToString();
+
+            // 4. Thiết lập bộ lọc (RowFilter)
+            try
+            {
+                // Câu lệnh này tương đương: WHERE SOHD LIKE '%...%' hoặc WHERE HOTEN LIKE '%...%'
+                ds.Tables["tblHOPDONG"].DefaultView.RowFilter = $"{colName} LIKE '%{key}%'";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tìm kiếm: " + ex.Message);
+            }
+        }
+
+        private void btnHienAllNV_Click(object sender, EventArgs e)
+        {
+            txtTimKiemNV.Text = "";
+            ds.Tables["tblHOPDONG"].DefaultView.RowFilter = string.Empty;
         }
     }
 }

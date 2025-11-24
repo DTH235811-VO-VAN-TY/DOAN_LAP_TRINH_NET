@@ -29,6 +29,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lblTaiKhoan = new System.Windows.Forms.Label();
             this.lblTuyenDung = new System.Windows.Forms.Label();
             this.lblQuyDinh = new System.Windows.Forms.Label();
             this.lblGioiThieu = new System.Windows.Forms.Label();
@@ -47,8 +49,6 @@
             this.uc_HopDong1 = new QuanLyNhanSU.Uc_HopDong();
             this.uC_BaoHiemNV1 = new QuanLyNhanSU.UC_BaoHiemNV();
             this.uC_NhanVien2 = new QuanLyNhanSU.UC_NhanVien();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.lblTaiKhoan = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -95,9 +95,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(51, 32);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 21);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(121, 134);
+            this.pictureBox1.Size = new System.Drawing.Size(171, 189);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -217,11 +217,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.MediumTurquoise;
-            this.label1.Location = new System.Drawing.Point(326, 21);
+            this.label1.Font = new System.Drawing.Font("Elephant", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.label1.Location = new System.Drawing.Point(326, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(622, 45);
+            this.label1.Size = new System.Drawing.Size(840, 60);
             this.label1.TabIndex = 13;
             this.label1.Text = "HỆ THỐNG QUẢN LÝ NHÂN SỰ";
             // 
@@ -239,6 +239,24 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1755, 77);
             this.panel3.TabIndex = 14;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.lblTaiKhoan);
+            this.panel4.Location = new System.Drawing.Point(1118, 6);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(200, 68);
+            this.panel4.TabIndex = 23;
+            // 
+            // lblTaiKhoan
+            // 
+            this.lblTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTaiKhoan.Location = new System.Drawing.Point(24, 8);
+            this.lblTaiKhoan.Name = "lblTaiKhoan";
+            this.lblTaiKhoan.Size = new System.Drawing.Size(158, 53);
+            this.lblTaiKhoan.TabIndex = 0;
+            this.lblTaiKhoan.Text = "Tài khoản";
+            this.lblTaiKhoan.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblTuyenDung
             // 
@@ -416,24 +434,6 @@
             this.uC_NhanVien2.Name = "uC_NhanVien2";
             this.uC_NhanVien2.Size = new System.Drawing.Size(1618, 981);
             this.uC_NhanVien2.TabIndex = 1;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.lblTaiKhoan);
-            this.panel4.Location = new System.Drawing.Point(1118, 6);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(200, 68);
-            this.panel4.TabIndex = 23;
-            // 
-            // lblTaiKhoan
-            // 
-            this.lblTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaiKhoan.Location = new System.Drawing.Point(24, 8);
-            this.lblTaiKhoan.Name = "lblTaiKhoan";
-            this.lblTaiKhoan.Size = new System.Drawing.Size(158, 53);
-            this.lblTaiKhoan.TabIndex = 0;
-            this.lblTaiKhoan.Text = "Tài khoản";
-            this.lblTaiKhoan.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TrangChu
             // 

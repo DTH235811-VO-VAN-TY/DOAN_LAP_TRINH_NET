@@ -26,25 +26,17 @@ namespace QuanLyNhanSU
             InitializeComponent();
         }
 
-        // --- HÀM LOAD CHÍNH (ĐÃ GỘP CODE TỪ _Load_1 VÀO ĐÂY) ---
+        // --- HÀM LOAD CHÍNH ---
         private void UC_KhenThuong_KyLuat_Load(object sender, EventArgs e)
         {
             if (Const.LoaiTaiKhoan == 2) // Nếu là NHÂN VIÊN
             {
-                // 1. Tắt hết các nút chức năng thêm/sửa/xóa
-                btnThem.Enabled = false;
-                btnSua.Enabled = false;
-                btnXoa.Enabled = false;
-                btnLuu.Enabled = false;
-                btnLamMoi.Enabled = false;
-               // btnInHD.Enabled = false;
-                // (Nếu có nút Hủy hay Làm mới thì tắt nốt nếu muốn)
+                // 1. Tắt hết các nút chức năng
+                btnThem.Enabled = false; btnSua.Enabled = false; btnXoa.Enabled = false; btnLuu.Enabled = false; btnLamMoi.Enabled = false;
+                btnThemKL.Enabled = false; btnSuaKL.Enabled = false; btnXoaKL.Enabled = false; btnLuuKL.Enabled = false; btnLamMoiKL.Enabled = false;
 
                 // 2. Các ô nhập liệu chỉ cho đọc
-                foreach (Control c in this.Controls)
-                {
-                    if (c is TextBox) ((TextBox)c).ReadOnly = true;
-                }
+                foreach (Control c in this.Controls) { if (c is TextBox) ((TextBox)c).ReadOnly = true; }
 
                 // 3. GridView chỉ cho xem
                 dgvKhenThuong.ReadOnly = true;
@@ -56,6 +48,7 @@ namespace QuanLyNhanSU
             {
                 conn = new SqlConnection(connString);
                 conn.Open();
+
                 LoadSearchComboBox();
                 LoadSearchComboBoxKL();
 
@@ -79,32 +72,6 @@ namespace QuanLyNhanSU
             {
                 MessageBox.Show("LỖI GỐC KHI TẢI FORM: " + ex.Message, "Lỗi nghiêm trọng", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        /// <summary>
-        /// Tải ComboBox Nhân Viên cho cả 2 tab
-        /// </summary>
-        private void LoadNhanVienComboBox()
-        {
-            string sQueryNhanVien = @"SELECT * FROM tb_NHANVIEN WHERE DATHOIVIEC = 0 OR DATHOIVIEC IS NULL"; ;
-            daNhanVien = new SqlDataAdapter(sQueryNhanVien, conn);
-            daNhanVien.Fill(ds, "tblNHANVIEN");
-
-            DataTable dtNVKhenThuong = ds.Tables["tblNHANVIEN"].Copy();
-            dtNVKhenThuong.TableName = "tblNV_KT";
-            ds.Tables.Add(dtNVKhenThuong);
-
-            DataTable dtNVKyLuat = ds.Tables["tblNHANVIEN"].Copy();
-            dtNVKyLuat.TableName = "tblNV_KL";
-            ds.Tables.Add(dtNVKyLuat);
-
-            cboMaNVkt.DataSource = ds.Tables["tblNV_KT"];
-            cboMaNVkt.DisplayMember = "MANV";
-            cboMaNVkt.ValueMember = "MANV";
-
-            cboMaNVkl.DataSource = ds.Tables["tblNV_KL"];
-            cboMaNVkl.DisplayMember = "MANV";
-            cboMaNVkl.ValueMember = "MANV";
         }
         public void ReloadNhanVien()
         {
@@ -147,29 +114,40 @@ namespace QuanLyNhanSU
                     dtNVKyLuat.TableName = "tblNV_KL";
                     ds.Tables.Add(dtNVKyLuat);
                 }
-
-                // 4. Gán lại DataSource để ComboBox nhận diện thay đổi
-                cboMaNVkt.DataSource = ds.Tables["tblNV_KT"];
-                cboMaNVkt.DisplayMember = "MANV";
-                cboMaNVkt.ValueMember = "MANV";
-
-                cboMaNVkl.DataSource = ds.Tables["tblNV_KL"];
-                cboMaNVkl.DisplayMember = "MANV";
-                cboMaNVkl.ValueMember = "MANV";
-
-                // Reset chọn
-                cboMaNVkt.SelectedIndex = -1;
-                cboMaNVkl.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi cập nhật danh sách nhân viên: " + ex.Message);
+
             }
         }
+                
+            
+        private void LoadNhanVienComboBox()
+        {
+            string sQueryNhanVien = @"SELECT * FROM tb_NHANVIEN WHERE DATHOIVIEC = 0 OR DATHOIVIEC IS NULL";
+            daNhanVien = new SqlDataAdapter(sQueryNhanVien, conn);
+            daNhanVien.Fill(ds, "tblNHANVIEN");
 
-        /// <summary>
-        /// Tải dữ liệu tĩnh cho các ComboBox "Loại"
-        /// </summary>
+            // Tạo bản sao cho Tab Khen Thưởng
+            DataTable dtNVKhenThuong = ds.Tables["tblNHANVIEN"].Copy();
+            dtNVKhenThuong.TableName = "tblNV_KT";
+            ds.Tables.Add(dtNVKhenThuong);
+
+            // Tạo bản sao cho Tab Kỷ Luật
+            DataTable dtNVKyLuat = ds.Tables["tblNHANVIEN"].Copy();
+            dtNVKyLuat.TableName = "tblNV_KL";
+            ds.Tables.Add(dtNVKyLuat);
+
+            cboMaNVkt.DataSource = ds.Tables["tblNV_KT"];
+            cboMaNVkt.DisplayMember = "MANV";
+            cboMaNVkt.ValueMember = "MANV";
+
+            cboMaNVkl.DataSource = ds.Tables["tblNV_KL"];
+            cboMaNVkl.DisplayMember = "MANV";
+            cboMaNVkl.ValueMember = "MANV";
+        }
+
+
         private void LoadStaticComboBoxes()
         {
             cboLoaiKT.Items.Add("Thưởng Lễ");
@@ -182,13 +160,14 @@ namespace QuanLyNhanSU
             cboLoaiKL.Items.Add("Sa thải");
         }
 
-        #region === KHEN THƯỞNG (TAB 1) ===
+        #region === KHEN THƯỞNG (TAB 1 - ĐÃ CẬP NHẬT TIỀN) ===
 
         private void SetupKhenThuong()
         {
             dgvKhenThuong.AutoGenerateColumns = false;
             dgvKhenThuong.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
+            // 1. SELECT: Lấy thêm SOTIEN
             string sQuery = @"SELECT kt.*, nv.HOTEN 
                               FROM TB_KHENTHUONG kt
                               LEFT JOIN TB_NHANVIEN nv ON kt.MANV = nv.MANV";
@@ -196,44 +175,49 @@ namespace QuanLyNhanSU
             daKhenThuong.Fill(ds, "tblKHENTHUONG");
             dgvKhenThuong.DataSource = ds.Tables["tblKHENTHUONG"];
 
+            // 2. MAP DỮ LIỆU VÀO GRID
             dgvKhenThuong.Columns["SoQuyetDinh"].DataPropertyName = "SOQD";
             dgvKhenThuong.Columns["TenNhanVien"].DataPropertyName = "HOTEN";
             dgvKhenThuong.Columns["Ngayky"].DataPropertyName = "NGAYKY";
             dgvKhenThuong.Columns["LoaiKhenThuong"].DataPropertyName = "LOAIKT";
             dgvKhenThuong.Columns["NoidungKhenThuong"].DataPropertyName = "NOIDUNG";
 
+            // Map cột Số Tiền (Cột này bạn đã thêm trong Designer)
+            if (dgvKhenThuong.Columns.Contains("SoTienKT"))
+            {
+                dgvKhenThuong.Columns["SoTienKT"].DataPropertyName = "SOTIEN";
+                dgvKhenThuong.Columns["SoTienKT"].DefaultCellStyle.Format = "N0"; // Định dạng 500,000
+            }
+
             ds.Tables["tblKHENTHUONG"].PrimaryKey = new DataColumn[] { ds.Tables["tblKHENTHUONG"].Columns["SOQD"] };
 
-            string sThem = @"INSERT INTO TB_KHENTHUONG (SOQD, MANV, NGAYKY, LOAIKT, NOIDUNG) 
-                             VALUES (@SOQD, @MANV, @NGAYKY, @LOAIKT, @NOIDUNG)";
+            // 3. INSERT COMMAND
+            string sThem = @"INSERT INTO TB_KHENTHUONG (SOQD, MANV, NGAYKY, LOAIKT, NOIDUNG, SOTIEN) 
+                             VALUES (@SOQD, @MANV, @NGAYKY, @LOAIKT, @NOIDUNG, @SOTIEN)";
             daKhenThuong.InsertCommand = new SqlCommand(sThem, conn);
             daKhenThuong.InsertCommand.Parameters.Add("@SOQD", SqlDbType.NVarChar, 10, "SOQD");
             daKhenThuong.InsertCommand.Parameters.Add("@MANV", SqlDbType.NVarChar, 10, "MANV");
             daKhenThuong.InsertCommand.Parameters.Add("@NGAYKY", SqlDbType.Date, 0, "NGAYKY");
             daKhenThuong.InsertCommand.Parameters.Add("@LOAIKT", SqlDbType.NVarChar, 50, "LOAIKT");
             daKhenThuong.InsertCommand.Parameters.Add("@NOIDUNG", SqlDbType.NVarChar, 255, "NOIDUNG");
+            daKhenThuong.InsertCommand.Parameters.Add("@SOTIEN", SqlDbType.Float, 0, "SOTIEN"); // Thêm tham số tiền
 
-            string sSua = @"UPDATE TB_KHENTHUONG SET MANV=@MANV, NGAYKY=@NGAYKY, LOAIKT=@LOAIKT, NOIDUNG=@NOIDUNG 
+            // 4. UPDATE COMMAND
+            string sSua = @"UPDATE TB_KHENTHUONG SET MANV=@MANV, NGAYKY=@NGAYKY, LOAIKT=@LOAIKT, NOIDUNG=@NOIDUNG, SOTIEN=@SOTIEN 
                             WHERE SOQD=@SOQD";
             daKhenThuong.UpdateCommand = new SqlCommand(sSua, conn);
             daKhenThuong.UpdateCommand.Parameters.Add("@MANV", SqlDbType.NVarChar, 10, "MANV");
             daKhenThuong.UpdateCommand.Parameters.Add("@NGAYKY", SqlDbType.Date, 0, "NGAYKY");
             daKhenThuong.UpdateCommand.Parameters.Add("@LOAIKT", SqlDbType.NVarChar, 50, "LOAIKT");
             daKhenThuong.UpdateCommand.Parameters.Add("@NOIDUNG", SqlDbType.NVarChar, 255, "NOIDUNG");
+            daKhenThuong.UpdateCommand.Parameters.Add("@SOTIEN", SqlDbType.Float, 0, "SOTIEN"); // Thêm tham số tiền
             daKhenThuong.UpdateCommand.Parameters.Add("@SOQD", SqlDbType.NVarChar, 10, "SOQD");
 
+            // 5. DELETE COMMAND
             string sXoa = @"DELETE FROM TB_KHENTHUONG WHERE SOQD=@SOQD";
             daKhenThuong.DeleteCommand = new SqlCommand(sXoa, conn);
             daKhenThuong.DeleteCommand.Parameters.Add("@SOQD", SqlDbType.NVarChar, 10, "SOQD");
-
-           /* btnLuu.Click += btnLuu_Click;
-            btnThem.Click += btnThem_Click;
-            btnSua.Click += btnSua_Click;
-            btnXoa.Click += btnXoa_Click;
-            btnLamMoi.Click += btnLamMoi_Click;
-            dgvKhenThuong.Click += dgvKhenThuong_Click;*/
         }
-        
 
         private void LamMoiControlsKT()
         {
@@ -244,10 +228,10 @@ namespace QuanLyNhanSU
             dtpNgayKyKT.Value = DateTime.Now;
             cboLoaiKT.SelectedIndex = -1;
             txtNoiDungKT.Text = "";
+            txtTienKT.Text = "0"; // Reset ô tiền
             dgvKhenThuong.ClearSelection();
         }
 
-        // Tự động điền Tên NV (ĐÃ GỘP CODE TỪ _1 VÀO ĐÂY)
         private void cboMaNVkt_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboMaNVkt.SelectedItem != null)
@@ -255,13 +239,9 @@ namespace QuanLyNhanSU
                 DataRowView drv = cboMaNVkt.SelectedItem as DataRowView;
                 txtTenNVkt.Text = drv["HOTEN"].ToString();
             }
-            else
-            {
-                txtTenNVkt.Text = "";
-            }
+            else { txtTenNVkt.Text = ""; }
         }
 
-        // Nút Lưu (Tab 1)
         private void btnLuu_Click(object sender, EventArgs e)
         {
             try
@@ -279,25 +259,25 @@ namespace QuanLyNhanSU
             }
         }
 
-        // Nút Thêm (Tab 1)
         private void btnThem_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtSoQDKT.Text) || cboMaNVkt.SelectedValue == null)
             {
-                MessageBox.Show("Số Quyết Định và Mã Nhân Viên là bắt buộc!");
-                return;
+                MessageBox.Show("Số Quyết Định và Mã Nhân Viên là bắt buộc!"); return;
             }
             if (!System.Text.RegularExpressions.Regex.IsMatch(txtSoQDKT.Text, @"^QDKT/\d+$"))
             {
-                MessageBox.Show("Định dạng không hợp lệ!\nVui lòng nhập theo mẫu: QD/xxxx (Ví dụ: QDKT/2025)", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtSoQDKT.Focus();
-                return; // <--- Thêm lệnh này để dừng việc thêm mới
+                MessageBox.Show("Định dạng không hợp lệ!\nVui lòng nhập theo mẫu: QDKT/xxxx", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSoQDKT.Focus(); return;
             }
             if (ds.Tables["tblKHENTHUONG"].Rows.Find(txtSoQDKT.Text) != null)
             {
-                MessageBox.Show("Số Quyết Định này đã tồn tại!");
-                return;
+                MessageBox.Show("Số Quyết Định này đã tồn tại!"); return;
             }
+
+            // Xử lý lấy số tiền từ TextBox
+            double soTien = 0;
+            if (!double.TryParse(txtTienKT.Text, out soTien)) soTien = 0;
 
             DataRow newRow = ds.Tables["tblKHENTHUONG"].NewRow();
             newRow["SOQD"] = txtSoQDKT.Text;
@@ -306,42 +286,44 @@ namespace QuanLyNhanSU
             newRow["NGAYKY"] = dtpNgayKyKT.Value;
             newRow["LOAIKT"] = cboLoaiKT.Text;
             newRow["NOIDUNG"] = txtNoiDungKT.Text;
+            newRow["SOTIEN"] = soTien; // Lưu tiền vào Row
 
             ds.Tables["tblKHENTHUONG"].Rows.Add(newRow);
             MessageBox.Show("Đã thêm vào bộ nhớ. Nhấn 'Lưu' để cập nhật.");
             LamMoiControlsKT();
         }
 
-        // Nút Sửa (Tab 1)
         private void btnSua_Click(object sender, EventArgs e)
         {
             if (txtSoQDKT.Enabled == true || string.IsNullOrEmpty(txtSoQDKT.Text))
             {
-                MessageBox.Show("Vui lòng chọn một mục từ lưới để sửa.");
-                return;
+                MessageBox.Show("Vui lòng chọn một mục từ lưới để sửa."); return;
             }
 
             DataRow rowToUpdate = ds.Tables["tblKHENTHUONG"].Rows.Find(txtSoQDKT.Text);
             if (rowToUpdate != null)
             {
+                // Xử lý lấy số tiền
+                double soTien = 0;
+                double.TryParse(txtTienKT.Text, out soTien);
+
                 rowToUpdate.BeginEdit();
                 rowToUpdate["MANV"] = cboMaNVkt.SelectedValue;
                 rowToUpdate["HOTEN"] = txtTenNVkt.Text;
                 rowToUpdate["NGAYKY"] = dtpNgayKyKT.Value;
                 rowToUpdate["LOAIKT"] = cboLoaiKT.Text;
                 rowToUpdate["NOIDUNG"] = txtNoiDungKT.Text;
+                rowToUpdate["SOTIEN"] = soTien; // Sửa tiền
                 rowToUpdate.EndEdit();
                 MessageBox.Show("Đã sửa trong bộ nhớ. Nhấn 'Lưu' để cập nhật.");
             }
         }
 
-        // Nút Xóa (Tab 1)
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (txtSoQDKT.Enabled == true || string.IsNullOrEmpty(txtSoQDKT.Text))
             {
-                MessageBox.Show("Vui lòng chọn một mục từ lưới để xóa.");
-                return;
+                MessageBox.Show("Vui lòng chọn một mục từ lưới để xóa."); return;
             }
             if (MessageBox.Show("Bạn có chắc muốn xóa QĐ: " + txtSoQDKT.Text + "?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
@@ -355,14 +337,12 @@ namespace QuanLyNhanSU
             }
         }
 
-        // Nút Làm Mới (Tab 1)
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             LamMoiControlsKT();
             ds.Tables["tblKHENTHUONG"].RejectChanges();
         }
 
-        // Click DGV (Tab 1)
         private void dgvKhenThuong_Click(object sender, EventArgs e)
         {
             if (dgvKhenThuong.SelectedRows.Count > 0)
@@ -377,37 +357,23 @@ namespace QuanLyNhanSU
                     cboLoaiKT.SelectedItem = drv["LOAIKT"].ToString();
                     txtNoiDungKT.Text = drv["NOIDUNG"].ToString();
 
-                    txtSoQDKT.Enabled = false; // Khóa PK
+                    // Hiển thị tiền lên TextBox (Format số đẹp)
+                    if (drv.Row.Table.Columns.Contains("SOTIEN") && drv["SOTIEN"] != DBNull.Value)
+                        txtTienKT.Text = double.Parse(drv["SOTIEN"].ToString()).ToString("N0");
+                    else
+                        txtTienKT.Text = "0";
+
+                    txtSoQDKT.Enabled = false;
                 }
             }
         }
 
         #endregion
 
-        #region === KỶ LUẬT (TAB 2) ===
+        #region === KỶ LUẬT (TAB 2 - ĐÃ CẬP NHẬT TIỀN) ===
 
         private void SetupKyLuat()
         {
-            if (Const.LoaiTaiKhoan == 2) // Nếu là NHÂN VIÊN
-            {
-                // 1. Tắt hết các nút chức năng thêm/sửa/xóa
-                btnThemKL.Enabled = false;
-                btnSuaKL.Enabled = false;
-                btnXoaKL.Enabled = false;
-                btnLuuKL.Enabled = false;
-                btnLamMoiKL.Enabled = false;
-             //   btnInHD.Enabled = false;
-                // (Nếu có nút Hủy hay Làm mới thì tắt nốt nếu muốn)
-
-                // 2. Các ô nhập liệu chỉ cho đọc
-                foreach (Control c in this.Controls)
-                {
-                    if (c is TextBox) ((TextBox)c).ReadOnly = true;
-                }
-
-                // 3. GridView chỉ cho xem
-                dgvKyLuat.ReadOnly = true;
-            }
             dgvKyLuat.AutoGenerateColumns = false;
             dgvKyLuat.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
@@ -424,36 +390,41 @@ namespace QuanLyNhanSU
             dgvKyLuat.Columns["LoaiKyLuat"].DataPropertyName = "LOAIKL";
             dgvKyLuat.Columns["NoiDungKyLuat"].DataPropertyName = "NOIDUNG";
 
+            // Map cột Số Tiền Kỷ Luật (Bạn đã thêm trong Designer)
+            if (dgvKyLuat.Columns.Contains("SoTienKL"))
+            {
+                dgvKyLuat.Columns["SoTienKL"].DataPropertyName = "SOTIEN";
+                dgvKyLuat.Columns["SoTienKL"].DefaultCellStyle.Format = "N0";
+            }
+
             ds.Tables["tblKYLUAT"].PrimaryKey = new DataColumn[] { ds.Tables["tblKYLUAT"].Columns["SOQD"] };
 
-            string sThem = @"INSERT INTO TB_KYLUAT (SOQD, MANV, NGAYKY, LOAIKL, NOIDUNG) 
-                             VALUES (@SOQD, @MANV, @NGAYKY, @LOAIKL, @NOIDUNG)";
+            // INSERT
+            string sThem = @"INSERT INTO TB_KYLUAT (SOQD, MANV, NGAYKY, LOAIKL, NOIDUNG, SOTIEN) 
+                             VALUES (@SOQD, @MANV, @NGAYKY, @LOAIKL, @NOIDUNG, @SOTIEN)";
             daKyLuat.InsertCommand = new SqlCommand(sThem, conn);
             daKyLuat.InsertCommand.Parameters.Add("@SOQD", SqlDbType.NVarChar, 10, "SOQD");
             daKyLuat.InsertCommand.Parameters.Add("@MANV", SqlDbType.NVarChar, 10, "MANV");
             daKyLuat.InsertCommand.Parameters.Add("@NGAYKY", SqlDbType.Date, 0, "NGAYKY");
             daKyLuat.InsertCommand.Parameters.Add("@LOAIKL", SqlDbType.NVarChar, 50, "LOAIKL");
             daKyLuat.InsertCommand.Parameters.Add("@NOIDUNG", SqlDbType.NVarChar, 255, "NOIDUNG");
+            daKyLuat.InsertCommand.Parameters.Add("@SOTIEN", SqlDbType.Float, 0, "SOTIEN"); // Thêm tiền
 
-            string sSua = @"UPDATE TB_KYLUAT SET MANV=@MANV, NGAYKY=@NGAYKY, LOAIKL=@LOAIKL, NOIDUNG=@NOIDUNG 
+            // UPDATE
+            string sSua = @"UPDATE TB_KYLUAT SET MANV=@MANV, NGAYKY=@NGAYKY, LOAIKL=@LOAIKL, NOIDUNG=@NOIDUNG, SOTIEN=@SOTIEN 
                             WHERE SOQD=@SOQD";
             daKyLuat.UpdateCommand = new SqlCommand(sSua, conn);
             daKyLuat.UpdateCommand.Parameters.Add("@MANV", SqlDbType.NVarChar, 10, "MANV");
             daKyLuat.UpdateCommand.Parameters.Add("@NGAYKY", SqlDbType.Date, 0, "NGAYKY");
             daKyLuat.UpdateCommand.Parameters.Add("@LOAIKL", SqlDbType.NVarChar, 50, "LOAIKL");
             daKyLuat.UpdateCommand.Parameters.Add("@NOIDUNG", SqlDbType.NVarChar, 255, "NOIDUNG");
+            daKyLuat.UpdateCommand.Parameters.Add("@SOTIEN", SqlDbType.Float, 0, "SOTIEN"); // Thêm tiền
             daKyLuat.UpdateCommand.Parameters.Add("@SOQD", SqlDbType.NVarChar, 10, "SOQD");
 
+            // DELETE
             string sXoa = @"DELETE FROM TB_KYLUAT WHERE SOQD=@SOQD";
             daKyLuat.DeleteCommand = new SqlCommand(sXoa, conn);
             daKyLuat.DeleteCommand.Parameters.Add("@SOQD", SqlDbType.NVarChar, 10, "SOQD");
-
-         /*  btnLuuKL.Click += btnLuuKL_Click;
-            btnThemKL.Click += btnThemKL_Click;
-            btnSuaKL.Click += btnSuaKL_Click;
-            btnXoaKL.Click += btnXoaKL_Click;
-            btnLamMoiKL.Click += btnLamMoiKL_Click;
-            dgvKyLuat.Click += dgvKyLuat_Click;*/
         }
 
         private void LamMoiControlsKL()
@@ -465,10 +436,10 @@ namespace QuanLyNhanSU
             dtpNgayKy.Value = DateTime.Now;
             cboLoaiKL.SelectedIndex = -1;
             txtNoiDung.Text = "";
+            txtTienKL.Text = "0"; // Reset tiền
             dgvKyLuat.ClearSelection();
         }
 
-        // Tự động điền Tên NV (Tab 2) (ĐÃ GỘP CODE TỪ _1 VÀO ĐÂY)
         private void cboMaNVkl_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboMaNVkl.SelectedItem != null)
@@ -476,13 +447,9 @@ namespace QuanLyNhanSU
                 DataRowView drv = cboMaNVkl.SelectedItem as DataRowView;
                 txtTenNVkl.Text = drv["HOTEN"].ToString();
             }
-            else
-            {
-                txtTenNVkl.Text = "";
-            }
+            else { txtTenNVkl.Text = ""; }
         }
 
-        // Nút Lưu (Tab 2)
         private void btnLuuKL_Click(object sender, EventArgs e)
         {
             try
@@ -500,25 +467,25 @@ namespace QuanLyNhanSU
             }
         }
 
-        // Nút Thêm (Tab 2)
         private void btnThemKL_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtSoQDKL.Text) || cboMaNVkl.SelectedValue == null)
             {
-                MessageBox.Show("Số Quyết Định và Mã Nhân Viên là bắt buộc!");
-                return;
+                MessageBox.Show("Số Quyết Định và Mã Nhân Viên là bắt buộc!"); return;
             }
             if (!System.Text.RegularExpressions.Regex.IsMatch(txtSoQDKL.Text, @"^QD/\d+$"))
             {
-                MessageBox.Show("Định dạng không hợp lệ!\nVui lòng nhập theo mẫu: QD/xxxx (Ví dụ: QD/2025)", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtSoQDKL.Focus();
-                return; // <--- Thêm lệnh này để dừng việc thêm mới
+                MessageBox.Show("Định dạng không hợp lệ!\nVui lòng nhập theo mẫu: QD/xxxx", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSoQDKL.Focus(); return;
             }
             if (ds.Tables["tblKYLUAT"].Rows.Find(txtSoQDKL.Text) != null)
             {
-                MessageBox.Show("Số Quyết Định này đã tồn tại!");
-                return;
+                MessageBox.Show("Số Quyết Định này đã tồn tại!"); return;
             }
+
+            // Xử lý tiền
+            double soTien = 0;
+            if (!double.TryParse(txtTienKL.Text, out soTien)) soTien = 0;
 
             DataRow newRow = ds.Tables["tblKYLUAT"].NewRow();
             newRow["SOQD"] = txtSoQDKL.Text;
@@ -527,42 +494,44 @@ namespace QuanLyNhanSU
             newRow["NGAYKY"] = dtpNgayKy.Value;
             newRow["LOAIKL"] = cboLoaiKL.Text;
             newRow["NOIDUNG"] = txtNoiDung.Text;
+            newRow["SOTIEN"] = soTien; // Lưu tiền
 
             ds.Tables["tblKYLUAT"].Rows.Add(newRow);
             MessageBox.Show("Đã thêm vào bộ nhớ. Nhấn 'Lưu' để cập nhật.");
             LamMoiControlsKL();
         }
 
-        // Nút Sửa (Tab 2)
         private void btnSuaKL_Click(object sender, EventArgs e)
         {
             if (txtSoQDKL.Enabled == true || string.IsNullOrEmpty(txtSoQDKL.Text))
             {
-                MessageBox.Show("Vui lòng chọn một mục từ lưới để sửa.");
-                return;
+                MessageBox.Show("Vui lòng chọn một mục từ lưới để sửa."); return;
             }
 
             DataRow rowToUpdate = ds.Tables["tblKYLUAT"].Rows.Find(txtSoQDKL.Text);
             if (rowToUpdate != null)
             {
+                // Xử lý tiền
+                double soTien = 0;
+                double.TryParse(txtTienKL.Text, out soTien);
+
                 rowToUpdate.BeginEdit();
                 rowToUpdate["MANV"] = cboMaNVkl.SelectedValue;
                 rowToUpdate["HOTEN"] = txtTenNVkl.Text;
                 rowToUpdate["NGAYKY"] = dtpNgayKy.Value;
                 rowToUpdate["LOAIKL"] = cboLoaiKL.Text;
                 rowToUpdate["NOIDUNG"] = txtNoiDung.Text;
+                rowToUpdate["SOTIEN"] = soTien; // Sửa tiền
                 rowToUpdate.EndEdit();
                 MessageBox.Show("Đã sửa trong bộ nhớ. Nhấn 'Lưu' để cập nhật.");
             }
         }
 
-        // Nút Xóa (Tab 2)
         private void btnXoaKL_Click(object sender, EventArgs e)
         {
             if (txtSoQDKL.Enabled == true || string.IsNullOrEmpty(txtSoQDKL.Text))
             {
-                MessageBox.Show("Vui lòng chọn một mục từ lưới để xóa.");
-                return;
+                MessageBox.Show("Vui lòng chọn một mục từ lưới để xóa."); return;
             }
             if (MessageBox.Show("Bạn có chắc muốn xóa QĐ: " + txtSoQDKL.Text + "?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
@@ -576,14 +545,12 @@ namespace QuanLyNhanSU
             }
         }
 
-        // Nút Làm Mới (Tab 2)
         private void btnLamMoiKL_Click(object sender, EventArgs e)
         {
             LamMoiControlsKL();
             ds.Tables["tblKYLUAT"].RejectChanges();
         }
 
-        // Click DGV (Tab 2)
         private void dgvKyLuat_Click(object sender, EventArgs e)
         {
             if (dgvKyLuat.SelectedRows.Count > 0)
@@ -598,65 +565,48 @@ namespace QuanLyNhanSU
                     cboLoaiKL.SelectedItem = drv["LOAIKL"].ToString();
                     txtNoiDung.Text = drv["NOIDUNG"].ToString();
 
-                    txtSoQDKL.Enabled = false; // Khóa PK
+                    // Hiển thị tiền lên TextBox
+                    if (drv.Row.Table.Columns.Contains("SOTIEN") && drv["SOTIEN"] != DBNull.Value)
+                        txtTienKL.Text = double.Parse(drv["SOTIEN"].ToString()).ToString("N0");
+                    else
+                        txtTienKL.Text = "0";
+
+                    txtSoQDKL.Enabled = false;
                 }
             }
         }
+
+        #endregion
+
+        #region === TÌM KIẾM ===
+
         private void LoadSearchComboBox()
         {
             var searchOptions = new[] {
                 new { Text = "Tìm theo SOQD", Value = "SOQD" },
                 new { Text = "Tìm theo Họ Tên", Value = "HOTEN" }
-    };
-            // (Sửa lại tên 'cboTimKiemTheo' nếu tên của bạn khác)
+            };
             cboLoaiTKkt.DataSource = searchOptions;
             cboLoaiTKkt.DisplayMember = "Text";
             cboLoaiTKkt.ValueMember = "Value";
             cboLoaiTKkt.SelectedIndex = 0;
         }
+
         private void btnTimKiemKT_Click(object sender, EventArgs e)
         {
             string searchTerm = txtTuKhoaKT.Text.Trim().Replace("'", "''");
             string searchColumn = cboLoaiTKkt.SelectedValue.ToString();
-
             DataView dv = ds.Tables["tblKHENTHUONG"].DefaultView;
 
-            if (string.IsNullOrEmpty(searchTerm))
-            {
-                dv.RowFilter = string.Empty;
-                return;
-            }
-
-            // Kiểm tra kiểu dữ liệu của cột
+            if (string.IsNullOrEmpty(searchTerm)) { dv.RowFilter = string.Empty; return; }
             Type columnType = ds.Tables["tblKHENTHUONG"].Columns[searchColumn].DataType;
-
             try
             {
-                if (columnType == typeof(string))
-                {
-                    // Nếu là chuỗi → dùng LIKE
-                    dv.RowFilter = $"{searchColumn} LIKE '%{searchTerm}%'";
-                }
-                else if (columnType == typeof(int) || columnType == typeof(double) || columnType == typeof(float))
-                {
-                    // Nếu là số → dùng so sánh chính xác
-                    dv.RowFilter = $"{searchColumn} = {searchTerm}";
-                }
-                else
-                {
-                    // Nếu kiểu khác → xử lý tùy trường hợp
-                    MessageBox.Show("Không hỗ trợ tìm kiếm với kiểu dữ liệu này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                if (columnType == typeof(string)) dv.RowFilter = $"{searchColumn} LIKE '%{searchTerm}%'";
+                else dv.RowFilter = $"{searchColumn} = {searchTerm}";
             }
-            catch
-            {
-                MessageBox.Show("Giá trị tìm kiếm không hợp lệ với kiểu dữ liệu của cột", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
+            catch { MessageBox.Show("Giá trị tìm kiếm không hợp lệ"); }
         }
-
-
-        #endregion
 
         private void btnShowALL_Click(object sender, EventArgs e)
         {
@@ -667,54 +617,29 @@ namespace QuanLyNhanSU
         private void LoadSearchComboBoxKL()
         {
             var searchOptions = new[] {
-        new { Text = "Tìm theo SOQD", Value = "SOQD" },
-        new { Text = "Tìm theo Họ Tên", Value = "HOTEN" }
-    };
-            // (Sửa lại tên 'cboTimKiemTheo' nếu tên của bạn khác)
+                new { Text = "Tìm theo SOQD", Value = "SOQD" },
+                new { Text = "Tìm theo Họ Tên", Value = "HOTEN" }
+            };
             cboLoaiTK.DataSource = searchOptions;
             cboLoaiTK.DisplayMember = "Text";
             cboLoaiTK.ValueMember = "Value";
             cboLoaiTK.SelectedIndex = 0;
         }
+
         private void btnTimKiemKL_Click(object sender, EventArgs e)
         {
             string searchTerm = txtTuKhoaKL.Text.Trim().Replace("'", "''");
             string searchColumn = cboLoaiTK.SelectedValue.ToString();
-
             DataView dv = ds.Tables["tblKYLUAT"].DefaultView;
 
-            if (string.IsNullOrEmpty(searchTerm))
-            {
-                dv.RowFilter = string.Empty;
-                return;
-            }
-
-            // Kiểm tra kiểu dữ liệu của cột
+            if (string.IsNullOrEmpty(searchTerm)) { dv.RowFilter = string.Empty; return; }
             Type columnType = ds.Tables["tblKYLUAT"].Columns[searchColumn].DataType;
-
             try
             {
-                if (columnType == typeof(string))
-                {
-                    // Nếu là chuỗi → dùng LIKE
-                    dv.RowFilter = $"{searchColumn} LIKE '%{searchTerm}%'";
-                }
-                else if (columnType == typeof(int) || columnType == typeof(double) || columnType == typeof(float))
-                {
-                    // Nếu là số → dùng so sánh chính xác
-                    dv.RowFilter = $"{searchColumn} = {searchTerm}";
-                }
-                else
-                {
-                    // Nếu kiểu khác → xử lý tùy trường hợp
-                    MessageBox.Show("Không hỗ trợ tìm kiếm với kiểu dữ liệu này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                if (columnType == typeof(string)) dv.RowFilter = $"{searchColumn} LIKE '%{searchTerm}%'";
+                else dv.RowFilter = $"{searchColumn} = {searchTerm}";
             }
-            catch
-            {
-                MessageBox.Show("Giá trị tìm kiếm không hợp lệ với kiểu dữ liệu của cột", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
+            catch { MessageBox.Show("Giá trị tìm kiếm không hợp lệ"); }
         }
 
         private void btnHienAll_Click(object sender, EventArgs e)
@@ -722,5 +647,7 @@ namespace QuanLyNhanSU
             txtTuKhoaKL.Text = "";
             ds.Tables["tblKYLUAT"].DefaultView.RowFilter = string.Empty;
         }
+
+        #endregion
     }
 }
