@@ -113,14 +113,14 @@
             this.txtTaiKhoan.Location = new System.Drawing.Point(276, 171);
             this.txtTaiKhoan.Name = "txtTaiKhoan";
             this.txtTaiKhoan.Size = new System.Drawing.Size(296, 30);
-            this.txtTaiKhoan.TabIndex = 7;
+            this.txtTaiKhoan.TabIndex = 1;
             // 
             // txtMatKhau
             // 
             this.txtMatKhau.Location = new System.Drawing.Point(276, 224);
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.Size = new System.Drawing.Size(296, 30);
-            this.txtMatKhau.TabIndex = 7;
+            this.txtMatKhau.TabIndex = 2;
             this.txtMatKhau.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMatKhau_KeyDown);
             // 
             // label4
@@ -145,7 +145,7 @@
             this.btnDangNhap.Location = new System.Drawing.Point(276, 327);
             this.btnDangNhap.Name = "btnDangNhap";
             this.btnDangNhap.Size = new System.Drawing.Size(296, 70);
-            this.btnDangNhap.TabIndex = 9;
+            this.btnDangNhap.TabIndex = 3;
             this.btnDangNhap.Text = "Đăng nhập";
             this.btnDangNhap.UseVisualStyleBackColor = false;
             this.btnDangNhap.Click += new System.EventHandler(this.btnDangNhap_Click);

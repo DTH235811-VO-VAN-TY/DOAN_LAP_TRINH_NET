@@ -27,12 +27,11 @@ namespace QuanLyNhanSU
             else if (quyen == 2)
             {
                 this.Text = "Hệ thống Quản lý Nhân sự - NHÂN VIÊN (Chỉ xem)";
-                string tk = "NhanVien";
 
                 // Khóa toàn bộ thanh chức năng bên trái
                 if (uC_ChucNangNS2 != null)
                 {
-                    uC_ChucNangNS2.Enabled = true; 
+                    uC_ChucNangNS2.Enabled = false;
                 }
 
                 MessageBox.Show("Chào bạn! Bạn đang đăng nhập với quyền Nhân Viên.\nChức năng chỉnh sửa hệ thống đã bị khóa.", "Phân quyền hệ thống");
@@ -47,7 +46,7 @@ namespace QuanLyNhanSU
             uC_ChucNangNS2.AddKhenThuongLyLuatClicked += Uc_KhenThuong_KyLuat_AddKhenThuongLyLuatClicked;
             uC_ChucNangNS2.AddThoiViecClicked += Uc_ThoiViec_AddThoiViecClicked;
             uC_ChucNangNS2.AddPhuCapClicked += Uc_PhuCap_AddPhuCapClicked;
-            uC_ChamCong2.AddNghiPhepClicked += Uc_NghiPhep_AddNghiPhepClicked;
+          //  uC_ChamCong2.AddNghiPhepClicked += Uc_NghiPhep_AddNghiPhepClicked;
             uC_NhanVien2.DataUpdated += UC_NhanVien_DataUpdated;
             uC_ThoiViec1.DataUpdated += UC_ThoiViec_DataUpdated;
             this.btnNhanSu.Click += new System.EventHandler(this.btnNhanSu_Click);
@@ -98,10 +97,10 @@ namespace QuanLyNhanSU
           // uC_NghiPhepNV1.BringToFront();
             uC_ThoiViec1.BringToFront();
         }
-        private void Uc_NghiPhep_AddNghiPhepClicked(object sender, EventArgs e)
+      /*  private void Uc_NghiPhep_AddNghiPhepClicked(object sender, EventArgs e)
         {
             uC_NghiPhepNV1.BringToFront();
-        }
+        }*/
 
 
         private void panel2_Paint(object sender, PaintEventArgs e)

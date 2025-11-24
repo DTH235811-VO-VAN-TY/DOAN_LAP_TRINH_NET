@@ -143,6 +143,27 @@ namespace QuanLyNhanSU
 
         private void UC_NhanVien_Load(object sender, EventArgs e)
         {
+
+            if (Const.LoaiTaiKhoan == 2) // Nếu là NHÂN VIÊN
+            {
+                // 1. Tắt hết các nút chức năng thêm/sửa/xóa
+                btnThemNv.Enabled = false;
+                btnSuaNV.Enabled = false;
+                btnXoaNV.Enabled = false;
+                btnLuuNv.Enabled = false;
+                btnHuyNV.Enabled = false;
+                btnInNV.Enabled = false;
+                // (Nếu có nút Hủy hay Làm mới thì tắt nốt nếu muốn)
+
+                // 2. Các ô nhập liệu chỉ cho đọc
+                foreach (Control c in this.Controls)
+                {
+                    if (c is TextBox) ((TextBox)c).ReadOnly = true;
+                }
+
+                // 3. GridView chỉ cho xem
+                dgvNhanVien.ReadOnly = true;
+            }
             // Chặn lỗi design mode
             if (this.DesignMode || System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
             {
@@ -309,6 +330,10 @@ namespace QuanLyNhanSU
             else if (txtDcNV.Text == "")
             {
                 MessageBox.Show("Vui lòng nhập địa chỉ nhân viên");
+            }
+            else if(dtpNgaySinh.Value >= DateTime.Now)
+            {
+                MessageBox.Show("Ngày sinh không hợp lệ!");
             }
             else
             {
@@ -592,10 +617,23 @@ namespace QuanLyNhanSU
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtHoTen, "");
+                errorProvider.SetError(txtHoTen, null);
+
             }
         }
-
+        private void txtMaNV_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtMaNV.Text.Length > 6)
+            {
+                e.Cancel = true;
+                errorProvider.SetError(txtMaNV,"Mã nhân viên tối đa 6 ký tự");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider.SetError(txtMaNV,null);
+            }
+        }
         private void btnHuyNV_Click(object sender, EventArgs e)
         {
             txtMaNV.Text = "";
@@ -858,5 +896,7 @@ namespace QuanLyNhanSU
                 MessageBox.Show("Lỗi in ấn: " + ex.Message);
             }
         }
+
+        
     }
 }

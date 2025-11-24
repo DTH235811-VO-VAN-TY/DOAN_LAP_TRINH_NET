@@ -27,6 +27,26 @@ namespace QuanLyNhanSU
 
         private void Uc_HopDong_Load(object sender, EventArgs e)
         {
+            if (Const.LoaiTaiKhoan == 2) // Nếu là NHÂN VIÊN
+            {
+                // 1. Tắt hết các nút chức năng thêm/sửa/xóa
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                btnLuu.Enabled = false;
+                btnLamMoi.Enabled = false;
+                btnInHD.Enabled = false;
+                // (Nếu có nút Hủy hay Làm mới thì tắt nốt nếu muốn)
+
+                // 2. Các ô nhập liệu chỉ cho đọc
+                foreach (Control c in this.Controls)
+                {
+                    if (c is TextBox) ((TextBox)c).ReadOnly = true;
+                }
+
+                // 3. GridView chỉ cho xem
+                dgvHopDong.ReadOnly = true;
+            }
             // Thoát nếu đang ở chế độ Design
             txtTenNV.Enabled = false;
             if (this.DesignMode) return;
@@ -164,7 +184,8 @@ namespace QuanLyNhanSU
             dtpNgayBatDau.Value = DateTime.Now;
             dtpNgayKetThuc.Value = DateTime.Now;
             txtHSL.Text = "0.0";
-            nudHSL.Value = 0;
+            numericUpDown1.Value = 0;
+            //nudHSL.Value = 0;
             cboThoiHan.SelectedIndex = -1;
             txtNoiDung.Text = "";
             dgvHopDong.ClearSelection();
@@ -195,34 +216,77 @@ namespace QuanLyNhanSU
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            // 1. Kiểm tra rỗng
             if (string.IsNullOrEmpty(txtSoHD.Text) || cboMaNV.SelectedValue == null)
             {
                 MessageBox.Show("Số Hợp Đồng và Tên Nhân Viên là bắt buộc!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Kiểm tra xem SOHD đã tồn tại trong DataSet chưa
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtSoHD.Text, @"^HDLD/\d+$"))
+            {
+                MessageBox.Show("Định dạng không hợp lệ!\nVui lòng nhập theo mẫu: HDLD/xxxx (Ví dụ: HDLD/2025)", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSoHD.Focus();
+                return; // <--- Thêm lệnh này để dừng việc thêm mới
+            }
+
+            // 3. Kiểm tra trùng mã trong bộ nhớ (DataSet)
             if (ds.Tables["tblHOPDONG"].Rows.Find(txtSoHD.Text) != null)
             {
-                MessageBox.Show("Số Hợp Đồng này đã tồn tại!");
+                MessageBox.Show("Số Hợp Đồng này đã tồn tại trong danh sách!", "Trùng dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            DataRow newRow = ds.Tables["tblHOPDONG"].NewRow();
-            newRow["SOHD"] = txtSoHD.Text;
-            newRow["MANV"] = cboMaNV.SelectedValue;
-            newRow["HOTEN"] = cboMaNV.Text; // Để hiển thị DGV ngay
-            newRow["LANKY"] = numericUpDown1.Value; // (numericUpDown1 là Lần Ký)
-            newRow["NGAYKY"] = dtpNgayKy.Value;
-            newRow["NGAYBATDAU"] = dtpNgayBatDau.Value;
-            newRow["NGAYKETTHUC"] = dtpNgayKetThuc.Value;
-            newRow["HESOLUONG"] = txtHSL.Text;
-            newRow["THOIHAN"] = cboThoiHan.SelectedItem;
-            newRow["NOIDUNG"] = txtNoiDung.Text;
+            // 4. Kiểm tra ngày tháng
+            if (dtpNgayKetThuc.Value <= dtpNgayBatDau.Value)
+            {
+                MessageBox.Show("Ngày Kết Thúc phải sau Ngày Bắt Đầu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if(txtHSL.Text=="")
+            {
+                MessageBox.Show("Hệ Số Lương không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            double heSoLuong;
+            if (!double.TryParse(txtHSL.Text, out heSoLuong) || heSoLuong <= 0)
+            {
+                MessageBox.Show("Hệ số lương phải là số và lớn hơn 0 (Ví dụ: 2.34)!", "Lỗi nhập liệu");
+                txtHSL.Focus();
+                return;
+            }
+            if (cboThoiHan.Text == "")
+            {
+                MessageBox.Show("Vui lòng chọn Thời Hạn hợp đồng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
-            ds.Tables["tblHOPDONG"].Rows.Add(newRow);
-            MessageBox.Show("Đã thêm vào bộ nhớ đệm. Nhấn 'Lưu' để cập nhật CSDL.");
-            LamMoiControls();
+            // --- Nếu qua hết các ải trên thì mới thực hiện Thêm ---
+            try
+            {
+                DataRow newRow = ds.Tables["tblHOPDONG"].NewRow();
+                newRow["SOHD"] = txtSoHD.Text.Trim(); // Trim() để xóa khoảng trắng thừa nếu có
+                newRow["MANV"] = cboMaNV.SelectedValue;
+                newRow["HOTEN"] = cboMaNV.Text;
+                newRow["LANKY"] = numericUpDown1.Value;
+                newRow["NGAYKY"] = dtpNgayKy.Value;
+                newRow["NGAYBATDAU"] = dtpNgayBatDau.Value;
+                newRow["NGAYKETTHUC"] = dtpNgayKetThuc.Value;
+
+                // Kiểm tra parse số liệu an toàn hơn
+                
+                newRow["HESOLUONG"] = heSoLuong;
+
+                newRow["THOIHAN"] = cboThoiHan.SelectedItem ?? "Vô thời hạn"; // Xử lý null
+                newRow["NOIDUNG"] = txtNoiDung.Text;
+
+                ds.Tables["tblHOPDONG"].Rows.Add(newRow);
+
+                MessageBox.Show("Đã thêm vào bộ nhớ tạm. Hãy nhấn nút 'Lưu' để ghi vào CSDL.");
+                LamMoiControls();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi thêm dòng: " + ex.Message);
+            }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -305,7 +369,7 @@ namespace QuanLyNhanSU
                     dtpNgayBatDau.Value = Convert.ToDateTime(drv["NGAYBATDAU"]);
                     dtpNgayKetThuc.Value = Convert.ToDateTime(drv["NGAYKETTHUC"]);
                     txtHSL.Text = drv["HESOLUONG"].ToString();
-                    nudHSL.Value = Convert.ToDecimal(drv["HESOLUONG"]);
+                    //nudHSL.Value = Convert.ToDecimal(drv["HESOLUONG"]);
                     cboThoiHan.SelectedItem = drv["THOIHAN"].ToString();
                     txtNoiDung.Text = drv["NOIDUNG"].ToString();
 

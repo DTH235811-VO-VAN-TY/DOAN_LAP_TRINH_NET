@@ -89,6 +89,7 @@
     <Compile Include="add_UngLuong_form.Designer.cs">
       <DependentUpon>add_UngLuong_form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Const.cs" />
     <Compile Include="DashBoards.cs">
       <SubType>Form</SubType>
     </Compile>

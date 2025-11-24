@@ -30,7 +30,6 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtHSL = new System.Windows.Forms.TextBox();
-            this.nudHSL = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -39,7 +38,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -70,7 +68,6 @@
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.btnInHD = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHSL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHopDong)).BeginInit();
             this.SuspendLayout();
@@ -78,7 +75,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtHSL);
-            this.groupBox1.Controls.Add(this.nudHSL);
             this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label11);
@@ -87,7 +83,6 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label10);
@@ -114,13 +109,6 @@
             this.txtHSL.Name = "txtHSL";
             this.txtHSL.Size = new System.Drawing.Size(168, 27);
             this.txtHSL.TabIndex = 12;
-            // 
-            // nudHSL
-            // 
-            this.nudHSL.Location = new System.Drawing.Point(620, 98);
-            this.nudHSL.Name = "nudHSL";
-            this.nudHSL.Size = new System.Drawing.Size(168, 27);
-            this.nudHSL.TabIndex = 8;
             // 
             // numericUpDown1
             // 
@@ -192,19 +180,10 @@
             this.label12.TabIndex = 8;
             this.label12.Text = "Hệ số lương";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(483, 100);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(93, 20);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "Hệ số lương";
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(483, 147);
+            this.label8.Location = new System.Drawing.Point(482, 110);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 20);
             this.label8.TabIndex = 9;
@@ -213,7 +192,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(483, 194);
+            this.label9.Location = new System.Drawing.Point(482, 157);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(103, 20);
             this.label9.TabIndex = 10;
@@ -222,7 +201,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(483, 246);
+            this.label10.Location = new System.Drawing.Point(482, 209);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(107, 20);
             this.label10.TabIndex = 11;
@@ -231,7 +210,7 @@
             // dtpNgayKetThuc
             // 
             this.dtpNgayKetThuc.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgayKetThuc.Location = new System.Drawing.Point(620, 241);
+            this.dtpNgayKetThuc.Location = new System.Drawing.Point(619, 204);
             this.dtpNgayKetThuc.Name = "dtpNgayKetThuc";
             this.dtpNgayKetThuc.Size = new System.Drawing.Size(282, 27);
             this.dtpNgayKetThuc.TabIndex = 6;
@@ -239,7 +218,7 @@
             // dtpNgayBatDau
             // 
             this.dtpNgayBatDau.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgayBatDau.Location = new System.Drawing.Point(620, 189);
+            this.dtpNgayBatDau.Location = new System.Drawing.Point(619, 152);
             this.dtpNgayBatDau.Name = "dtpNgayBatDau";
             this.dtpNgayBatDau.Size = new System.Drawing.Size(282, 27);
             this.dtpNgayBatDau.TabIndex = 5;
@@ -271,7 +250,7 @@
             // cboThoiHan
             // 
             this.cboThoiHan.FormattingEnabled = true;
-            this.cboThoiHan.Location = new System.Drawing.Point(620, 147);
+            this.cboThoiHan.Location = new System.Drawing.Point(619, 110);
             this.cboThoiHan.Name = "cboThoiHan";
             this.cboThoiHan.Size = new System.Drawing.Size(168, 28);
             this.cboThoiHan.TabIndex = 2;
@@ -469,7 +448,7 @@
             this.btnInHD.Name = "btnInHD";
             this.btnInHD.Size = new System.Drawing.Size(162, 36);
             this.btnInHD.TabIndex = 12;
-            this.btnInHD.Text = "LÀM MỚI";
+            this.btnInHD.Text = "IN HD";
             this.btnInHD.UseVisualStyleBackColor = false;
             this.btnInHD.Click += new System.EventHandler(this.btnInHD_Click);
             // 
@@ -494,7 +473,6 @@
             this.Load += new System.EventHandler(this.Uc_HopDong_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHSL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHopDong)).EndInit();
             this.ResumeLayout(false);
@@ -519,13 +497,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Button btnSua;
-        private System.Windows.Forms.NumericUpDown nudHSL;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button btnLuu;
         private System.Windows.Forms.Button btnXoa;

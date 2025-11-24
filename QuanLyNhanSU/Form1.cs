@@ -46,35 +46,48 @@ namespace QuanLyNhanSU
                 {
                     conn.Open();
 
-                    // Câu lệnh: Tìm IDQuyen dựa vào TenDangNhap và MatKhau
-                    string sql = "SELECT IDQuyen FROM tb_TAIKHOAN WHERE TenDangNhap = @user AND MatKhau = @pass";
+                    // --- CÂU LỆNH SQL CẢI TIẾN ---
+                    // Ta cần lấy: IDQuyen (để phân quyền), MANV (để chấm công), HOTEN (để hiển thị xin chào)
+                    // Nên phải JOIN bảng TAIKHOAN và NHANVIEN
+                    string sql = @"SELECT T.IDQuyen, T.MANV, N.HOTEN 
+                           FROM tb_TAIKHOAN T 
+                           INNER JOIN tb_NHANVIEN N ON T.MANV = N.MANV 
+                           WHERE T.TenDangNhap = @user AND T.MatKhau = @pass";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    // Dùng tham số @ để bảo mật, chống hack SQL Injection
                     cmd.Parameters.AddWithValue("@user", txtTaiKhoan.Text);
                     cmd.Parameters.AddWithValue("@pass", txtMatKhau.Text);
 
-                    // Thực thi và lấy kết quả ô đầu tiên (Chính là IDQuyen)
-                    object ketQua = cmd.ExecuteScalar();
+                    // Dùng DataAdapter để lấy dữ liệu về (An toàn và lấy được nhiều cột)
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-                    if (ketQua != null) // TÌM THẤY (Đăng nhập thành công)
+                    // 3. Kiểm tra kết quả
+                    if (dt.Rows.Count > 0) // Tìm thấy tài khoản
                     {
-                        int quyen = Convert.ToInt32(ketQua);
+                        // --- LƯU THÔNG TIN VÀO CONST (QUAN TRỌNG) ---
+                        Const.LoaiTaiKhoan = int.Parse(dt.Rows[0]["IDQuyen"].ToString());
+                        Const.MaNV = dt.Rows[0]["MANV"].ToString();      // Lưu mã để dùng bên Chấm công
+                        Const.TenHienThi = dt.Rows[0]["HOTEN"].ToString(); // Lưu tên để hiện Xin chào
 
                         // Hiển thị thông báo
-                        string tenQuyen = (quyen == 1) ? "Admin (Quản trị)" : "User (Nhân viên)";
-                        MessageBox.Show("Đăng nhập thành công!\nXin chào: " + tenQuyen, "Thông báo");
-                        //  DashBoards tc = new DashBoards();
-                        TrangChu tc = new TrangChu();
-                        tc.PhanQuyen(quyen); // Gọi hàm phân quyền
-                        this.Hide();
+                        string vaiTro = (Const.LoaiTaiKhoan == 1) ? "Quản trị viên (Admin)" : "Nhân viên";
+                        MessageBox.Show("Đăng nhập thành công!\nXin chào: " + Const.TenHienThi + "\nVai trò: " + vaiTro, "Thông báo");
 
-                        tc.ShowDialog();
+                        // 4. Mở Form Trang Chủ (Dashboard)
+                        // Lưu ý: Nếu form chính của bạn tên là 'DashBoards' thì sửa 'TrangChu' thành 'DashBoards'
+                        TrangChu tc = new TrangChu();
+
+                        this.Hide(); // Ẩn form đăng nhập đi
+                        tc.ShowDialog(); // Hiện form chính lên
+
+                        // Khi form chính đóng lại thì đóng luôn ứng dụng (hoặc hiện lại form login tùy logic)
                         this.Close();
                     }
                     else
                     {
-                        // KHÔNG TÌM THẤY (Đăng nhập thất bại)
+                        // Đăng nhập thất bại
                         MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng!", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         txtMatKhau.Clear();
                         txtTaiKhoan.Focus();
@@ -83,7 +96,6 @@ namespace QuanLyNhanSU
                 catch (Exception ex)
                 {
                     MessageBox.Show("Lỗi kết nối cơ sở dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                 }
             }
         }   

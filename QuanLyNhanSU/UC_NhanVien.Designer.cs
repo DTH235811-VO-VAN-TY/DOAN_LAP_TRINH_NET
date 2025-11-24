@@ -368,6 +368,7 @@
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(229, 28);
             this.txtMaNV.TabIndex = 1;
+            this.txtMaNV.Validating += new System.ComponentModel.CancelEventHandler(this.txtMaNV_Validating);
             // 
             // label6
             // 

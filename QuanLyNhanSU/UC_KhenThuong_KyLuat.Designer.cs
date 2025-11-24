@@ -397,6 +397,7 @@
             // 
             // dtpNgayKyKT
             // 
+            this.dtpNgayKyKT.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpNgayKyKT.Location = new System.Drawing.Point(492, 36);
             this.dtpNgayKyKT.Name = "dtpNgayKyKT";
             this.dtpNgayKyKT.Size = new System.Drawing.Size(282, 27);
@@ -707,7 +708,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(742, 68);
+            this.label11.Location = new System.Drawing.Point(464, 68);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(46, 20);
             this.label11.TabIndex = 10;
@@ -715,7 +716,8 @@
             // 
             // dtpNgayKy
             // 
-            this.dtpNgayKy.Location = new System.Drawing.Point(811, 63);
+            this.dtpNgayKy.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpNgayKy.Location = new System.Drawing.Point(533, 63);
             this.dtpNgayKy.Name = "dtpNgayKy";
             this.dtpNgayKy.Size = new System.Drawing.Size(282, 27);
             this.dtpNgayKy.TabIndex = 5;

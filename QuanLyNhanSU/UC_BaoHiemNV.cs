@@ -29,6 +29,26 @@ namespace QuanLyNhanSU
 
         private void UC_BaoHiemNV_Load(object sender, EventArgs e)
         {
+            if (Const.LoaiTaiKhoan == 2) // Nếu là NHÂN VIÊN
+            {
+                // 1. Tắt hết các nút chức năng thêm/sửa/xóa
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                btnLuu.Enabled = false;
+                btnLamMoi.Enabled = false;
+               // btnInHD.Enabled = false;
+                // (Nếu có nút Hủy hay Làm mới thì tắt nốt nếu muốn)
+
+                // 2. Các ô nhập liệu chỉ cho đọc
+                foreach (Control c in this.Controls)
+                {
+                    if (c is TextBox) ((TextBox)c).ReadOnly = true;
+                }
+
+                // 3. GridView chỉ cho xem
+                dgvBaoHiem.ReadOnly = true;
+            }
             LoadSearchComboBox();
             txtTenNV.Enabled = false; // Chỉ đọc
             if (this.DesignMode) return;

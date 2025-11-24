@@ -19,6 +19,24 @@ namespace QuanLyNhanSU
 
         private void UC_BangLuong_Load(object sender, EventArgs e)
         {
+            if (Const.LoaiTaiKhoan == 2) // Nếu là NHÂN VIÊN
+            {
+                // 1. Tắt hết các nút chức năng thêm/sửa/xóa
+                btnTinhLuong.Enabled = false;
+                btnHienNangLuong.Enabled = false;
+                btnHienNVungluong.Enabled = false;
+                btnInPhieuLuong.Enabled = false;
+                btnQuayLai.Enabled = false;
+                btnXoa.Enabled = false;
+                // 2. Các ô nhập liệu chỉ cho đọc
+                foreach (Control c in this.Controls)
+                {
+                    if (c is TextBox) ((TextBox)c).ReadOnly = true;
+                }
+
+                // 3. GridView chỉ cho xem
+                dgvBangLuong.ReadOnly = true;
+            }
             if (this.DesignMode) return;
 
             dtpKyLuong.Format = DateTimePickerFormat.Custom;

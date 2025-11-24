@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblNgayCong = new System.Windows.Forms.Label();
+            this.btnNghiPhep = new System.Windows.Forms.Button();
             this.btnThemChamCong = new System.Windows.Forms.Button();
             this.lblGioHienTai = new System.Windows.Forms.Label();
             this.txtTrangThai = new System.Windows.Forms.TextBox();
@@ -42,7 +44,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnTanCa = new System.Windows.Forms.Button();
             this.dgvLichSu = new System.Windows.Forms.DataGridView();
-            this.btnNghiPhep = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichSu)).BeginInit();
@@ -61,6 +62,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblNgayCong);
             this.groupBox1.Controls.Add(this.btnNghiPhep);
             this.groupBox1.Controls.Add(this.btnThemChamCong);
             this.groupBox1.Controls.Add(this.lblGioHienTai);
@@ -74,6 +76,25 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Bảng Chấm Công";
+            // 
+            // lblNgayCong
+            // 
+            this.lblNgayCong.AutoSize = true;
+            this.lblNgayCong.Location = new System.Drawing.Point(24, 221);
+            this.lblNgayCong.Name = "lblNgayCong";
+            this.lblNgayCong.Size = new System.Drawing.Size(44, 16);
+            this.lblNgayCong.TabIndex = 6;
+            this.lblNgayCong.Text = "label4";
+            // 
+            // btnNghiPhep
+            // 
+            this.btnNghiPhep.Location = new System.Drawing.Point(471, 182);
+            this.btnNghiPhep.Name = "btnNghiPhep";
+            this.btnNghiPhep.Size = new System.Drawing.Size(266, 56);
+            this.btnNghiPhep.TabIndex = 5;
+            this.btnNghiPhep.Text = "Nghĩ Phép";
+            this.btnNghiPhep.UseVisualStyleBackColor = true;
+            this.btnNghiPhep.Click += new System.EventHandler(this.btnNghiPhep_Click);
             // 
             // btnThemChamCong
             // 
@@ -181,16 +202,6 @@
             this.dgvLichSu.Size = new System.Drawing.Size(1210, 267);
             this.dgvLichSu.TabIndex = 9;
             // 
-            // btnNghiPhep
-            // 
-            this.btnNghiPhep.Location = new System.Drawing.Point(471, 182);
-            this.btnNghiPhep.Name = "btnNghiPhep";
-            this.btnNghiPhep.Size = new System.Drawing.Size(266, 56);
-            this.btnNghiPhep.TabIndex = 5;
-            this.btnNghiPhep.Text = "Nghĩ Phép";
-            this.btnNghiPhep.UseVisualStyleBackColor = true;
-            this.btnNghiPhep.Click += new System.EventHandler(this.btnNghiPhep_Click);
-            // 
             // UC_ChamCong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -227,5 +238,6 @@
         private System.Windows.Forms.DataGridView dgvLichSu;
         private System.Windows.Forms.Button btnThemChamCong;
         private System.Windows.Forms.Button btnNghiPhep;
+        private System.Windows.Forms.Label lblNgayCong;
     }
 }

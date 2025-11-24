@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_HomePage));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -40,19 +41,22 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_HomePage));
             this.panelSumNV = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblTongNV = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lblTongPB = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.lblTongLuong = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblNVLuongCaoNhat = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tblNho = new System.Windows.Forms.TableLayoutPanel();
@@ -60,24 +64,20 @@
             this.chartNhanSu = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartDoTuoi = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartLuong = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panelSumNV.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tblNho.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartGioiTinh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartNhanSu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartDoTuoi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartLuong)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // panelSumNV
@@ -94,6 +94,16 @@
             this.panelSumNV.Size = new System.Drawing.Size(346, 131);
             this.panelSumNV.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(215, 58);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(99, 65);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -107,10 +117,10 @@
             // lblTongNV
             // 
             this.lblTongNV.AutoSize = true;
-            this.lblTongNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTongNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTongNV.Location = new System.Drawing.Point(33, 74);
             this.lblTongNV.Name = "lblTongNV";
-            this.lblTongNV.Size = new System.Drawing.Size(109, 38);
+            this.lblTongNV.Size = new System.Drawing.Size(70, 25);
             this.lblTongNV.TabIndex = 2;
             this.lblTongNV.Text = "label2";
             // 
@@ -128,6 +138,16 @@
             this.panel1.Size = new System.Drawing.Size(364, 131);
             this.panel1.TabIndex = 0;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(230, 58);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(106, 65);
+            this.pictureBox2.TabIndex = 4;
+            this.pictureBox2.TabStop = false;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -141,10 +161,10 @@
             // lblTongPB
             // 
             this.lblTongPB.AutoSize = true;
-            this.lblTongPB.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTongPB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTongPB.Location = new System.Drawing.Point(41, 74);
             this.lblTongPB.Name = "lblTongPB";
-            this.lblTongPB.Size = new System.Drawing.Size(109, 38);
+            this.lblTongPB.Size = new System.Drawing.Size(70, 25);
             this.lblTongPB.TabIndex = 2;
             this.lblTongPB.Text = "label2";
             // 
@@ -162,13 +182,22 @@
             this.panel2.Size = new System.Drawing.Size(346, 131);
             this.panel2.TabIndex = 0;
             // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(206, 48);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(114, 65);
+            this.pictureBox4.TabIndex = 5;
+            this.pictureBox4.TabStop = false;
+            // 
             // lblTongLuong
             // 
             this.lblTongLuong.AutoSize = true;
-            this.lblTongLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTongLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTongLuong.Location = new System.Drawing.Point(18, 74);
             this.lblTongLuong.Name = "lblTongLuong";
-            this.lblTongLuong.Size = new System.Drawing.Size(109, 38);
+            this.lblTongLuong.Size = new System.Drawing.Size(70, 25);
             this.lblTongLuong.TabIndex = 2;
             this.lblTongLuong.Text = "label2";
             // 
@@ -185,10 +214,10 @@
             // lblNVLuongCaoNhat
             // 
             this.lblNVLuongCaoNhat.AutoSize = true;
-            this.lblNVLuongCaoNhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNVLuongCaoNhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNVLuongCaoNhat.Location = new System.Drawing.Point(31, 74);
             this.lblNVLuongCaoNhat.Name = "lblNVLuongCaoNhat";
-            this.lblNVLuongCaoNhat.Size = new System.Drawing.Size(178, 38);
+            this.lblNVLuongCaoNhat.Size = new System.Drawing.Size(113, 25);
             this.lblNVLuongCaoNhat.TabIndex = 2;
             this.lblNVLuongCaoNhat.Text = "Nhân Viên";
             // 
@@ -205,6 +234,15 @@
             this.panel3.Padding = new System.Windows.Forms.Padding(5);
             this.panel3.Size = new System.Drawing.Size(365, 131);
             this.panel3.TabIndex = 2;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(257, 58);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(100, 65);
+            this.pictureBox3.TabIndex = 5;
+            this.pictureBox3.TabStop = false;
             // 
             // label3
             // 
@@ -237,7 +275,7 @@
             this.tblNho.ColumnCount = 3;
             this.tblNho.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.07048F));
             this.tblNho.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.92952F));
-            this.tblNho.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 424F));
+            this.tblNho.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 425F));
             this.tblNho.Controls.Add(this.chartGioiTinh, 2, 0);
             this.tblNho.Controls.Add(this.chartNhanSu, 0, 0);
             this.tblNho.Controls.Add(this.chartDoTuoi, 1, 0);
@@ -257,13 +295,13 @@
             this.chartGioiTinh.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.Name = "Legend1";
             this.chartGioiTinh.Legends.Add(legend1);
-            this.chartGioiTinh.Location = new System.Drawing.Point(1097, 3);
+            this.chartGioiTinh.Location = new System.Drawing.Point(1096, 3);
             this.chartGioiTinh.Name = "chartGioiTinh";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chartGioiTinh.Series.Add(series1);
-            this.chartGioiTinh.Size = new System.Drawing.Size(419, 276);
+            this.chartGioiTinh.Size = new System.Drawing.Size(420, 276);
             this.chartGioiTinh.TabIndex = 6;
             this.chartGioiTinh.Text = "chart1";
             // 
@@ -297,7 +335,7 @@
             series3.Legend = "Legend1";
             series3.Name = "Series1";
             this.chartDoTuoi.Series.Add(series3);
-            this.chartDoTuoi.Size = new System.Drawing.Size(628, 276);
+            this.chartDoTuoi.Size = new System.Drawing.Size(627, 276);
             this.chartDoTuoi.TabIndex = 7;
             this.chartDoTuoi.Text = "chart2";
             // 
@@ -318,44 +356,6 @@
             this.chartLuong.TabIndex = 8;
             this.chartLuong.Text = "chart3";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(215, 58);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(99, 65);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(230, 58);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(106, 65);
-            this.pictureBox2.TabIndex = 4;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(257, 58);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(100, 65);
-            this.pictureBox3.TabIndex = 5;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(206, 48);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(114, 65);
-            this.pictureBox4.TabIndex = 5;
-            this.pictureBox4.TabStop = false;
-            // 
             // UC_HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -370,22 +370,22 @@
             this.Load += new System.EventHandler(this.UC_HomePage_Load);
             this.panelSumNV.ResumeLayout(false);
             this.panelSumNV.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tblNho.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chartGioiTinh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartNhanSu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartDoTuoi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartLuong)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }

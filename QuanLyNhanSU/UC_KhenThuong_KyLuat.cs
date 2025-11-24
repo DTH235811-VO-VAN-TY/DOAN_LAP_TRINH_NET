@@ -29,6 +29,27 @@ namespace QuanLyNhanSU
         // --- HÀM LOAD CHÍNH (ĐÃ GỘP CODE TỪ _Load_1 VÀO ĐÂY) ---
         private void UC_KhenThuong_KyLuat_Load(object sender, EventArgs e)
         {
+            if (Const.LoaiTaiKhoan == 2) // Nếu là NHÂN VIÊN
+            {
+                // 1. Tắt hết các nút chức năng thêm/sửa/xóa
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                btnLuu.Enabled = false;
+                btnLamMoi.Enabled = false;
+               // btnInHD.Enabled = false;
+                // (Nếu có nút Hủy hay Làm mới thì tắt nốt nếu muốn)
+
+                // 2. Các ô nhập liệu chỉ cho đọc
+                foreach (Control c in this.Controls)
+                {
+                    if (c is TextBox) ((TextBox)c).ReadOnly = true;
+                }
+
+                // 3. GridView chỉ cho xem
+                dgvKhenThuong.ReadOnly = true;
+                dgvKyLuat.ReadOnly = true;
+            }
             if (this.DesignMode) return;
 
             try
@@ -266,6 +287,12 @@ namespace QuanLyNhanSU
                 MessageBox.Show("Số Quyết Định và Mã Nhân Viên là bắt buộc!");
                 return;
             }
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtSoQDKT.Text, @"^QDKT/\d+$"))
+            {
+                MessageBox.Show("Định dạng không hợp lệ!\nVui lòng nhập theo mẫu: QD/xxxx (Ví dụ: QDKT/2025)", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSoQDKT.Focus();
+                return; // <--- Thêm lệnh này để dừng việc thêm mới
+            }
             if (ds.Tables["tblKHENTHUONG"].Rows.Find(txtSoQDKT.Text) != null)
             {
                 MessageBox.Show("Số Quyết Định này đã tồn tại!");
@@ -361,6 +388,26 @@ namespace QuanLyNhanSU
 
         private void SetupKyLuat()
         {
+            if (Const.LoaiTaiKhoan == 2) // Nếu là NHÂN VIÊN
+            {
+                // 1. Tắt hết các nút chức năng thêm/sửa/xóa
+                btnThemKL.Enabled = false;
+                btnSuaKL.Enabled = false;
+                btnXoaKL.Enabled = false;
+                btnLuuKL.Enabled = false;
+                btnLamMoiKL.Enabled = false;
+             //   btnInHD.Enabled = false;
+                // (Nếu có nút Hủy hay Làm mới thì tắt nốt nếu muốn)
+
+                // 2. Các ô nhập liệu chỉ cho đọc
+                foreach (Control c in this.Controls)
+                {
+                    if (c is TextBox) ((TextBox)c).ReadOnly = true;
+                }
+
+                // 3. GridView chỉ cho xem
+                dgvKyLuat.ReadOnly = true;
+            }
             dgvKyLuat.AutoGenerateColumns = false;
             dgvKyLuat.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
@@ -460,6 +507,12 @@ namespace QuanLyNhanSU
             {
                 MessageBox.Show("Số Quyết Định và Mã Nhân Viên là bắt buộc!");
                 return;
+            }
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtSoQDKL.Text, @"^QD/\d+$"))
+            {
+                MessageBox.Show("Định dạng không hợp lệ!\nVui lòng nhập theo mẫu: QD/xxxx (Ví dụ: QD/2025)", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSoQDKL.Focus();
+                return; // <--- Thêm lệnh này để dừng việc thêm mới
             }
             if (ds.Tables["tblKYLUAT"].Rows.Find(txtSoQDKL.Text) != null)
             {
