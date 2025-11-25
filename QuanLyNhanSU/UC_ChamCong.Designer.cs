@@ -53,8 +53,8 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.MediumSeaGreen;
-            this.label1.Location = new System.Drawing.Point(451, 36);
+            this.label1.ForeColor = System.Drawing.Color.MediumTurquoise;
+            this.label1.Location = new System.Drawing.Point(543, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(449, 46);
             this.label1.TabIndex = 0;
@@ -88,22 +88,26 @@
             // 
             // btnNghiPhep
             // 
-            this.btnNghiPhep.Location = new System.Drawing.Point(471, 182);
+            this.btnNghiPhep.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnNghiPhep.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNghiPhep.Location = new System.Drawing.Point(454, 182);
             this.btnNghiPhep.Name = "btnNghiPhep";
-            this.btnNghiPhep.Size = new System.Drawing.Size(266, 56);
+            this.btnNghiPhep.Size = new System.Drawing.Size(266, 69);
             this.btnNghiPhep.TabIndex = 5;
             this.btnNghiPhep.Text = "Nghĩ Phép";
-            this.btnNghiPhep.UseVisualStyleBackColor = true;
+            this.btnNghiPhep.UseVisualStyleBackColor = false;
             this.btnNghiPhep.Click += new System.EventHandler(this.btnNghiPhep_Click);
             // 
             // btnThemChamCong
             // 
-            this.btnThemChamCong.Location = new System.Drawing.Point(471, 90);
+            this.btnThemChamCong.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnThemChamCong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThemChamCong.Location = new System.Drawing.Point(454, 37);
             this.btnThemChamCong.Name = "btnThemChamCong";
-            this.btnThemChamCong.Size = new System.Drawing.Size(266, 56);
+            this.btnThemChamCong.Size = new System.Drawing.Size(266, 75);
             this.btnThemChamCong.TabIndex = 5;
             this.btnThemChamCong.Text = "Chấm Công";
-            this.btnThemChamCong.UseVisualStyleBackColor = true;
+            this.btnThemChamCong.UseVisualStyleBackColor = false;
             this.btnThemChamCong.Click += new System.EventHandler(this.btnThemChamCong_Click);
             // 
             // lblGioHienTai

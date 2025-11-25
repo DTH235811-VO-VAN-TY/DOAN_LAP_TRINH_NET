@@ -117,7 +117,7 @@
             // 
             // btnXoaTD
             // 
-            this.btnXoaTD.BackColor = System.Drawing.Color.Red;
+            this.btnXoaTD.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnXoaTD.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnXoaTD.ForeColor = System.Drawing.Color.White;
             this.btnXoaTD.Location = new System.Drawing.Point(560, 272);
@@ -130,7 +130,7 @@
             // 
             // btnSuuTD
             // 
-            this.btnSuuTD.BackColor = System.Drawing.Color.Yellow;
+            this.btnSuuTD.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnSuuTD.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnSuuTD.ForeColor = System.Drawing.Color.White;
             this.btnSuuTD.Location = new System.Drawing.Point(407, 272);
@@ -143,7 +143,7 @@
             // 
             // btnThemTD
             // 
-            this.btnThemTD.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnThemTD.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnThemTD.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnThemTD.ForeColor = System.Drawing.Color.White;
             this.btnThemTD.Location = new System.Drawing.Point(254, 272);
@@ -156,7 +156,7 @@
             // 
             // btnLuuTD
             // 
-            this.btnLuuTD.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnLuuTD.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnLuuTD.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnLuuTD.ForeColor = System.Drawing.Color.White;
             this.btnLuuTD.Location = new System.Drawing.Point(101, 272);

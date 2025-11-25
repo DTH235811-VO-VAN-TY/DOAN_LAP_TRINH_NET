@@ -57,15 +57,13 @@ namespace QuanLyNhanSU
                 pk.AutoIncrementSeed = -1;
                 pk.AutoIncrementStep = -1;
 
-                // Gán DataPropertyName cho các cột DataGridView
-                // Lưu ý: Tên cột "Id" và "ChucVu" phải khớp với Designer của bạn
                 dgvChucVu.Columns["Id"].DataPropertyName = "IDCV";
                 dgvChucVu.Columns["ChucVu"].DataPropertyName = "TENCV";
 
-                // Cấu hình AutoSizeMode (nếu cột tên là ChucVu)
+                
                 dgvChucVu.Columns["ChucVu"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-                // Đặt khóa chính cho DataTable
+                
                 ds.Tables["TbChucVu"].PrimaryKey = new DataColumn[] { ds.Tables["TbChucVu"].Columns["IDCV"] };
 
                 // --- THIẾT LẬP CÁC COMMAND CHO DACHUCVU ---

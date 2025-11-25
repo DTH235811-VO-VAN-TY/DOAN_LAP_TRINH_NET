@@ -147,6 +147,10 @@ namespace QuanLyNhanSU
             {
                 uC_ThoiViec1.LoadComboBoxNhanVien();
             }
+           if(uC_ChamCong2 != null)
+            {
+                uC_ChamCong2.LoadDataComboBox();
+            }
             MessageBox.Show("Dữ liệu nhân viên đã được cập nhật. Các phần liên quan đã được làm mới.");
         }
         private void UC_ThoiViec_DataUpdated(object sender, EventArgs e)
@@ -172,6 +176,10 @@ namespace QuanLyNhanSU
                 if(uC_NghiPhepNV1 !=null)
                 {
                     uC_NghiPhepNV1.ReloadData();
+                }
+                if(uC_ChamCong2 != null)
+                {
+                    uC_ChamCong2.LoadDataComboBox();
                 }
                 MessageBox.Show("Dữ liệu nhân viên đã được cập nhật. Các phần liên quan đã được làm mới.");
             }

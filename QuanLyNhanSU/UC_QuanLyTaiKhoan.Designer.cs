@@ -52,7 +52,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.MediumSeaGreen;
+            this.label1.ForeColor = System.Drawing.Color.MediumTurquoise;
             this.label1.Location = new System.Drawing.Point(621, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(379, 46);
@@ -144,9 +144,9 @@
             // 
             // btnLamMoi
             // 
-            this.btnLamMoi.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnLamMoi.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnLamMoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLamMoi.ForeColor = System.Drawing.Color.White;
+            this.btnLamMoi.ForeColor = System.Drawing.Color.Black;
             this.btnLamMoi.Location = new System.Drawing.Point(1271, 593);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(144, 44);
@@ -157,10 +157,10 @@
             // 
             // btnXoa
             // 
-            this.btnXoa.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnXoa.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoa.ForeColor = System.Drawing.Color.White;
-            this.btnXoa.Location = new System.Drawing.Point(946, 592);
+            this.btnXoa.ForeColor = System.Drawing.Color.Black;
+            this.btnXoa.Location = new System.Drawing.Point(415, 593);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(144, 46);
             this.btnXoa.TabIndex = 15;
@@ -170,10 +170,10 @@
             // 
             // btnSua
             // 
-            this.btnSua.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnSua.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSua.ForeColor = System.Drawing.Color.White;
-            this.btnSua.Location = new System.Drawing.Point(549, 591);
+            this.btnSua.ForeColor = System.Drawing.Color.Black;
+            this.btnSua.Location = new System.Drawing.Point(707, 592);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(144, 46);
             this.btnSua.TabIndex = 14;
@@ -183,10 +183,10 @@
             // 
             // btnThem
             // 
-            this.btnThem.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnThem.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThem.ForeColor = System.Drawing.Color.White;
-            this.btnThem.Location = new System.Drawing.Point(142, 591);
+            this.btnThem.ForeColor = System.Drawing.Color.Black;
+            this.btnThem.Location = new System.Drawing.Point(142, 593);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(144, 46);
             this.btnThem.TabIndex = 13;
@@ -207,10 +207,10 @@
             // 
             // btnLuu
             // 
-            this.btnLuu.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnLuu.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnLuu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLuu.ForeColor = System.Drawing.Color.White;
-            this.btnLuu.Location = new System.Drawing.Point(368, 593);
+            this.btnLuu.ForeColor = System.Drawing.Color.Black;
+            this.btnLuu.Location = new System.Drawing.Point(988, 592);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(144, 46);
             this.btnLuu.TabIndex = 14;

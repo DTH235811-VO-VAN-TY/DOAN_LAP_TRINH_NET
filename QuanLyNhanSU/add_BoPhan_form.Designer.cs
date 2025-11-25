@@ -115,7 +115,7 @@
             // 
             // btnHuyBP
             // 
-            this.btnHuyBP.BackColor = System.Drawing.Color.Tomato;
+            this.btnHuyBP.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnHuyBP.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnHuyBP.ForeColor = System.Drawing.Color.White;
             this.btnHuyBP.Location = new System.Drawing.Point(732, 317);
@@ -128,7 +128,7 @@
             // 
             // btnXoaBP
             // 
-            this.btnXoaBP.BackColor = System.Drawing.Color.Red;
+            this.btnXoaBP.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnXoaBP.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnXoaBP.ForeColor = System.Drawing.Color.White;
             this.btnXoaBP.Location = new System.Drawing.Point(579, 317);
@@ -141,7 +141,7 @@
             // 
             // btnSuuBP
             // 
-            this.btnSuuBP.BackColor = System.Drawing.Color.Yellow;
+            this.btnSuuBP.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnSuuBP.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnSuuBP.ForeColor = System.Drawing.Color.White;
             this.btnSuuBP.Location = new System.Drawing.Point(426, 317);
@@ -154,7 +154,7 @@
             // 
             // btnThemBP
             // 
-            this.btnThemBP.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnThemBP.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnThemBP.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnThemBP.ForeColor = System.Drawing.Color.White;
             this.btnThemBP.Location = new System.Drawing.Point(273, 317);
@@ -167,7 +167,7 @@
             // 
             // btnLuuBP
             // 
-            this.btnLuuBP.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnLuuBP.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnLuuBP.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnLuuBP.ForeColor = System.Drawing.Color.White;
             this.btnLuuBP.Location = new System.Drawing.Point(120, 317);

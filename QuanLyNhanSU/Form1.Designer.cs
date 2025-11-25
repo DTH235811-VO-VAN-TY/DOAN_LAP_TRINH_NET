@@ -38,7 +38,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtTaiKhoan = new System.Windows.Forms.TextBox();
             this.txtMatKhau = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.btnDangNhap = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -119,19 +118,10 @@
             // 
             this.txtMatKhau.Location = new System.Drawing.Point(276, 224);
             this.txtMatKhau.Name = "txtMatKhau";
+            this.txtMatKhau.PasswordChar = '*';
             this.txtMatKhau.Size = new System.Drawing.Size(296, 30);
             this.txtMatKhau.TabIndex = 2;
             this.txtMatKhau.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMatKhau_KeyDown);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Blue;
-            this.label4.Location = new System.Drawing.Point(356, 282);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(125, 22);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Quên mật khẩu";
             // 
             // btnDangNhap
             // 
@@ -170,7 +160,6 @@
             this.ClientSize = new System.Drawing.Size(830, 467);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnDangNhap);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtMatKhau);
             this.Controls.Add(this.txtTaiKhoan);
             this.Controls.Add(this.label3);
@@ -203,7 +192,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtTaiKhoan;
         private System.Windows.Forms.TextBox txtMatKhau;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnDangNhap;
         private System.Windows.Forms.Button button2;
     }

@@ -74,7 +74,13 @@ namespace QuanLyNhanSU
                     col.DefaultCellStyle.Format = "N0";
                 }
             }
-
+            //---Load combobox tìm kiếm ---
+            cboTimKiemLuong.Items.Clear();
+            // Thêm các lựa chọn
+            cboTimKiemLuong.Items.Add("Mã Nhân Viên");
+            cboTimKiemLuong.Items.Add("Họ Tên");
+            // Mặc định chọn dòng đầu tiên (Mã Nhân Viên) để không bị trắng
+            cboTimKiemLuong.SelectedIndex = 0;
             LoadBangLuong();
         }
 
@@ -400,5 +406,38 @@ namespace QuanLyNhanSU
             y += 30;
             g.DrawString("(Ký tên)", fontThuong, Brushes.Gray, new PointF(530, y));
         }
+
+        private void btnHienAll_Click(object sender, EventArgs e)
+        {
+            txtTimKiemLuong.Text = "";
+            ds.Tables["tblBANGLUONG"].DefaultView.RowFilter = string.Empty;
         }
+
+        private void btnTiemKiemLuong_Click(object sender, EventArgs e)
+        {
+            string searchValue = txtTimKiemLuong.Text.Trim().Replace("'", "''");
+
+            if (ds.Tables.Contains("tblBANGLUONG")) // Nhớ sửa tên bảng thành tblBANGLUONG
+            {
+                if (string.IsNullOrEmpty(searchValue))
+                {
+                    ds.Tables["tblBANGLUONG"].DefaultView.RowFilter = string.Empty;
+                }
+                else
+                {
+                    // Kiểm tra xem người dùng đang chọn tìm theo cái gì
+                    string kieuTimKiem = cboTimKiemLuong.Text;
+
+                    if (kieuTimKiem == "Mã Nhân Viên")
+                    {
+                        ds.Tables["tblBANGLUONG"].DefaultView.RowFilter = $"MANV LIKE '%{searchValue}%'";
+                    }
+                    else if (kieuTimKiem == "Họ Tên")
+                    {
+                        ds.Tables["tblBANGLUONG"].DefaultView.RowFilter = $"HOTEN LIKE '%{searchValue}%'";
+                    }
+                }
+            }
+        }
+    }
     }

@@ -60,8 +60,7 @@ namespace QuanLyNhanSU
                 }
                 else
                 {
-                    // Trường hợp daNhanVien chưa được khởi tạo (hiếm gặp nếu Load đã chạy)
-                    // Gọi lại cấu hình
+                    
                     LoadDataConfiguration();
                     daNhanVien.Fill(ds, "NhanVien");
                 }

@@ -69,7 +69,7 @@ namespace QuanLyNhanSU
         }
 
         // --- 2. CÁC HÀM TẢI DỮ LIỆU ---
-        private void LoadDataComboBox()
+        public void LoadDataComboBox()
         {
             using (SqlConnection conn = new SqlConnection(connString))
             {

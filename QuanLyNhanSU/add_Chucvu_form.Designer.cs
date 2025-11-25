@@ -117,7 +117,7 @@
             // 
             // btnXoaCV
             // 
-            this.btnXoaCV.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnXoaCV.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnXoaCV.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnXoaCV.ForeColor = System.Drawing.Color.White;
             this.btnXoaCV.Location = new System.Drawing.Point(551, 285);
@@ -130,7 +130,7 @@
             // 
             // btnSuuCV
             // 
-            this.btnSuuCV.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnSuuCV.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnSuuCV.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnSuuCV.ForeColor = System.Drawing.Color.White;
             this.btnSuuCV.Location = new System.Drawing.Point(398, 285);
@@ -143,7 +143,7 @@
             // 
             // btnThemCV
             // 
-            this.btnThemCV.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnThemCV.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnThemCV.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnThemCV.ForeColor = System.Drawing.Color.White;
             this.btnThemCV.Location = new System.Drawing.Point(245, 285);
@@ -156,7 +156,7 @@
             // 
             // btnLuuCV
             // 
-            this.btnLuuCV.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnLuuCV.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnLuuCV.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnLuuCV.ForeColor = System.Drawing.Color.White;
             this.btnLuuCV.Location = new System.Drawing.Point(92, 285);

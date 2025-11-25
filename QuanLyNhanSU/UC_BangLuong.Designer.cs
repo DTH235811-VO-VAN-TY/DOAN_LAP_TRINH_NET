@@ -83,9 +83,9 @@
             this.btnHienNVungluong.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnHienNVungluong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHienNVungluong.ForeColor = System.Drawing.Color.White;
-            this.btnHienNVungluong.Location = new System.Drawing.Point(911, 104);
+            this.btnHienNVungluong.Location = new System.Drawing.Point(911, 94);
             this.btnHienNVungluong.Name = "btnHienNVungluong";
-            this.btnHienNVungluong.Size = new System.Drawing.Size(413, 50);
+            this.btnHienNVungluong.Size = new System.Drawing.Size(430, 50);
             this.btnHienNVungluong.TabIndex = 3;
             this.btnHienNVungluong.Text = "Xem Quá Trình Ứng Lương";
             this.btnHienNVungluong.UseVisualStyleBackColor = false;
@@ -96,7 +96,7 @@
             this.btnHienNangLuong.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnHienNangLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHienNangLuong.ForeColor = System.Drawing.Color.White;
-            this.btnHienNangLuong.Location = new System.Drawing.Point(388, 104);
+            this.btnHienNangLuong.Location = new System.Drawing.Point(388, 94);
             this.btnHienNangLuong.Name = "btnHienNangLuong";
             this.btnHienNangLuong.Size = new System.Drawing.Size(383, 50);
             this.btnHienNangLuong.TabIndex = 3;
@@ -109,7 +109,7 @@
             this.btnQuayLai.BackColor = System.Drawing.Color.MediumTurquoise;
             this.btnQuayLai.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQuayLai.ForeColor = System.Drawing.Color.White;
-            this.btnQuayLai.Location = new System.Drawing.Point(1247, 28);
+            this.btnQuayLai.Location = new System.Drawing.Point(1167, 28);
             this.btnQuayLai.Name = "btnQuayLai";
             this.btnQuayLai.Size = new System.Drawing.Size(174, 50);
             this.btnQuayLai.TabIndex = 2;
@@ -311,6 +311,7 @@
             this.btnHienAll.TabIndex = 2;
             this.btnHienAll.Text = "Hiện tất cả";
             this.btnHienAll.UseVisualStyleBackColor = false;
+            this.btnHienAll.Click += new System.EventHandler(this.btnHienAll_Click);
             // 
             // btnTiemKiemLuong
             // 
@@ -321,6 +322,7 @@
             this.btnTiemKiemLuong.TabIndex = 3;
             this.btnTiemKiemLuong.Text = "Tim kiếm";
             this.btnTiemKiemLuong.UseVisualStyleBackColor = false;
+            this.btnTiemKiemLuong.Click += new System.EventHandler(this.btnTiemKiemLuong_Click);
             // 
             // txtTimKiemLuong
             // 
@@ -355,10 +357,10 @@
             this.label4.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.label4.Location = new System.Drawing.Point(82, 750);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(1215, 32);
+            this.label4.Size = new System.Drawing.Size(1402, 32);
             this.label4.TabIndex = 5;
             this.label4.Text = "*Ghi chú: Thực lĩnh = ((Lương Hợp Đồng */26) * Ngày Công) + Phụ cấp + Thưởng - Kỹ" +
-    " luật";
+    " luật - Tiền đã ứng";
             // 
             // UC_BangLuong
             // 

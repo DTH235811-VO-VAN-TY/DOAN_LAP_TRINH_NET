@@ -182,6 +182,10 @@ namespace QuanLyNhanSU
         // --- NÚT LƯU ---
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrEmpty(txtLyDo.Text.Trim()))
+            {
+                MessageBox.Show("Chưa nhập lý do thôi việc!"); return;
+            }
             if (cboMaNV.SelectedIndex == -1) { MessageBox.Show("Chưa chọn nhân viên!"); return; }
 
             string soQD = txtSoQD.Text.Trim();

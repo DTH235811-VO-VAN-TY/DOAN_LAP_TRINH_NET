@@ -237,6 +237,13 @@ namespace QuanLyNhanSU
                 MessageBox.Show("Số Hợp Đồng này đã tồn tại trong danh sách!", "Trùng dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            
+            if (numericUpDown1.Value < 0)
+                {
+                    MessageBox.Show("Lần Ký phải lớn hơn 0!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            
 
             // 4. Kiểm tra ngày tháng
             if (dtpNgayKetThuc.Value <= dtpNgayBatDau.Value)

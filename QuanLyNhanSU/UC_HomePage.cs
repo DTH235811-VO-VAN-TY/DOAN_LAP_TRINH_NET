@@ -140,7 +140,7 @@ namespace QuanLyNhanSU
         // Chart 2: Gender Ratio (Doughnut Chart)
         private void DrawChartGender()
         {
-            StyleChart(chartGioiTinh, "GENDER RATIO");
+            StyleChart(chartGioiTinh, "GIỚI TÍNH");
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -172,7 +172,7 @@ namespace QuanLyNhanSU
         // Chart 3: Age Structure (Column Chart)
         private void DrawChartAge()
         {
-            StyleChart(chartDoTuoi, "AGE STRUCTURE");
+            StyleChart(chartDoTuoi, "CƠ CẤU TUỔI");
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -218,7 +218,7 @@ namespace QuanLyNhanSU
         // Chart 4: Salary Fluctuation (Spline Area Chart)
         private void DrawChartSalary()
         {
-            StyleChart(chartLuong, "SALARY TREND (LAST 6 MONTHS)");
+            StyleChart(chartLuong, "LƯƠNG 6 THÁNG GẦN NHẤT");
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -236,7 +236,7 @@ namespace QuanLyNhanSU
                     da.Fill(dt);
 
                     chartLuong.Series.Clear();
-                    Series s = new Series("Salary");
+                    Series s = new Series("Lương");
                     s.ChartType = SeriesChartType.SplineArea;
 
                     // Styling: Semi-transparent blue fill
@@ -256,7 +256,7 @@ namespace QuanLyNhanSU
                         s.Points.AddXY(month, amount);
                     }
 
-                    chartLuong.ChartAreas[0].AxisY.Title = "Unit: Million VND";
+                    chartLuong.ChartAreas[0].AxisY.Title = "Đơn vị:  VND";
                 }
                 catch { }
             }
